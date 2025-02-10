@@ -3,8 +3,9 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    port: 1023,
-  },
-  plugins: [vue()],
+	base: process.env.NODE_ENV === 'production' ? '/code-monkey-note/' : './',
+	server: {
+		port: 1023,
+	},
+	plugins: [vue()],
 });
