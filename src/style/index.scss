@@ -1,0 +1,19 @@
+@import './flex.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --font-size-large: 18px;
+}
+
+body,
+#app {
+    width: 100vw;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}

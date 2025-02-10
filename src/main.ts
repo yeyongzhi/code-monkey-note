@@ -1,5 +1,12 @@
 import { createApp } from 'vue'
-import './style.css'
+import './style/index.scss'
 import App from './App.vue'
+import naive from 'naive-ui'
+import router from '@/router/index.ts'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+app.use(naive)
+app.use(router)
+
+app.mount('#app')
