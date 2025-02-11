@@ -13,6 +13,54 @@ interface NavItem {
 
 export const NavList: Array<NavItem> = [
     {
+        title: '前端组件库（PC端）',
+        descriptions: '',
+        linkList: [
+            {
+                name: 'Antd',
+                icon: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+                url: 'https://ant-design.antgroup.com/components/overview-cn',
+                descriptions: 'React生态结合最好的官方组件库，由蚂蚁集团出品，功能、api非常全面'
+            },
+            {
+                name: 'Element Plus',
+                icon: 'https://element-plus.org/images/element-plus-logo.svg',
+                url: 'https://element-plus.org/zh-CN/component/overview.html',
+                descriptions: '基于vue3开发，全面拥抱vue3的流行组件库，继承elementUI'
+            },
+            {
+                name: 'Naive UI',
+                icon: 'https://www.naiveui.com/assets/naivelogo-BdDVTUmz.svg',
+                url: 'https://www.naiveui.com/zh-CN/light',
+                descriptions: '一个 Vue 3 组件库，比较完整，主题可调，使用 TypeScript，有点意思'
+            },
+            {
+                name: 'Arco design',
+                icon: 'https://unpkg.byted-static.com/latest/byted/arco-config/assets/favicon.ico',
+                url: 'https://arco.design/vue/docs/start',
+                descriptions: 'ArcoDesign 主要服务于字节跳动旗下中后台产品的体验设计和技术实现，主要由UED设计和开发同学共同构建及维护'
+            },
+            {
+                name: 'TDesign',
+                icon: 'https://cdc.cdn-go.cn/tdc/latest/images/tdesign.svg',
+                url: 'https://tdesign.tencent.com/',
+                descriptions: '腾讯旗下出品的官方组件库，有react、vue、小程序以及Flutter等各框架版本'
+            },
+        ]
+    },
+    {
+        title: '前端组件库（H5端）',
+        descriptions: '',
+        linkList: [
+            {
+                name: 'Vant',
+                icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/logo.png',
+                url: 'https://vant-ui.github.io/vant/#/zh-CN/action-sheet',
+                descriptions: 'Vant 是一个轻量、可定制的移动端组件库，于 2017 年开源。目前 Vant 官方提供了 Vue 2 版本、Vue 3 版本和微信小程序版本，并由社区团队维护 React 版本和支付宝小程序版本。'
+            }
+        ]
+    },
+    {
         title: '官方框架',
         descriptions: '提供一些官方的开发框架官网',
         linkList: [
@@ -45,7 +93,20 @@ export const NavList: Array<NavItem> = [
     {
         title: 'React生态',
         descriptions: '',
-        linkList: []
+        linkList: [
+            {
+                name: 'react-router',
+                icon: 'https://reactrouter.com/splash/v7-badge-2.svg',
+                url: 'https://reactrouter.com/start/library/installation',
+                descriptions: 'react官方路由脚手架'
+            },
+            {
+                name: 'redux',
+                icon: 'https://www.redux.org.cn/images/icon.png',
+                url: 'https://www.redux.org.cn/',
+                descriptions: '用于JavaScript应用的可预测状态容器'
+            },
+        ]
     },
     {
         title: 'Vue全家桶',

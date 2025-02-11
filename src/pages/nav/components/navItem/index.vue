@@ -28,7 +28,7 @@ const { nav } = defineProps({
 
 <style scoped lang="scss">
 .navItem {
-    width: 200px;
+    width: 240px;
     height: 100px;
     padding: 10px;
     border: 2px solid #DDDDDD;
@@ -59,7 +59,7 @@ const { nav } = defineProps({
 
     .description {
         height: 55px;
-        width: 200px;
+        width: 100%;
         margin-top: 5px;
         font-size: 14px;
         color: #797979;

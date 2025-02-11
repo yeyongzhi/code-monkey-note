@@ -34,6 +34,7 @@ import Header from './header/index.vue'
         margin: 0 auto;
         box-sizing: border-box;
         z-index: 2;
+        margin-top: 65px;
     }
 }
 </style>
