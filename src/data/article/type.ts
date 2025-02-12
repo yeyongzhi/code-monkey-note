@@ -11,6 +11,7 @@ export type ArticleItemType =
 'bolder' | 
 'underline' |
 'quote' | // 引用样式
+'imgList' | // 图片列表
 'carousel' // 轮播图
 
 export interface CarouselItem {
@@ -21,4 +22,5 @@ export interface CarouselItem {
 export interface ArticleItem {
     type: ArticleItemType | Array<ArticleItemType>;
     content: string | Array<string> | Array<CarouselItem>;
+    params?: Object;
 }

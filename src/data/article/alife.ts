@@ -20,10 +20,14 @@ export const AlifeArticle: Array<ArticleItem> = [
     },
     { type: 'title1', content: '应用设计' },
     {
-        type: 'carousel', content: [
+        type: 'imgList', content: [
             { name: '首页', url: home },
             { name: '列表页', url: list },
             { name: '关于页', url: my },
         ]
     },
+    { type: 'title1', content: '使用体验' },
+    { type: 'image', content: code, params: { width: 200, height: 200 } },
+    { type: 'title1', content: '写在最后' },
+    { type: 'content', content: '欢迎体验使用，有各种建议、问题也欢迎交流讨论' },
 ]

@@ -1,8 +1,10 @@
 <script setup lang="ts">
-
+import { onMounted, ref, watch } from 'vue';
 import Avatar from '@/assets/images/user/logo.png'
 import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkItem } from '@/data/header/index'
 import router from '@/router/index'
+
+const emits = defineEmits(['changeTheme'])
 
 const gotoLink = (link: HeaderLinkItem) => {
     if (!link.url) {
@@ -18,6 +20,20 @@ const gotoUserLink = (link: HeaderUserLinkItem) => {
     window.open(link.url)
 }
 
+const isDarkTheme = ref<Boolean>(false)
+
+watch(isDarkTheme, (newVal) => {
+    const theme = newVal ? "dark" : 'light'
+    emits('changeTheme', theme)
+})
+
+onMounted(() => {
+    const value = localStorage.getItem("codeMonkey_datatheme")
+    if(value) {
+        isDarkTheme.value = (value === 'dark')
+    }
+})
+
 </script>
 
 <template>
@@ -32,9 +48,17 @@ const gotoUserLink = (link: HeaderUserLinkItem) => {
                     :key="'link' + index">{{ link.name }}</span>
             </div>
             <div class="userInfo flex-center-center">
-                <span class="flex-center-center" @click="gotoUserLink(link)" v-for="(link, index) in HeaderUserLink" :key="'userlink' + index" :title="link.name">
+                <span class="flex-center-center" @click="gotoUserLink(link)" v-for="(link, index) in HeaderUserLink"
+                    :key="'userlink' + index" :title="link.name">
                     <img :src="link.icon" />
                 </span>
+                <n-tooltip trigger="hover" placement="bottom">
+                    <template #trigger>
+                        <n-switch style="margin-left: 20px;" v-model:value="isDarkTheme"/>
+                    </template>
+                    {{ !isDarkTheme ? '打开黑夜模式' : '关闭黑夜模式' }}
+                </n-tooltip>
+
             </div>
         </div>
     </div>
@@ -46,7 +70,7 @@ const gotoUserLink = (link: HeaderUserLinkItem) => {
     padding: 0 5%;
     margin: 0 auto;
     height: 100%;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--border-color);
 
     .user {
         .name {
@@ -63,11 +87,13 @@ const gotoUserLink = (link: HeaderUserLinkItem) => {
             font-size: 14px;
         }
     }
+
     .userInfo {
         img {
             width: 25px;
             height: 25px;
             cursor: pointer;
+
             &:nth-child(n + 1) {
                 margin-left: 10px;
             }

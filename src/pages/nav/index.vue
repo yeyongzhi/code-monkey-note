@@ -84,13 +84,13 @@ onUnmounted(() => {
         .title {
             height: 30px;
             line-height: 30px;
-            color: gray;
+            color: var(--text-color-3);
             cursor: pointer;
             font-size: 14px;
             text-decoration: none;
 
             &:hover {
-                color: #000;
+                color: var(--primary-color);
             }
         }
     }

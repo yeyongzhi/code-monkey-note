@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 
 const { data } = defineProps({
     data: { type: Object, required: true, default: '' },
@@ -25,7 +25,17 @@ onMounted(() => {
             <template v-else-if="item.type === 'unorderList'">
                 <div class="unorderList_item" v-for="(c, index) in item.content" :key="'unorder' + index">{{ c }}</div>
             </template>
-            <!-- 轮播图 -->
+            <!-- 单张图片 -->
+            <template v-else-if="item.type === 'image'">
+                <n-image :src="item.content" :style="`width: ${item.params.width ? item.params.width + 'px' : 'auto'};height: ${item.params.height ? item.params.height + 'px' : 'auto'};`" />
+            </template>
+            <!-- 图片列表 -->
+            <template v-else-if="item.type === 'imgList'">
+                <n-image-group>
+                    <n-image :src="c.url" v-for="(c, index) in item.content" :key="'imgList' + index" />
+                </n-image-group>
+            </template>
+            <!-- 轮播图 TODO -->
             <template v-else-if="item.type === 'carousel'">
                 <n-image-group>
                     <n-carousel autoplay show-arrow style="width: 600px;">
@@ -97,6 +107,13 @@ onMounted(() => {
             height: 30px;
             line-height: 30px;
         }
+    }
+
+    .imgList {
+        width: 100%;
+        height: 500px;
+        display: flex;
+        gap: 0 40px;
     }
 
     .carousel {

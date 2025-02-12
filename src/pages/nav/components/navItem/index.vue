@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { type LinkItem } from '@/data/nav/index'
 
 const { nav } = defineProps({
     nav: { type: Object, required: true, default: () => { } }
@@ -31,7 +30,7 @@ const { nav } = defineProps({
     width: 240px;
     height: 100px;
     padding: 10px;
-    border: 2px solid #DDDDDD;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     cursor: pointer;
     .title {
@@ -39,7 +38,7 @@ const { nav } = defineProps({
         height: 40px;
         margin-bottom: 5px;
         .icon {
-            background-color: #DDDDDD;
+            background-color: var(--tag-color);
             width: 40px;
             height: 40px;
             border-radius: 5px;
@@ -62,10 +61,10 @@ const { nav } = defineProps({
         width: 100%;
         margin-top: 5px;
         font-size: 14px;
-        color: #797979;
+        color: var(--text-color-2);
     }
     &:hover {
-        border: 2px solid #1890FF;
+        border: 2px solid var(--primary-color);
     }
 }
 </style>

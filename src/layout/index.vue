@@ -1,39 +1,61 @@
 <script setup lang="ts">
-
+import { darkTheme, type GlobalTheme } from 'naive-ui'
 import { RouterView } from 'vue-router';
 import Header from './header/index.vue'
+import { ref, onMounted } from 'vue';
+
+onMounted(() => {
+    const value = localStorage.getItem("codeMonkey_datatheme")
+    // 默认白天模式
+    if (!value || value === "") {
+        localStorage.setItem("codeMonkey_datatheme", 'light')
+    }
+})
+
+const theme = ref<GlobalTheme | null>(null)
+
+const handleChangeTheme = (value: string) => {
+    localStorage.setItem("codeMonkey_datatheme", value)
+    document.body.setAttribute("data-theme", value)
+    theme.value = (value === 'light' ? null : darkTheme)
+}
 
 </script>
 
 <template>
-    <div class="main_container">
-        <div class="header">
-            <Header />
-        </div>
-        <div class="content">
-            <RouterView></RouterView>
-        </div>
-    </div>
+    <n-config-provider :theme="theme">
+        <n-el>
+            <div class="main_container">
+                <div class="header">
+                    <Header @changeTheme="handleChangeTheme" />
+                </div>
+                <div class="content">
+                    <RouterView></RouterView>
+                </div>
+            </div>
+        </n-el>
+        <n-global-style />
+    </n-config-provider>
 </template>
 
 <style scoped lang="scss">
 .main_container {
     width: 100%;
+
     .header {
         position: fixed;
         top: 0;
         width: 100%;
         height: 64px;
         box-sizing: border-box;
-        z-index: 999;
-        // border-bottom: 1px solid var(--n-color);
-        background-color: #FFFFFF;
+        background-color: var(--body-color);
     }
+
     .content {
         width: 90%;
         margin: 0 auto;
         box-sizing: border-box;
-        z-index: 2;
+        z-index: 1;
         margin-top: 65px;
     }
 }
