@@ -1,5 +1,5 @@
 @import './flex.scss';
-@import './font.css';
+@import './font.scss';
 
 * {
     margin: 0;
@@ -31,4 +31,9 @@ body::-webkit-scrollbar {
     width: 100%;
     padding-top: 30px;
     padding-bottom: 50px;
+}
+
+.code_img {
+    width: 100px;
+    height: 100px;
 }

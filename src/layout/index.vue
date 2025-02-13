@@ -49,6 +49,7 @@ const handleChangeTheme = (value: string) => {
         height: 64px;
         box-sizing: border-box;
         background-color: var(--body-color);
+        z-index: 99;
     }
 
     .content {

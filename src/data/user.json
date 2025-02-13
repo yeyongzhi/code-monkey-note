@@ -1,0 +1,26 @@
+{
+    "name": "Aurora",
+    "province": "浙江",
+    "city": "杭州",
+    "user_tag": [
+        "≈00后",
+        "程序猿",
+        "前端开发，喜欢记录",
+        "语雀重度使用者"
+    ],
+    "user_contact_list": [
+        { "name": "WeChat", "type": "wechat" },
+        { "name": "小红书", "type": "redboox" },
+        { "name": "网易云", "type": "cloudmusic" }
+    ],
+    "user_social_list": [
+        { "name": "语雀", "key": "yuque" },
+        { "name": "掘金", "key": "juejin" }
+    ],
+    "socialAccount": {
+        "wyy": "https://juejin.cn/user/2717648476705431",
+        "juejin": "https://juejin.cn/user/2717648476705431",
+        "yuque": "https://www.yuque.com/aurora1970",
+        "redbook": ""
+    }
+}

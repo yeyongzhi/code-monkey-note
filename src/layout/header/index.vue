@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from 'vue';
 import Avatar from '@/assets/images/user/logo.png'
 import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkItem } from '@/data/header/index'
-import router from '@/router/index'
+import { gotoPage } from '@/router/index'
 
 const emits = defineEmits(['changeTheme'])
 
@@ -10,7 +10,7 @@ const gotoLink = (link: HeaderLinkItem) => {
     if (!link.url) {
         return false;
     }
-    router.push(link.url)
+    gotoPage(link.url)
 }
 
 const gotoUserLink = (link: HeaderUserLinkItem) => {
@@ -44,7 +44,7 @@ onMounted(() => {
         </div>
         <div class="flex-center-center">
             <div class="link flex-start-center">
-                <span class="link_item" @click="gotoLink(link)" v-for="(link, index) in HeaderLink"
+                <span class="link_item hover_color_text" @click="gotoLink(link)" v-for="(link, index) in HeaderLink"
                     :key="'link' + index">{{ link.name }}</span>
             </div>
             <div class="userInfo flex-center-center">
@@ -82,7 +82,7 @@ onMounted(() => {
 
     .link {
         .link_item {
-            margin: 0 20px;
+            margin: 0 15px;
             cursor: pointer;
             font-size: 14px;
         }

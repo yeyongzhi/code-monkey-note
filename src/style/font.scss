@@ -31,3 +31,37 @@
 .movie_font {
     font-family: "MovieFont";
 }
+
+.page_hover_title {
+    width: fit-content;
+    font-size: 24px;
+    margin: 20px 0;
+    font-weight: bolder;
+    cursor: pointer;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    color: var(--text-color-1);
+    z-index: 1;
+    &::before {
+        content: "#";
+        visibility: hidden;
+        color: var(--primary-color);
+        position: absolute;
+        top: 0;
+        left: -20px;
+    }
+
+    &:hover {
+        color: var(--primary-color);
+        &::before {
+            visibility: visible;
+        }
+    }
+}
+
+.hover_color_text {
+    &:hover {
+        color: var(--primary-color);
+    }
+}

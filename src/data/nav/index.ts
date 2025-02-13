@@ -3,6 +3,8 @@ export interface LinkItem {
     icon?: string;
     url: string;
     descriptions?: string;
+    singleIcon?: boolean;
+    textIcon?: string;
 }
 
 interface NavItem {
@@ -11,7 +13,51 @@ interface NavItem {
     linkList: Array<LinkItem>;
 }
 
+const KimiIcon: string = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABhCAYAAAApxKSdAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUUSURBVHgB7Z29bhtHFIWPHQN2J7lKqnhYpYvpIukCbJEAKQJEegLReYFIT0DrCSI9QEDqCSIDaQIEIOukiJwyza5SJWlId3FFz+HuGmuSSw6p+dlZ3g84luhdUeI9M3fmziyXgBCUe/DHYY0Wj/tgWmjV42zFcWe4MIBBPNJ6qqW0uvAbXFvQgKzQK62bQhkaCIPc10q1Zi3XH1o/IG9cwUm0RogrgDY1KmLgHYX9DvyiBvDYI77XmiD+oLlQHw7hIDoCMBOt1U9w0BsU9mOAtaUUFk3oQoIfzAQFCf5dNMEdTFCQ4NtQih1NSIGgf3ibxOJt5UrAB1gNK72vIdjiI61HWr+YnNxDXK0rJiULsV65GJeiIescLSTTeobKSutiCuojX8kU3MBx4I3WeNVBBRl4fWiCyoB8v2JAAkk9PmDwT8sH1TEghRjgC27scCx41wO43KAg+ILxTvhNaUACwTc04Z0B30LwzTzm5Rjw3sgseIG1wGMawMBPIOQcqvzrNIMHOg9Q5KK953O90/rFC+BhJRH8PQZ+fu7SjC7HAIV95yu99vjlxfvBJx8nwHd6IfNJAkccOjHg6OgIs9lsra6vr2GTNE03/k7q8HAhyJ/2gM9O65/4kT7/mwEcoZwYsPQiV3BwcABb9Ho9KKU2njccDjGdLlxx+InBBPBAAR86ydRPaIC9SASi3+8bnXd+fr78nw8NJ39uDJjXAVFPP7dp/VmWLR9g6w6Huo/IOTk5MTpvZesn/93AiP/dXCwd9SyILT9Jko3n1bZ+8s8rGPGvoVHbEXcPMM39V1dX9Qd/19PPNxta959D4HUGF0RrAFs/8/8mxuPxXLUwtfx2WX+cxdivZ3DFA0SKldZPuPTAKrikbOlMOX+9zFu/Q2iAQoSY5H7mfeb/tXCT8MdneU9wNNCuQUXZA0ynnrUznyqOcrspUY4BJunHqPU3gOgMsNr6G0B0BpgUXrG0fhKVAaaF1/HxMWIhKgNMcj9Tz82Nk6rVGdav/tJ5eraJ0Wi01XPq1r/xOS8uLkJc6XYnRTMNXdf62eIvLy+jyftVghnQ7Xahe8FW59fBTRYOzosDNI1hJdz0lBQkBflkMBjMU5iL13pXRb8fYAJrB/a2db0oFHthAOEUliaYFHE+aaUBdZsvvFhApyM0idYZwOCvW4JmIWdSzPmidQaYrAGZ7iX4oFUGnJ2dGdUCTRqMozeANQCLsE6nA10JG/0Mx4KmDMbBCjEWR2yxu8LAM98vXelmCA2ovVLCI8EMYODWbpbvCXtTBzQVMSAwYkBgxIDAtNKAXWdGIRADAiMpKDA0IIMQikx6QGDEgMCIAYGRMSAsMgaEhgbcQgjFa+kBYZnIGBCWWzEgLPNBOJ6Fk/aR8Y5ZCvktKwX/PJZ7xoVjfs+4chYU11tK2sE85qUBLyH4Zh5z6QHhGPOf6r2j+TEbcgdFP2RaHX5TrYQlDflj5RXE5Q1cG/lWnhYpReUGKdUewGnRmhvnCJbgmxey8sHiZ8iwF3AsUBBckKHI/SWLq6HsBc8huML4DiK80D6WnBqLzN68UFCmopheYJOVYgcU5FOVbAVfYUcUZGoaLPglCtITdg2+tZUFBTFh2+ArWEYh/7z0WIIQSiM43lt5AWAmWhLHylN4QmkNEXfAbGqEQKsHSfHLYwiSq8AnaAAKeaW3D8VbijwNW5nh3IN9FPI/jnpaPKZi2/SfFuJu4W3x9RqWL+N5C+7ruKpBAgLkAAAAAElFTkSuQmCC"
+
 export const NavList: Array<NavItem> = [
+    {
+        title: 'AI',
+        descriptions: '',
+        linkList: [
+            {
+                name: 'deepseek',
+                icon: 'https://chat.deepseek.com/favicon.svg',
+                url: 'https://chat.deepseek.com/',
+                descriptions: '杭州六小龙之一的当下最火的AI大模型，具备优秀的深度思考、推理能力'
+            },
+            {
+                name: '通义千问',
+                icon: 'https://img.alicdn.com/imgextra/i1/O1CN01asLYeX1WhbsyEZn5u_!!6000000002820-55-tps-56-56.svg',
+                url: 'https://tongyi.aliyun.com/qianwen/',
+                descriptions: '阿里巴巴出品——通情、达义，你的全能AI助手'
+            },
+            {
+                name: 'Kimi',
+                icon: KimiIcon,
+                url: 'https://kimi.moonshot.cn/',
+                descriptions: '主要应用场景为专业学术论文的翻译和理解、辅助分析法律问题、快速理解API开发文档等，是全球首个支持输入20万汉字的智能助手产品'
+            },
+            {
+                name: '豆包',
+                icon: "https://lf-flow-web-cdn.doubao.com/obj/flow-doubao/doubao/logo-doubao-overflow.png",
+                url: 'https://www.doubao.com/chat/',
+                descriptions: '主要应用场景为专业学术论文的翻译和理解、辅助分析法律问题、快速理解API开发文档等，是全球首个支持输入20万汉字的智能助手产品'
+            },
+            {
+                name: '智谱清言',
+                icon: "https://chatglm.cn/img/icons/favicon.svg",
+                url: 'https://chatglm.cn/main/guest?lang=zh',
+                descriptions: '智谱是由清华大学计算机系技术成果转化而来的公司,致力于打造新一代认知智能通用模型。'
+            },
+            {
+                name: '文心一言',
+                icon: "https://nlp-eb.cdn.bcebos.com/logo/favicon.ico",
+                url: 'https://yiyan.baidu.com/',
+                descriptions: '百度全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动、回答问题、协助创作，高效便捷地帮助人们获取信息、知识和灵感。'
+            },
+        ]
+    },
     {
         title: '前端组件库（PC端）',
         descriptions: '',
@@ -24,7 +70,7 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: 'Element Plus',
-                icon: 'https://element-plus.org/images/element-plus-logo.svg',
+                icon: 'https://element-plus.org/images/element-plus-logo-small.svg',
                 url: 'https://element-plus.org/zh-CN/component/overview.html',
                 descriptions: '基于vue3开发，全面拥抱vue3的流行组件库，继承elementUI'
             },
@@ -57,6 +103,12 @@ export const NavList: Array<NavItem> = [
                 icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/logo.png',
                 url: 'https://vant-ui.github.io/vant/#/zh-CN/action-sheet',
                 descriptions: 'Vant 是一个轻量、可定制的移动端组件库，于 2017 年开源。目前 Vant 官方提供了 Vue 2 版本、Vue 3 版本和微信小程序版本，并由社区团队维护 React 版本和支付宝小程序版本。'
+            },
+            {
+                name: 'Antd Mobile',
+                icon: 'https://gw.alipayobjects.com/zos/bmw-prod/69a27fcc-ce52-4f27-83f1-c44541e9b65d.svg',
+                url: 'https://mobile.ant.design/zh/components/button',
+                descriptions: 'Antd官方出品的移动端组件库，保持了统一的设计语言'
             }
         ]
     },
@@ -66,7 +118,7 @@ export const NavList: Array<NavItem> = [
         linkList: [
             {
                 name: 'Nodejs 中文网',
-                icon: 'https://cn.vuejs.org/logo.svg',
+                icon: 'https://nodejs.p2hp.com/favicon-32x32.png',
                 url: 'https://nodejs.p2hp.com/',
                 descriptions: 'Node.js 是一个免费的、开源的、跨平台的 JavaScript 运行时环境，允许开发人员在浏览器之外编写命令行工具和服务器端脚本'
             },
@@ -78,15 +130,15 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: 'React官网',
-                icon: 'https://www.runoob.com/wp-content/uploads/2016/02/react.png',
+                icon: 'https://zh-hans.react.dev/favicon-32x32.png',
                 url: 'https://zh-hans.react.dev/',
                 descriptions: '用于构建 Web 和原生交互界面的库'
             },
             {
                 name: '菜鸟',
-                icon: 'https://www.runoob.com/wp-content/uploads/2016/02/react.png',
+                icon: 'https://notes.fe-mm.com/icons/runoob.png',
                 url: 'https://www.runoob.com/',
-                descriptions: '用于构建 Web 和原生交互界面的库'
+                descriptions: '菜鸟网站'
             },
         ]
     },
@@ -120,9 +172,41 @@ export const NavList: Array<NavItem> = [
         ]
     },
     {
-        title: '在线图标库',
+        title: '设计资源',
         descriptions: '',
-        linkList: []
+        linkList: [
+            {
+                name: 'iconFont',
+                icon: 'https://img.alicdn.com/imgextra/i4/O1CN01XZe8pH1USpiUNT1QN_!!6000000002517-2-tps-114-114.png',
+                url: 'https://www.iconfont.cn/',
+                descriptions: '阿里巴巴矢量图标库'
+            },
+            {
+                name: 'IconPark',
+                icon: 'https://lf1-cdn2-tos.bytegoofy.com/bydesign/iconparksite/logo.svg',
+                url: 'https://iconpark.oceanengine.com/official',
+                descriptions: 'IconPark图标库是一个通过技术驱动矢量图标样式的图标库产品，可以实现根据单一SVG源文件变换出多种主题，具备丰富的分类、更轻量的代码和更灵活的使用场景；致力于构建高质量、统一化、可定义的图标资源。'
+            },
+            {
+                name: 'Emoji大全',
+                icon: '',
+                textIcon: '🤣',
+                url: 'https://emoji6.com/emojiall/',
+                descriptions: 'Emoji 表情合集'
+            },
+            {
+                name: '字体下载',
+                icon: 'https://font.chinaz.com/favicon.ico',
+                url: 'https://font.chinaz.com/zhongwenziti.html',
+                descriptions: '中文字体、中文字体免费下载和在线预览-font.chinaz.com'
+            },
+            {
+                name: 'NB Map',
+                icon: 'https://www.nbcharts.com/images/32.png',
+                url: 'https://www.nbcharts.com/map/map.php',
+                descriptions: '一个可以制作地图图片的网站'
+            },
+        ]
     },
     {
         title: '微信小程序Wechat',
@@ -130,7 +214,7 @@ export const NavList: Array<NavItem> = [
         linkList: [
             {
                 name: '小程序官方文档',
-                icon: 'https://www.runoob.com/wp-content/uploads/2016/02/react.png',
+                icon: 'https://res.wx.qq.com/mmbizwxampnodelogicsvr_node/dist/images/menu_logo_8363f4.svg',
                 url: 'https://developers.weixin.qq.com/miniprogram/dev/component/',
                 descriptions: '小程序提供了一个简单、高效的应用开发框架和丰富的组件及API，帮助开发者在微信中开发具有原生 APP 体验的服务'
             },
@@ -162,6 +246,7 @@ export const NavList: Array<NavItem> = [
                 name: '百度地图API',
                 icon: 'https://webmap0.bdimg.com/wolfman/static/common/images/new/newlogo-new_3c175be.png',
                 url: 'https://lbsyun.baidu.com/index.php?title=jspopularGL',
+                textIcon: '百',
                 descriptions: '百度地图JavaScript API GL 是一套由JavaScript语言编写的应用程序接口，使用了WebGL对地图、覆盖物等进行渲染，支持3D视角展示地图。帮助开发者在网站中构建功能丰富、交互性强的地图应用，支持PC端和移动端基于浏览器的地图应用开发。JavaScript API GL提供了丰富的功能接口，包括地图展示、定位、覆盖物、检索、路线规划等，适配多样化的业务场景'
             },
             {
@@ -172,7 +257,7 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: 'leaflet',
-                icon: 'https://leafletjs.com/docs/images/logo-ua.png',
+                icon: 'https://leafletjs.com/docs/images/favicon.ico',
                 url: 'https://leafletjs.com/reference.html',
                 descriptions: '一个开源 JavaScript 库，适用于适合移动设备的交互式地图'
             },
@@ -180,19 +265,59 @@ export const NavList: Array<NavItem> = [
                 name: '天地图底图服务',
                 icon: 'http://lbs.tianditu.gov.cn/images/home/top.png',
                 url: 'http://lbs.tianditu.gov.cn/server/MapService.html',
+                singleIcon: true,
+                textIcon: '天',
                 descriptions: '天地图地图服务支持HTTP和HTTPS协议；天地图地图服务采用OGC WMTS标准，具体使用方法请参考OGC WMTS标准 中GetCapabilities 和GetTile。'
             },
             {
                 name: 'mapbox API',
-                icon: 'data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 790 180%22%3E%3Cpath d%3D%22M89.1 1.8C39.9 1.8 0 41.7 0 90.9 0 140.1 39.9 180 89.1 180c49.2 0 89.1-39.9 89.1-89.1 0-49.2-39.9-89.1-89.1-89.1zm457.8 19.7c-1.2 0-2.2 1-2.2 2.2v103.2c0 1.2 1 2.2 2.2 2.2h13.4c1.2 0 2.2-1 2.2-2.2v-7.1c6.9 7.2 16.4 11.3 26.3 11.3 20.9 0 37.9-18 37.9-40.3 0-22.3-17-40.2-37.9-40.2-10 0-19.5 4.1-26.3 11.3V23.7c0-1.2-1-2.2-2.2-2.2h-13.4zM98.3 36.4c11.4.3 22.9 4.8 31.7 13.7 17.7 17.7 18.3 45.7 1.4 62.7-30.5 30.5-84.8 20.7-84.8 20.7s-9.8-54.3 20.7-84.8c8.5-8.4 19.7-12.5 31-12.3zm160.3 14.2c-8.2 0-15.9 4-20.8 10.6v-6.4c0-1.2-1-2.2-2.2-2.2h-13.4c-1.2 0-2.2 1-2.2 2.2V127c0 1.2 1 2.2 2.2 2.2h13.4c1.2 0 2.2-1 2.2-2.2V83.8c.5-9.7 7.2-17.3 15.4-17.3 8.5 0 15.6 7.1 15.6 16.5v44c0 1.2 1 2.2 2.2 2.2h13.5c1.2 0 2.2-1 2.2-2.2l-.1-44.9c1.2-8.8 7.6-15.6 15.3-15.6 8.5 0 15.6 7.1 15.6 16.5v44c0 1.2 1 2.2 2.2 2.2h13.5c1.2 0 2.2-1 2.2-2.2l-.1-49.6c.3-14.8-12.3-26.8-27.9-26.8-10 .1-19.2 5.9-23.5 15-5-9.3-14.7-15.1-25.3-15zm127.9 0c-20.9 0-37.9 18-37.9 40.3 0 22.3 17 40.3 37.9 40.3 10 0 19.5-4.1 26.3-11.3v7.1c0 1.2 1 2.2 2.2 2.2h13.4c1.2 0 2.2-1 2.2-2.2V54.8c.1-1.2-.9-2.2-2.2-2.2H415c-1.2 0-2.2 1-2.2 2.2v7.1c-6.9-7.2-16.4-11.3-26.3-11.3zm106.1 0c-10 0-19.5 4.1-26.3 11.3v-7.1c0-1.2-1-2.2-2.2-2.2h-13.4c-1.2 0-2.2 1-2.2 2.2V158c0 1.2 1 2.2 2.2 2.2h13.4c1.2 0 2.2-1 2.2-2.2v-38.2c6.9 7.2 16.4 11.3 26.3 11.3 20.9 0 37.9-18 37.9-40.3 0-22.3-17-40.2-37.9-40.2zm185.5 0c-22.7 0-41 18-41 40.3 0 22.3 18.4 40.3 41 40.3s41-18 41-40.3c0-22.3-18.3-40.3-41-40.3zm45.4 2c-1.1 0-2 .9-2 2 0 .4.1.8.3 1.1l23 35-23.3 35.4c-.6.9-.4 2.2.6 2.8.3.2.7.3 1.1.3h15.5c1.2 0 2.3-.6 2.9-1.6l13.8-23.1 13.8 23.1c.6 1 1.7 1.6 2.9 1.6h15.5c1.1 0 2-.9 2-2 0-.4-.1-.7-.3-1.1L766 90.7l23-35c.6-.9.4-2.2-.6-2.8-.3-.2-.7-.3-1.1-.3h-15.5c-1.2 0-2.3.6-2.9 1.6l-13.5 22.7-13.5-22.7c-.6-1-1.7-1.6-2.9-1.6h-15.5zM99.3 54l-8.7 18-17.9 8.7 17.9 8.7 8.7 18 8.8-18 17.9-8.7-17.9-8.7-8.8-18zm290.3 12.7c12.7 0 23 10.7 23.2 23.9v.6c-.1 13.2-10.5 23.9-23.2 23.9-12.8 0-23.2-10.8-23.2-24.2 0-13.4 10.4-24.2 23.2-24.2zm99.8 0c12.8 0 23.2 10.8 23.2 24.2 0 13.4-10.4 24.2-23.2 24.2-12.7 0-23-10.7-23.2-23.9v-.6c.2-13.2 10.5-23.9 23.2-23.9zm96.3 0c12.8 0 23.2 10.8 23.2 24.2 0 13.4-10.4 24.2-23.2 24.2-12.7 0-23-10.7-23.2-23.9v-.6c.2-13.2 10.5-23.9 23.2-23.9zm92.2 0c12.8 0 23.2 10.8 23.2 24.2 0 13.4-10.4 24.2-23.2 24.2-12.8 0-23.2-10.8-23.2-24.2 0-13.4 10.4-24.2 23.2-24.2z%22 fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E',
+                icon: 'https://static-assets.mapbox.com/branding/favicon/v2/favicon-32x32.png?v=gAd4JjrGWl',
                 url: 'https://docs.mapbox.com/mapbox-gl-js/api/map/',
                 descriptions: 'mapBox 官网API文档'
             },
             {
                 name: 'DataV 行政范围选择器',
-                icon: '',
+                icon: 'https://img.alicdn.com/imgextra/i3/O1CN0127O3dX20W68RLghAG_!!6000000006856-2-tps-662-108.png',
                 url: 'https://datav.aliyun.com/portal/school/atlas/area_selector',
-                descriptions: ''
+                singleIcon: true,
+                textIcon: "V",
+                descriptions: 'DataV 行政范围选择器'
+            },
+            {
+                name: 'Turf js',
+                icon: 'https://turfjs.fenxianglu.cn/img/favicon.ico',
+                url: 'https://turfjs.fenxianglu.cn/docs/next/intro',
+                descriptions: '一个用 JavaScript 编写的模块化地理空间引擎'
+            },
+            {
+                name: 'Cesium API',
+                icon: 'https://sandcastle.cesium.com/images/cesium-logomark-192.png',
+                url: 'https://cesium.com/learn/cesiumjs/ref-doc/',
+                descriptions: 'Cesium API官方文档'
+            },
+        ]
+    },
+    {
+        title: '前端常用工具',
+        descriptions: '',
+        linkList: [
+            {
+                name: 'Can I Use',
+                icon: 'https://caniuse.com/img/favicon-128.png',
+                url: 'https://caniuse.com/',
+                descriptions: '前端API 兼容性查询'
+            },
+            {
+                name: 'JSON 工具箱',
+                icon: 'https://static.json.cn/r/img/favicon/favicon.ico',
+                url: 'https://www.json.cn/',
+                descriptions: '前端API 兼容性查询'
+            },
+            {
+                name: '图片转base64',
+                icon: 'https://static.jyshare.com/images/c-runoob-logo.ico',
+                url: 'https://www.jyshare.com/front-end/59/',
+                descriptions: '图片的 BASE64 编码就是可以将一幅图片数据编码成一串字符串，使用该字符串代替图片地址，从而不需要使用图片的 URL 地址。'
             },
         ]
     }
