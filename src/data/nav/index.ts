@@ -56,6 +56,18 @@ export const NavList: Array<NavItem> = [
                 url: 'https://yiyan.baidu.com/',
                 descriptions: '百度全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动、回答问题、协助创作，高效便捷地帮助人们获取信息、知识和灵感。'
             },
+            {
+                name: '腾讯元宝',
+                icon: "https://cdn-bot.hunyuan.tencent.com/logo.png",
+                url: 'https://yuanbao.tencent.com/chat',
+                descriptions: '由腾讯公司全链路自研，在高质量内容创作、数理逻辑、代码生成和多轮对话上性能表现卓越，处于业界领先水平。混元API支持AI搜索联网插件，通过整合腾讯优质的内容生态（如微信公众号、视频号等），提供强大的时新、深度内容获取和AI问答能力。'
+            },
+            {
+                name: '问小白',
+                icon: "https://www.wenxiaobai.com/new_favicon.ico",
+                url: 'https://www.wenxiaobai.com/',
+                descriptions: 'deepseek 满血版R1🔥🔥🔥'
+            },
         ]
     },
     {
@@ -244,9 +256,9 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: '百度地图API',
-                icon: 'https://webmap0.bdimg.com/wolfman/static/common/images/new/newlogo-new_3c175be.png',
+                icon: 'https://lbsyun.baidu.com/skins/MySkin/resources/img/icon/lbsyunlogo_icon.ico',
                 url: 'https://lbsyun.baidu.com/index.php?title=jspopularGL',
-                textIcon: '百',
+                // textIcon: '百',
                 descriptions: '百度地图JavaScript API GL 是一套由JavaScript语言编写的应用程序接口，使用了WebGL对地图、覆盖物等进行渲染，支持3D视角展示地图。帮助开发者在网站中构建功能丰富、交互性强的地图应用，支持PC端和移动端基于浏览器的地图应用开发。JavaScript API GL提供了丰富的功能接口，包括地图展示、定位、覆盖物、检索、路线规划等，适配多样化的业务场景'
             },
             {
@@ -263,10 +275,10 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: '天地图底图服务',
-                icon: 'http://lbs.tianditu.gov.cn/images/home/top.png',
+                icon: 'http://lbs.tianditu.gov.cn/images/favicon.ico',
                 url: 'http://lbs.tianditu.gov.cn/server/MapService.html',
-                singleIcon: true,
-                textIcon: '天',
+                // singleIcon: true,
+                // textIcon: '天',
                 descriptions: '天地图地图服务支持HTTP和HTTPS协议；天地图地图服务采用OGC WMTS标准，具体使用方法请参考OGC WMTS标准 中GetCapabilities 和GetTile。'
             },
             {
@@ -277,10 +289,10 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: 'DataV 行政范围选择器',
-                icon: 'https://img.alicdn.com/imgextra/i3/O1CN0127O3dX20W68RLghAG_!!6000000006856-2-tps-662-108.png',
+                icon: 'https://img.alicdn.com/imgextra/i3/O1CN01NQARus1gyEAmmQ9T0_!!6000000004210-0-tps-670-670.jpg',
                 url: 'https://datav.aliyun.com/portal/school/atlas/area_selector',
-                singleIcon: true,
-                textIcon: "V",
+                // singleIcon: true,
+                // textIcon: "V",
                 descriptions: 'DataV 行政范围选择器'
             },
             {

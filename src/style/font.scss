@@ -63,5 +63,6 @@
 .hover_color_text {
     &:hover {
         color: var(--primary-color);
+        cursor: pointer;
     }
 }

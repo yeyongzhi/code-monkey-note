@@ -9,8 +9,8 @@
         "语雀重度使用者"
     ],
     "user_contact_list": [
-        { "name": "WeChat", "type": "wechat" },
-        { "name": "小红书", "type": "redboox" },
+        { "name": "WeChat: Aurora-O23", "type": "wechat" },
+        { "name": "小红书", "type": "redbook" },
         { "name": "网易云", "type": "cloudmusic" }
     ],
     "user_social_list": [
@@ -18,9 +18,19 @@
         { "name": "掘金", "key": "juejin" }
     ],
     "socialAccount": {
-        "wyy": "https://juejin.cn/user/2717648476705431",
+        "wyy": "https://music.163.com/#/user/home?id=325840458",
         "juejin": "https://juejin.cn/user/2717648476705431",
         "yuque": "https://www.yuque.com/aurora1970",
-        "redbook": ""
-    }
+        "redbook": "https://www.xiaohongshu.com/user/profile/659c9a180000000022008079"
+    },
+    "codeAccount": {
+        "github": "",
+        "gitee": "",
+        "CSDN": "",
+        "npm": "https://www.npmjs.com/settings/aurora_/packages"
+    },
+    "personalWorks": [
+        { "name": "A Life清单", "descriptions": "一款个人开发的微信小程序，已上线，欢迎体验", "routePath": "/alife" },
+        { "name": "js2geohash", "descriptions": "将gis坐标值快捷转换为geohash值的工具函数", "link": "https://www.npmjs.com/package/js2geohash" }
+    ]
 }

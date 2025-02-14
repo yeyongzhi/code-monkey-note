@@ -25,14 +25,16 @@ const handleChangeTheme = (value: string) => {
 <template>
     <n-config-provider :theme="theme">
         <n-el>
-            <div class="main_container">
-                <div class="header">
-                    <Header @changeTheme="handleChangeTheme" />
+            <n-notification-provider>
+                <div class="main_container">
+                    <div class="header">
+                        <Header @changeTheme="handleChangeTheme" />
+                    </div>
+                    <div class="content">
+                        <RouterView></RouterView>
+                    </div>
                 </div>
-                <div class="content">
-                    <RouterView></RouterView>
-                </div>
-            </div>
+            </n-notification-provider>
         </n-el>
         <n-global-style />
     </n-config-provider>

@@ -2,13 +2,15 @@
 import logo from '@/assets/images/user/logo.png'
 import Wechat from '@/assets/images/user/wechat.jpg'
 import Yuque from '@/assets/images/yuque.png'
-import { ref, getCurrentInstance } from 'vue';
+import { getCurrentInstance, h } from 'vue';
 import { ArrowRight16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
-import { userKnowledge, type KnowledgeItem } from '@/data/home/index'
-import router from '@/router/index'
+import { userKnowledge } from '@/data/home/index'
+import { gotoPage } from '@/router/index'
+import { useNotification, NImage } from 'naive-ui'
 
 const { proxy }: any = getCurrentInstance()
+const notification = useNotification()
 
 const tagTypeList = [
     'success',
@@ -26,12 +28,26 @@ const tagList = proxy.globalData.user_tag
 const user_contact_list = proxy.globalData.user_contact_list
 const user_social_list = proxy.globalData.user_social_list
 
-const gotoPage = (item: KnowledgeItem) => {
-    router.push(item.link.url)
-}
-
 const gotoSocial = (item: any) => {
     window.open(proxy.globalData.socialAccount[item.key])
+}
+
+const handleContactClick = (item: any) => {
+    if (item.type === 'wechat') {
+        notification.success({
+            content: () => h(NImage, {
+                src: Wechat,
+                style: 'width: 162.4px;height: 219.6px'
+            }),
+            title: '这个就是微信',
+            duration: 3000,
+            keepAliveOnHover: true
+        })
+    } else if (item.type === 'cloudmusic') {
+        window.open(proxy.globalData.socialAccount.wyy)
+    } else if (item.type === 'redbook') {
+        window.open(proxy.globalData.socialAccount.redbook)
+    }
 }
 
 </script>
@@ -57,18 +73,20 @@ const gotoSocial = (item: any) => {
         <div style="margin: 20px 0;line-height: 30px;">
             坐标：{{ proxy.globalData.province }}{{ proxy.globalData.city }}
             <br />
-            一个最普通的程序猿，我就是一个破打工的啊💼
+            一个最普通的程序猿，我就是一个破打工的啊💼...
             <br />
             理想是念头通达，学会思考，早日去码头整薯条🍟
             <br />
             兴趣爱好是<span style="text-decoration: line-through;margin: 0 5px;">唱跳、Rap</span>和篮球，没事喜欢写着写那的，拿着破手机拍来拍去的
         </div>
         <div class="contact flex-start-center">
-            <div :class="`box flex-center-center ${item.type}`" v-for="(item, index) in user_contact_list" :key="'contact' + index">{{ item.name }}</div>
+            <div @click="handleContactClick(item)" :class="`box flex-center-center ${item.type}`"
+                v-for="(item, index) in user_contact_list" :key="'contact' + index">{{ item.name }}</div>
         </div>
         <div class="social flex-start-center">
-            <div :class="`box flex-center-center ${item.key}`" v-for="(item, index) in user_social_list" :key="item.key" @click="gotoSocial(item)">
-                <img :src="social_icon[item.key]" width="30" height="30"/>
+            <div :class="`box flex-center-center ${item.key}`" v-for="(item, index) in user_social_list" :key="item.key"
+                @click="gotoSocial(item)">
+                <img :src="social_icon[item.key]" width="30" height="30" />
                 <span style="margin-left: 10px;">{{ item.name }}</span>
             </div>
         </div>
@@ -79,7 +97,7 @@ const gotoSocial = (item: any) => {
         <div class="knowledge flex-start-center">
             <n-grid :x-gap="20" :y-gap="20" :cols="3">
                 <n-grid-item v-for="(item, index) in userKnowledge" :key="'knowledge' + index">
-                    <div class="box" @click="gotoPage(item)">
+                    <div class="box" @click="() => gotoPage(item.link.url)">
                         <div class="icon flex-center-center">
                             {{ item.icon }}
                         </div>
@@ -102,6 +120,15 @@ const gotoSocial = (item: any) => {
             </n-grid>
         </div>
         <Divider :margin="50" />
+        <div class="page_hover_title">个人作品</div>
+        <div class="person_works">
+            <div class="work_box" v-for="(item, index) in proxy.globalData.personalWorks" :key="'works' + index">
+                <div class="title hover_color_text">· {{ item.name }}</div>
+                <div class="descriptions">
+                    {{ item.descriptions }}
+                </div>
+            </div>
+        </div>
         <!-- 底部文字 -->
         <div class="alert flex-center-center movie_font" v-if="false">
             <n-alert style="width: 100%;font-size: 20px;" type="info" :bordered="true" :show-icon="false">
@@ -171,12 +198,14 @@ const gotoSocial = (item: any) => {
             }
         }
 
-        .wechat{
+        .wechat {
             background-color: #2aae67;
         }
-        .redboox {
-            background-color: #E20000;
+
+        .redbook {
+            background-color: #ff2442;
         }
+
         .cloudmusic {
             background-color: #E20000;
         }
@@ -184,6 +213,7 @@ const gotoSocial = (item: any) => {
 
     .social {
         margin-top: 20px;
+
         .box {
             height: 30px;
             line-height: 30px;
@@ -247,6 +277,27 @@ const gotoSocial = (item: any) => {
                     color: var(--primary-color);
                     ;
                 }
+            }
+        }
+    }
+
+    .person_works {
+        width: 100%;
+        margin: 20px 0;
+
+        .work_box {
+            margin-bottom: 20px;
+
+            .title {
+                font-size: 16px;
+                font-weight: bolder;
+            }
+
+            .descriptions {
+                margin-top: 10px;
+                padding-left: 10px;
+                color: var(--text-color-3);
+                letter-spacing: 2px;
             }
         }
     }
