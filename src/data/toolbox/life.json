@@ -1,0 +1,19 @@
+[
+    {
+        "title": "网盘资源",
+        "children": [
+            {
+                "name": "阿里小站",
+                "icon": "",
+                "descriptions": "",
+                "url": ""
+            },
+            {
+                "name": "夸父资源社",
+                "icon": "",
+                "descriptions": "",
+                "url": ""
+            }
+        ]
+    }
+]

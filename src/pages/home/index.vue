@@ -84,7 +84,7 @@ const handleContactClick = (item: any) => {
                 v-for="(item, index) in user_contact_list" :key="'contact' + index">{{ item.name }}</div>
         </div>
         <div class="social flex-start-center">
-            <div :class="`box flex-center-center ${item.key}`" v-for="(item, index) in user_social_list" :key="item.key"
+            <div :class="`box flex-center-center ${item.key}`" v-for="(item) in user_social_list" :key="item.key"
                 @click="gotoSocial(item)">
                 <img :src="social_icon[item.key]" width="30" height="30" />
                 <span style="margin-left: 10px;">{{ item.name }}</span>
