@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import PageContentGuide from '@/components/PageContentGuide/index.vue'
 import LifeList from '@/data/toolbox/life.json'
 import StudyList from '@/data/toolbox/study.json'

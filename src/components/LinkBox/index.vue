@@ -1,9 +1,5 @@
 <script setup lang="ts">
 
-const { link } = defineProps({
-    link: { type: Object, required: true, default: () => {} }
-})
-
 </script>
 
 <template>
