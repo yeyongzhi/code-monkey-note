@@ -3,6 +3,8 @@ import { darkTheme, type GlobalTheme } from 'naive-ui'
 import { RouterView } from 'vue-router';
 import Header from './header/index.vue'
 import { ref, onMounted } from 'vue';
+import router from '@/router/index'
+import { useRoute } from 'vue-router'
 
 onMounted(() => {
     const value = localStorage.getItem("codeMonkey_datatheme")
@@ -10,6 +12,8 @@ onMounted(() => {
     if (!value || value === "") {
         localStorage.setItem("codeMonkey_datatheme", 'light')
     }
+    console.log(useRoute())
+    console.log(router.getRoutes())
 })
 
 const theme = ref<GlobalTheme | null>(null)

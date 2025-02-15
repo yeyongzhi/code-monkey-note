@@ -147,6 +147,12 @@ export const NavList: Array<NavItem> = [
                 descriptions: '用于构建 Web 和原生交互界面的库'
             },
             {
+                name: 'Uniapp',
+                icon: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/icon.png?v=1556263038788',
+                url: 'https://uniapp.dcloud.net.cn/',
+                descriptions: 'uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、Web（响应式）、以及各种小程序（微信/支付宝/百度/头条/飞书/QQ/快手/钉钉/淘宝）、快应用等多个平台。'
+            },
+            {
                 name: '菜鸟',
                 icon: 'https://notes.fe-mm.com/icons/runoob.png',
                 url: 'https://www.runoob.com/',

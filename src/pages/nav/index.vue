@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, onUnmounted, watch } from 'vue';
 import { NavList } from '@/data/nav/index'
-import NavItem from './components/navItem/index.vue'
+import NavItem from '@/components/navItem/index.vue'
 import { ErrorCircle20Regular } from '@vicons/fluent'
 import { openTab } from '@/utils/index'
 

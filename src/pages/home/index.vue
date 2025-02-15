@@ -21,7 +21,14 @@ const tagTypeList = [
 
 const social_icon: any = {
     "yuque": Yuque,
-    "juejin": "https://lf-web-assets.juejin.cn/obj/juejin-web/xitu_juejin_web/6c61ae65d1c41ae8221a670fa32d05aa.svg"
+    "juejin": "https://lf-web-assets.juejin.cn/obj/juejin-web/xitu_juejin_web/6c61ae65d1c41ae8221a670fa32d05aa.svg",
+}
+
+const code_icon: any = {
+    "npm": "https://static-production.npmjs.com/b0f1a8318363185cc2ea6a40ac23eeb2.png",
+    "github": "https://github.com/fluidicon.png",
+    "gitee": "https://gitee.com/assets/favicon_message.ico?1581387642851",
+    "CSDN": "https://g.csdnimg.cn/static/logo/favicon32.ico"
 }
 
 const tagList = proxy.globalData.user_tag
@@ -29,7 +36,13 @@ const user_contact_list = proxy.globalData.user_contact_list
 const user_social_list = proxy.globalData.user_social_list
 
 const gotoSocial = (item: any) => {
-    window.open(proxy.globalData.socialAccount[item.key])
+    const url = proxy.globalData.socialAccount[item.key]
+    window.open(url)
+}
+
+const gotoCodePage = (item: any) => {
+    const url = proxy.globalData.codeAccount[item.key]
+    window.open(url)
 }
 
 const handleContactClick = (item: any) => {
@@ -87,6 +100,13 @@ const handleContactClick = (item: any) => {
             <div :class="`box flex-center-center ${item.key}`" v-for="(item) in user_social_list" :key="item.key"
                 @click="gotoSocial(item)">
                 <img :src="social_icon[item.key]" width="30" height="30" />
+                <span style="margin-left: 10px;">{{ item.name }}</span>
+            </div>
+        </div>
+        <div class="social flex-start-center">
+            <div :class="`box flex-center-center ${item.key}`" v-for="(item) in proxy.globalData.user_code_list" :key="'code' + item.key"
+                @click="gotoCodePage(item)">
+                <img :src="code_icon[item.key]" width="30" height="30" />
                 <span style="margin-left: 10px;">{{ item.name }}</span>
             </div>
         </div>

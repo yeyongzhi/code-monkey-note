@@ -1,0 +1,34 @@
+[
+    {
+        "title": "内容生成",
+        "children": [
+            {
+                "name": "不知所云狗屁不通文章生成器",
+                "icon": "https://yhjf.cc/favicon.ico",
+                "descriptions": "狗屁不通",
+                "url": "https://yhjf.cc/bzsy/"
+            },
+            {
+                "name": "互联网黑话生成器",
+                "icon": "https://fakeupdate.net/favicon.gif",
+                "descriptions": "一款能熟练应用“赋能、抓手、闭环、沉淀、打通”等词汇的文章生成器",
+                "url": "http://www.shadowingszy.top/text-generator/index.html"
+            }
+        ]
+    },
+    {
+        "title": "娱乐影音",
+        "children": []
+    },
+    {
+        "title": "上班摸鱼",
+        "children": [
+            {
+                "name": "伪装更新",
+                "icon": "https://fakeupdate.net/favicon.gif",
+                "descriptions": "伪装你的电脑正在进行系统升级...",
+                "url": "https://www.zhuayuya.com/updata/win.html"
+            }
+        ]
+    }
+]

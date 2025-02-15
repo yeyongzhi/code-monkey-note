@@ -17,6 +17,12 @@
         { "name": "语雀", "key": "yuque" },
         { "name": "掘金", "key": "juejin" }
     ],
+    "user_code_list": [
+        { "name": "github", "key": "github" },
+        { "name": "gitee", "key": "gitee" },
+        { "name": "npm", "key": "npm" },
+        { "name": "CSDN", "key": "CSDN" }
+    ],
     "socialAccount": {
         "wyy": "https://music.163.com/#/user/home?id=325840458",
         "juejin": "https://juejin.cn/user/2717648476705431",
@@ -24,9 +30,9 @@
         "redbook": "https://www.xiaohongshu.com/user/profile/659c9a180000000022008079"
     },
     "codeAccount": {
-        "github": "",
-        "gitee": "",
-        "CSDN": "",
+        "github": "https://github.com/yeyongzhi",
+        "gitee": "https://gitee.com/AuroraO23",
+        "CSDN": "https://blog.csdn.net/Aurora_1970s?type=blog",
         "npm": "https://www.npmjs.com/settings/aurora_/packages"
     },
     "personalWorks": [

@@ -1,8 +1,10 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-const basePath = '/code-monkey-note'
+const basePath = import.meta.env.MODE === 'production' 
+  ? '/code-monkey-note' 
+  : ''
 
-const routes = [
+const routes: any = [
     { path: '/nav', component: () => import('@/pages/nav/index.vue') },
     { path: '/home', component: () => import('@/pages/home/index.vue') },
     { path: '/alife', component: () => import('@/pages/alife/index.vue') },
@@ -13,9 +15,11 @@ const routes = [
     { path: '/think', component: () => import('@/pages/think/index.vue') }
 ]
 
+routes.unshift({ path: basePath, redirect: `${basePath}/nav` })
+
 const router = createRouter({
     history: createWebHistory(),
-    routes: routes.map(r => {
+    routes: routes.map((r: any) => {
         return {
             ...r,
             path: basePath + r.path
