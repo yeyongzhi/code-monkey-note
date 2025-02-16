@@ -7,7 +7,7 @@ import my from '@/assets/images/alife/my.png'
 export const AlifeArticle: Array<ArticleItem> = [
     { type: 'title', content: 'A Life 清单' },
     { type: 'title1', content: '背景' },
-    { type: 'content', content: '很早之前就想着开发一款属于自己的小程序，后来因为一些原因都没有很好地善始善终。这次总算是顺利地完成了.' },
+    { type: 'content', content: '很早之前就想着开发一款属于自己的小程序，后来因为一些原因都没有很好地善始善终。这次总算是顺利地完成了' },
     { type: 'title1', content: '功能介绍' },
     { type: 'content', content: '这款小程序可以帮助你记录自己的人生清单，比如：' },
     {

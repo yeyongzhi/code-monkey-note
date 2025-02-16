@@ -22,21 +22,32 @@ const activeData: any = computed(() => {
 </script>
 
 <template>
-    <div class="app_container">
+    <div class="app_container toolbox_container flex-between-start">
         <div class="tab_container">
-            <n-tabs type="segment" animated v-model:value="tabKey">
-                <n-tab-pane :name="item.value" :tab="item.label" v-for="(item, index) in tabList" :key="'tab' + index"></n-tab-pane>
+            <n-tabs animated v-model:value="tabKey" type="line" :placement="'left'">
+                <n-tab :name="item.value" v-for="(item, index) in tabList"
+                :key="'tab' + index">
+                    {{ item.label }}
+                </n-tab>
             </n-tabs>
         </div>
-        <PageContentGuide :data="activeData"/>
+        <div class="toolbox_content_container">
+            <PageContentGuide :data="activeData" />
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-.tab_container {
-    width: fit-content;
-    :deep(.n-tabs-tab) {
-        width: 150px !important;
+.toolbox_container {
+    .tab_container {
+        width: 150px;
+        position: fixed;
+        top: 100px;
+        left: 5%;
+    }
+    .toolbox_content_container {
+        width: 100%;
+        margin-left: 150px;
     }
 }
 </style>

@@ -18,7 +18,32 @@
     },
     {
         "title": "娱乐影音",
-        "children": []
+        "children": [
+            {
+                "name": "新浪微博",
+                "icon": "https://weibo.com/favicon.ico",
+                "descriptions": "微博 – 随时随地发现新鲜事",
+                "url": "https://weibo.com/"
+            },
+            {
+                "name": "B站",
+                "icon": "https://i0.hdslb.com/bfs/static/jinkela/long/images/favicon.ico",
+                "descriptions": "哔哩哔哩（bilibili.com)是国内知名的视频弹幕网站，这里有及时的动漫新番，活跃的ACG氛围，有创意的Up主。大家可以在这里找到许多欢乐。",
+                "url": "https://www.bilibili.com/"
+            },
+            {
+                "name": "腾讯视频",
+                "icon": "https://vfiles.gtimg.cn/wuji_dashboard/xy/starter/4ea79867.png",
+                "descriptions": "腾讯视频致力于打造中国领先的在线视频媒体平台，以丰富的内容、极致的观看体验、便捷的登录方式、多平台无缝应用体验以及快捷分享的产品特性，主要满足用户在线观看视频的需求",
+                "url": "https://v.qq.com/"
+            },
+            {
+                "name": "爱奇艺",
+                "icon": "https://www.iqiyi.com/favicon.ico",
+                "descriptions": "",
+                "url": "https://www.iqiyi.com/"
+            }
+        ]
     },
     {
         "title": "上班摸鱼",
@@ -28,6 +53,29 @@
                 "icon": "https://fakeupdate.net/favicon.gif",
                 "descriptions": "伪装你的电脑正在进行系统升级...",
                 "url": "https://www.zhuayuya.com/updata/win.html"
+            },
+            {
+                "name": "电子木鱼",
+                "icon": "https://muyu.xingji.fun/favicon.ico",
+                "descriptions": "敲电子木鱼，见机甲佛祖，修赛博真经",
+                "url": "https://muyu.xingji.fun/"
+            },
+            {
+                "name": "赛博烟花",
+                "icon": "https://firework.xingji.fun/images/favicon.png",
+                "descriptions": "烟花模拟器",
+                "url": "https://firework.xingji.fun/"
+            }
+        ]
+    },
+    {
+        "title": "还看个球啊",
+        "children": [
+            {
+                "name": "腾讯NBA",
+                "icon": "https://new.inews.gtimg.com/tnews/d64ca7e6-a0c1-47dd-80bf-7cd7d6d53fef/pc-logo-white.png",
+                "descriptions": "腾讯体育是全国亿万体育迷喜爱的社区平台，我们提供顶级赛事直播和丰富高燃的精彩视频，还有专业实时的赛场数据、及时权威的热点资讯、懂球有梗的聊球社区。等你一起为热爱加冕！",
+                "url": "https://sports.qq.com/nba/"
             }
         ]
     }

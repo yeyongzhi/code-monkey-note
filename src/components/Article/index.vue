@@ -53,7 +53,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .article_container {
     padding-bottom: 100px;
-
+    font-size: 15px;
     .title {
         font-size: 30px;
         font-weight: bolder;
@@ -79,12 +79,10 @@ onMounted(() => {
     }
 
     .content {
-        font-size: 16px;
         margin-bottom: 10px;
     }
 
     .unorderList {
-        font-size: 16px;
         margin-bottom: 10px;
         padding-left: 10px;
 
@@ -95,7 +93,6 @@ onMounted(() => {
     }
 
     .orderList {
-        font-size: 16px;
         margin-bottom: 10px;
         padding-left: 10px;
 
