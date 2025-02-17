@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { marked } from 'marked';
 import { ref, watch } from 'vue';
+import { formatMarkDown } from '@/utils/markdown'
 
 const markdownContent = ref("")
 const { path } = defineProps({
@@ -20,6 +21,9 @@ const getArticle = async () => {
         console.error("md文件读取出错")
     }
     if(data) {
+        console.log(data)
+        console.log(typeof data)
+        console.log(formatMarkDown(data))
         markdownContent.value = await marked(data);
     } else {
         const errorRes = await fetch(ErrorPath);

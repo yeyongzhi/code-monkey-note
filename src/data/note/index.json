@@ -3,7 +3,7 @@
         "key": "js",
         "label": "Javascript基础",
         "children": [
-
+            { "key": "dataType", "label": "基础数据类型" }
         ]
     },
     {
@@ -11,6 +11,13 @@
         "label": "TypeScript",
         "children": [
 
+        ]
+    },
+    {
+        "key": "vue",
+        "label": "vue",
+        "children": [
+            { "key": "vueRouter", "label": "vue-router" }
         ]
     },
     {
@@ -46,9 +53,6 @@
     },
     {
         "key": "cesium",
-        "label": "Cesium",
-        "children": [
-
-        ]
+        "label": "Cesium"
     }
 ]

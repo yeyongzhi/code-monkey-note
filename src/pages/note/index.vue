@@ -5,6 +5,7 @@ import NoteData from '@/data/note/index.json'
 const basePath = '/article/note'
 
 const articlePath = ref<string | null>(null)
+const selectKeys = ref<Array<string | number>>([])
 
 const findPath = (tree: Array<any>, targetId: string) => {
   // 定义递归函数
@@ -46,9 +47,10 @@ const getFullPath = (path: string) => {
 const handleTreeSelected = (keys: any, option: any, meta: any) => {
     console.log(keys, option, meta)
     const path = keys[0]
-    if(!option[0].children || option[0].children.length === 0) {
+    if(!meta.node.children || meta.node.children.length === 0) {
         articlePath.value = `${basePath}/${getFullPath(path)}.md`
         console.log(articlePath.value)
+        selectKeys.value = keys
     }
 }
 
@@ -61,6 +63,7 @@ const handleTreeSelected = (keys: any, option: any, meta: any) => {
                 block-line
                 :data="NoteData"
                 expand-on-click
+                :selected-keys="selectKeys"
                 :on-update:selected-keys="handleTreeSelected"
             />
         </div>
