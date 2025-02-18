@@ -4,6 +4,8 @@ const basePath = import.meta.env.MODE === 'production'
   ? '/code-monkey-note' 
   : ''
 
+console.log("basePath: " + basePath)
+
 const routes: any = [
     { path: '/nav', component: () => import('@/pages/nav/index.vue') },
     { path: '/home', component: () => import('@/pages/home/index.vue') },
@@ -15,7 +17,7 @@ const routes: any = [
     { path: '/think', component: () => import('@/pages/think/index.vue') }
 ]
 
-routes.unshift({ path: basePath, redirect: `${basePath}/nav` })
+routes.unshift({ path: '', redirect: `${basePath}/nav` })
 
 const router = createRouter({
     history: createWebHistory(),

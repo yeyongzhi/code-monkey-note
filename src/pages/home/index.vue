@@ -2,12 +2,16 @@
 import logo from '@/assets/images/user/logo.png'
 import Wechat from '@/assets/images/user/wechat.jpg'
 import Yuque from '@/assets/images/yuque.png'
-import { getCurrentInstance, h } from 'vue';
+import Location from '@/assets/images/location.png'
+import Star from '@/assets/images/star.png'
+import { getCurrentInstance, h, onMounted, ref } from 'vue';
 import { ArrowRight16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
-import { userKnowledge } from '@/data/home/index'
+import { userKnowledge, userTripMapData } from '@/data/home/index'
 import { gotoPage } from '@/router/index'
+import { openTab } from '@/utils/index'
 import { useNotification, NImage } from 'naive-ui'
+import { initAMapSource, initMap } from '@/utils/gaode'
 
 const { proxy }: any = getCurrentInstance()
 const notification = useNotification()
@@ -63,6 +67,75 @@ const handleContactClick = (item: any) => {
     }
 }
 
+const gotoPersonWorks = (item: any) => {
+    if (item.routePath) {
+        gotoPage(item.routePath)
+    } else {
+        openTab(item.link)
+    }
+}
+
+const showAllTrip = () => {
+    const list = userTripMapData.map(item => {
+        return h('p', { class: 'text' }, `${item.date}: ${item.name}`)
+    })
+    notification.success({
+        content: () => h('div', {
+            class: 'text'
+        }, list),
+        title: 'Life',
+        duration: 3000,
+        keepAliveOnHover: true
+    })
+}
+
+const map = ref<any>(null)
+const mapContainerRef = ref<any>(null)
+
+const initMarkers = () => {
+    const myMarker = new AMap.Marker({
+        position: [120.2, 30.3],
+        icon: new AMap.Icon({
+            image: Star,
+            size: [24, 24],
+            imageSize: [24, 24]
+        })
+    })
+    map.value.add(myMarker)
+    const markers = userTripMapData.map(item => {
+        const marker = new AMap.LabelMarker({
+            position: item.center,
+            icon: {
+                image: Location,
+                size: [24, 24],
+                anchor: 'bottom-center'
+            },
+            text: {
+                content: item.name,
+                direction: 'bottom'
+            }
+        })
+        map.value.add(marker)
+        return marker
+    })
+    map.value.setFitView(markers)
+}
+
+const initGaodeMap = async () => {
+    await initAMapSource({
+        key: "cb0aa408d9ab7dae72b577579adbadc2",
+        securityJsCode: "097670d2dba193c34ca44b13f721db75"
+    })
+    map.value = await initMap({
+        element: mapContainerRef.value
+    })
+    initMarkers()
+}
+
+onMounted(() => {
+    initGaodeMap()
+})
+
 </script>
 
 <template>
@@ -104,15 +177,15 @@ const handleContactClick = (item: any) => {
             </div>
         </div>
         <div class="social flex-start-center">
-            <div :class="`box flex-center-center ${item.key}`" v-for="(item) in proxy.globalData.user_code_list" :key="'code' + item.key"
-                @click="gotoCodePage(item)">
+            <div :class="`box flex-center-center ${item.key}`" v-for="(item) in proxy.globalData.user_code_list"
+                :key="'code' + item.key" @click="gotoCodePage(item)">
                 <img :src="code_icon[item.key]" width="30" height="30" />
                 <span style="margin-left: 10px;">{{ item.name }}</span>
             </div>
         </div>
         <div style="margin: 20px 0;">欢迎找我讨论💬</div>
         <Divider :margin="50" />
-        <div class="page_hover_title">知识库</div>
+        <div class="page_hover_title" style="margin-bottom: 20px;">知识库</div>
         <!-- 知识库 -->
         <div class="knowledge flex-start-center">
             <n-grid :x-gap="20" :y-gap="20" :cols="3">
@@ -140,10 +213,21 @@ const handleContactClick = (item: any) => {
             </n-grid>
         </div>
         <Divider :margin="50" />
+        <div class="page_hover_title" style="margin-bottom: 20px;">人生地图</div>
+        <div style="margin: 20px 0;">
+            <p>迄今为止，我已经踏足过 <span
+                    style="font-weight: bolder;color: var(--primary-color);font-size: 25px;cursor: pointer;"
+                    @click="showAllTrip">{{ userTripMapData.length }}</span> 个城市/区县</p>
+            <p>✈️勇敢的人先享受世界</p>
+        </div>
+        <div class="map_container">
+            <div ref="mapContainerRef" class="gaode_map"></div>
+        </div>
+        <Divider :margin="50" />
         <div class="page_hover_title">个人作品</div>
         <div class="person_works">
             <div class="work_box" v-for="(item, index) in proxy.globalData.personalWorks" :key="'works' + index">
-                <div class="title hover_color_text">· {{ item.name }}</div>
+                <div class="title hover_color_text" @click="gotoPersonWorks(item)">· {{ item.name }}</div>
                 <div class="descriptions">
                     {{ item.descriptions }}
                 </div>
@@ -298,6 +382,27 @@ const handleContactClick = (item: any) => {
                     ;
                 }
             }
+        }
+    }
+
+    .map_container {
+        width: 100%;
+        height: 500px;
+        border: 2px solid var(--border-color);
+        border-radius: 5px;
+        position: relative;
+
+        &:hover {
+            border: 2px solid var(--primary-color);
+        }
+
+        .gaode_map {
+            width: 100%;
+            height: 500px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
         }
     }
 

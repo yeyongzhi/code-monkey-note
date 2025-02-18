@@ -84,7 +84,7 @@ const handleTreeSelected = (keys: any, option: any, meta: any) => {
 
     .note_content_container {
         width: 100%;
-        margin-left: 250px;
+        margin-left: 280px;
     }
 }
 </style>
