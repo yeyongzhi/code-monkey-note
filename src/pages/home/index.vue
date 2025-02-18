@@ -15,6 +15,7 @@ import { initAMapSource, initMap } from '@/utils/gaode'
 
 const { proxy }: any = getCurrentInstance()
 const notification = useNotification()
+const AMap: any = (window as any).AMap
 
 const tagTypeList = [
     'success',
