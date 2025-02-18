@@ -118,14 +118,15 @@ export function identifyLine(text: string) {
     }
 }
 
-const lineTextFormat = [
-    "**",
-    "__",
-    "*",
-    "_",
-    "~~",
-    "`",
-]
+// const lineTextFormat = [
+//     "**",
+//     "__",
+//     "*",
+//     "_",
+//     "~~",
+//     "`",
+// ]
+
 function handleLineText(content: string) {
     const boldRegex = /(\*\*|__)(.*?)(\*\*|__)/g;
     const italicRegex = /(\*|_)(.*?)(\*|_)/g;

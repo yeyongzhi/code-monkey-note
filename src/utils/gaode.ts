@@ -1,3 +1,5 @@
+const window: any = window
+
 /**
  * 初始化安全秘钥
  * @param code 安全密钥
@@ -16,7 +18,7 @@ const initAMapLoader = () => {
         script.src = url
         document.body.appendChild(script)
         script.onload = () => {
-            resolve()
+            resolve(void 0)
         }
     })
 }
