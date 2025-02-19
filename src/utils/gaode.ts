@@ -25,6 +25,9 @@ const initAMapLoader = () => {
  * 初始化地图资源
  */
 const initAMapSource = async (mapConfig: any) => {
+    if((window as any).AMap) {
+        return true
+    }
     initAMapSecurityConfig(mapConfig.securityJsCode)
     await initAMapLoader()
     const res = await (window as any).AMapLoader.load({

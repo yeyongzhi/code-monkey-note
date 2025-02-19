@@ -4,7 +4,7 @@ import Wechat from '@/assets/images/user/wechat.jpg'
 import Yuque from '@/assets/images/yuque.png'
 import Location from '@/assets/images/location.png'
 import Star from '@/assets/images/star.png'
-import { getCurrentInstance, h, onMounted, ref } from 'vue';
+import { getCurrentInstance, h, onMounted, ref, onUnmounted } from 'vue';
 import { ArrowRight16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
 import { userKnowledge, userTripMapData } from '@/data/home/index'
@@ -135,6 +135,11 @@ const initGaodeMap = async () => {
 
 onMounted(() => {
     initGaodeMap()
+})
+
+onUnmounted(() => {
+    map.value.destroy()
+    map.value = null
 })
 
 </script>

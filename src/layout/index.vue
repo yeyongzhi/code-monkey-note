@@ -3,8 +3,11 @@ import { darkTheme, type GlobalTheme } from 'naive-ui'
 import { RouterView } from 'vue-router';
 import Header from './header/index.vue'
 import { ref, onMounted } from 'vue';
-import router from '@/router/index'
-import { useRoute } from 'vue-router'
+import router, { gotoPage } from '@/router/index'
+import hljs from 'highlight.js/lib/core'
+import javascript from 'highlight.js/lib/languages/javascript'
+
+hljs.registerLanguage('javascript', javascript)
 
 onMounted(() => {
     const value = localStorage.getItem("codeMonkey_datatheme")
@@ -12,8 +15,19 @@ onMounted(() => {
     if (!value || value === "") {
         localStorage.setItem("codeMonkey_datatheme", 'light')
     }
-    console.log(useRoute())
-    console.log(router.getRoutes())
+    window.addEventListener('beforeunload', (event) => {
+        console.log(event)
+        console.log(router)
+        localStorage.setItem("before_refresh_path", router.currentRoute.value.path)
+    });
+    window.addEventListener('load', (event) => {
+        const path = localStorage.getItem("before_refresh_path")
+        console.log(path)
+        if (path && path !== "") {
+            localStorage.setItem("before_refresh_path", "")
+            gotoPage(path)
+        }
+    });
 })
 
 const theme = ref<GlobalTheme | null>(null)
@@ -27,17 +41,19 @@ const handleChangeTheme = (value: string) => {
 </script>
 
 <template>
-    <n-config-provider :theme="theme">
+    <n-config-provider :theme="theme" :hljs="hljs">
         <n-el>
             <n-notification-provider>
-                <div class="main_container">
-                    <div class="header">
-                        <Header @changeTheme="handleChangeTheme" />
+                <n-message-provider>
+                    <div class="main_container">
+                        <div class="header">
+                            <Header @changeTheme="handleChangeTheme" />
+                        </div>
+                        <div class="content">
+                            <RouterView></RouterView>
+                        </div>
                     </div>
-                    <div class="content">
-                        <RouterView></RouterView>
-                    </div>
-                </div>
+                </n-message-provider>
             </n-notification-provider>
         </n-el>
         <n-global-style />

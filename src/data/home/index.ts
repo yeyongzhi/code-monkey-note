@@ -32,12 +32,21 @@ export const userKnowledge: Array<KnowledgeItem> = [
         }
     },
     {
-        icon: '🧰',
+        icon: '📦️',
         title: '百宝工具箱',
         descriptions: '一些个人收藏许久的压箱底的网站合集，方方面面都有',
         link: {
             url: '/toolbox',
             text: '打开宝箱'
+        }
+    },
+    {
+        icon: '🖱️',
+        title: '代码片段',
+        descriptions: '直接CV，不好用来找我',
+        link: {
+            url: '/code',
+            text: '给我三个键'
         }
     },
     {
