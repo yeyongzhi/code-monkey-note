@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 import CodeItem from './components/codeItem.vue'
-import { ref } from 'vue';
 import { codeCardList } from '@/data/code/index'
 
 </script>

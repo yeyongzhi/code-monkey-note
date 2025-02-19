@@ -11,10 +11,10 @@ const props = defineProps({
 
 const copyCode = () => {
     navigator.clipboard.writeText(props.code)
-        .then((res) => {
+        .then(() => {
             message.success("复制成功")
         })
-        .catch((err) => {
+        .catch(() => {
             message.error("复制出错，请重试")
         });
 }

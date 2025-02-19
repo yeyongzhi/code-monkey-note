@@ -20,7 +20,7 @@ onMounted(() => {
         console.log(router)
         localStorage.setItem("before_refresh_path", router.currentRoute.value.path)
     });
-    window.addEventListener('load', (event) => {
+    window.addEventListener('load', () => {
         const path = localStorage.getItem("before_refresh_path")
         console.log(path)
         if (path && path !== "") {
