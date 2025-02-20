@@ -3,7 +3,7 @@
         "key": "js",
         "label": "Javascript基础",
         "children": [
-            { "key": "dataType", "label": "基础数据类型" }
+            { "key": "dataType", "label": "数据类型" }
         ]
     },
     {

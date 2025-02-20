@@ -2,15 +2,16 @@
 import { onMounted, ref, watch } from 'vue';
 import Avatar from '@/assets/images/user/logo.png'
 import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkItem } from '@/data/header/index'
-import { gotoPage } from '@/router/index'
+// import { gotoPage } from '@/router/index'
 
-const emits = defineEmits(['changeTheme'])
+const emits = defineEmits(['changeTheme', 'changeComponent'])
 
 const gotoLink = (link: HeaderLinkItem) => {
     if (!link.url) {
         return false;
     }
-    gotoPage(link.url)
+    // gotoPage(link.url)
+    emits('changeComponent', link.url.replace("/", ""))
 }
 
 const gotoUserLink = (link: HeaderUserLinkItem) => {

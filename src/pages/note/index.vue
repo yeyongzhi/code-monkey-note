@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import NoteData from '@/data/note/index.json'
+import { basePath } from '@/router/index'
 
-const basePath = '/article/note'
+const baseNotePath = basePath + '/article/note'
 
 const articlePath = ref<string | null>(null)
 const selectKeys = ref<Array<string | number>>([])
@@ -48,8 +49,7 @@ const handleTreeSelected = (keys: any, option: any, meta: any) => {
     console.log(keys, option, meta)
     const path = keys[0]
     if(!meta.node.children || meta.node.children.length === 0) {
-        articlePath.value = `${basePath}/${getFullPath(path)}.md`
-        console.log(articlePath.value)
+        articlePath.value = `${baseNotePath}/${getFullPath(path)}.md`
         selectKeys.value = keys
     }
 }

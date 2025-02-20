@@ -42,7 +42,6 @@ const copyCode = () => {
     border-radius: 5px;
 
     .title {
-        color: var(--primary-color);
         height: 40px;
         line-height: 40px;
         margin-bottom: 10px;

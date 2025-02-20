@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import './style/index.scss'
 import App from './App.vue'
 import naive from 'naive-ui'
-import router from '@/router/index.ts'
+// import router from '@/router/index.ts'
 
 import Divider from '@/components/Divider/index.vue'
 import MarkDown from '@/components/MarkDown/index.vue'
@@ -12,7 +12,7 @@ import globalData from '@/data/user.json'
 const app = createApp(App)
 
 app.use(naive)
-app.use(router)
+// app.use(router)
 
 // 全局通用组件
 app.component('Divider', Divider)

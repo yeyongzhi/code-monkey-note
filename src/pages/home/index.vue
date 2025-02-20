@@ -4,17 +4,21 @@ import Wechat from '@/assets/images/user/wechat.jpg'
 import Yuque from '@/assets/images/yuque.png'
 import Location from '@/assets/images/location.png'
 import Star from '@/assets/images/star.png'
+// import Line1 from '@/assets/images/line_white.png'
+import Line2 from '@/assets/images/line_black.png'
 import { getCurrentInstance, h, onMounted, ref, onUnmounted } from 'vue';
 import { ArrowRight16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
 import { userKnowledge, userTripMapData } from '@/data/home/index'
-import { gotoPage } from '@/router/index'
+// import { gotoPage } from '@/router/index'
 import { openTab } from '@/utils/index'
 import { useNotification, NImage } from 'naive-ui'
 import { initAMapSource, initMap } from '@/utils/gaode'
 
 const { proxy }: any = getCurrentInstance()
 const notification = useNotification()
+
+const emits = defineEmits(['changeComponent'])
 
 const tagTypeList = [
     'success',
@@ -69,10 +73,15 @@ const handleContactClick = (item: any) => {
 
 const gotoPersonWorks = (item: any) => {
     if (item.routePath) {
-        gotoPage(item.routePath)
+        // gotoPage(item.routePath)
+        emits('changeComponent', item.routePath.replace("/", ""))
     } else {
         openTab(item.link)
     }
+}
+
+const gotoKonwledge = (item: any) => {
+    emits('changeComponent', item.link.url.replace("/", ""))
 }
 
 const showAllTrip = () => {
@@ -150,8 +159,9 @@ onUnmounted(() => {
         <div class="header flex-between-center">
             <div class="title">
                 <div class="name">{{ proxy.globalData.name }}</div>
-                <div class="tips">-</div>
-                <div class="signature">记录自己，学无止境</div>
+                <div class="tips">{{ proxy.globalData.description }}</div>
+                <img :src="Line2" style="width: 25%;height: 40px;"/>
+                <div class="signature">{{ proxy.globalData.signature }}</div>
                 <div class="tag">
                     <n-tag :type="tagTypeList[index % 4]" round v-for="(item, index) in tagList" :key="'tag' + index">
                         {{ item }}
@@ -163,7 +173,7 @@ onUnmounted(() => {
         <!-- 介绍 -->
         <div class="page_hover_title">About</div>
         <div style="margin: 20px 0;line-height: 30px;">
-            坐标：{{ proxy.globalData.province }}{{ proxy.globalData.city }}
+            坐标：{{ proxy.globalData.province }}-{{ proxy.globalData.city }}
             <br />
             一个最普通的程序猿，我就是一个破打工的啊💼...
             <br />
@@ -196,7 +206,7 @@ onUnmounted(() => {
         <div class="knowledge flex-start-center">
             <n-grid :x-gap="20" :y-gap="20" :cols="3">
                 <n-grid-item v-for="(item, index) in userKnowledge" :key="'knowledge' + index">
-                    <div class="box" @click="() => gotoPage(item.link.url)">
+                    <div class="box" @click="gotoKonwledge(item)">
                         <div class="icon flex-center-center">
                             {{ item.icon }}
                         </div>

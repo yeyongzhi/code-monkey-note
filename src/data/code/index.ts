@@ -79,39 +79,70 @@ export function RgbToHex(url) {
         `
     },
     {
-        title: "",
+        title: "检测元素之外的点击",
         content: `
-
+document.addEventListener('click', function (evt) {
+    // isClickedOutside 为 true 如果点击的元素在 ele 之外
+    const isClickedOutside = !ele.contains(evt.target);
+});
         `
     },
     {
-        title: "",
+        title: "滚动条样式",
         content: `
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgb(191, 191, 191);
+}
+
+// 较新的 API
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #718096 #edf2f7;
+}
         `
     },
     {
-        title: "",
+        title: "判断页面属于浏览器还是移动端",
         content: `
-
+export function isMobile() {
+    let flag = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return flag;
+}
         `
     },
     {
-        title: "",
+        title: "css文本超出隐藏显示...",
         content: `
-
-        `
-    },
-    {
-        title: "",
-        content: `
-
-        `
-    },
-    {
-        title: "",
-        content: `
-
+// 单行文本
+.ellipsis {
+  width:100px; /* 需要设置一个宽度 */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+// 多行文本
+.ellipsis {
+  width: 100px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
         `
     }
 ]

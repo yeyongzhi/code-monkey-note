@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { darkTheme, type GlobalTheme } from 'naive-ui'
-import { RouterView } from 'vue-router';
+// import { RouterView } from 'vue-router';
 import Header from './header/index.vue'
-import { ref, onMounted } from 'vue';
-import router, { gotoPage, basePath } from '@/router/index'
+import { ref, onMounted, watch } from 'vue';
+// import router, { gotoPage, basePath } from '@/router/index'
+import { routes } from '@/router/component'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 
 hljs.registerLanguage('javascript', javascript)
+
+const componentKey = ref("nav")
+const componentName = ref(null)
 
 onMounted(() => {
     const value = localStorage.getItem("codeMonkey_datatheme")
@@ -15,24 +19,24 @@ onMounted(() => {
     if (!value || value === "") {
         localStorage.setItem("codeMonkey_datatheme", 'light')
     }
-    window.addEventListener('beforeunload', (event) => {
-        console.log(event)
-        console.log(router)
-        window.location.href = window.location.origin + basePath;
-        if(localStorage.getItem("before_refresh_path")) {
-            localStorage.setItem("before_refresh_path", router.currentRoute.value.path)
-        }
-    });
-    window.addEventListener('load', () => {
-        const path = localStorage.getItem("before_refresh_path")
-        if (path && path !== "") {
-            localStorage.setItem("before_refresh_path", "")
-            setTimeout(() => {
-                console.log("刷新后重定向")
-                gotoPage(path)
-            }, 3000)
-        }
-    });
+    // window.addEventListener('beforeunload', (event) => {
+    //     console.log(event)
+    //     console.log(router)
+    //     window.location.href = window.location.origin + basePath;
+    //     if(localStorage.getItem("before_refresh_path")) {
+    //         localStorage.setItem("before_refresh_path", router.currentRoute.value.path)
+    //     }
+    // });
+    // window.addEventListener('load', () => {
+    //     const path = localStorage.getItem("before_refresh_path")
+    //     if (path && path !== "") {
+    //         localStorage.setItem("before_refresh_path", "")
+    //         setTimeout(() => {
+    //             console.log("刷新后重定向")
+    //             gotoPage(path)
+    //         }, 3000)
+    //     }
+    // });
 })
 
 const theme = ref<GlobalTheme | null>(null)
@@ -43,6 +47,20 @@ const handleChangeTheme = (value: string) => {
     theme.value = (value === 'light' ? null : darkTheme)
 }
 
+const changeComponent = (value: string) => {
+    console.log(value)
+    componentKey.value = value
+}
+
+watch(componentKey, (newVal) => {
+    if(newVal) {
+        const re = routes.find((item: any) => {
+            return item.path === `/${componentKey.value}`
+        })
+        componentName.value = re.component
+    }
+}, { immediate: true })
+
 </script>
 
 <template>
@@ -52,10 +70,11 @@ const handleChangeTheme = (value: string) => {
                 <n-message-provider>
                     <div class="main_container">
                         <div class="header">
-                            <Header @changeTheme="handleChangeTheme" />
+                            <Header @changeTheme="handleChangeTheme" @changeComponent="changeComponent" />
                         </div>
                         <div class="content">
-                            <RouterView></RouterView>
+                            <component :is="componentName" @changeComponent="changeComponent" />
+                            <!-- <RouterView></RouterView> -->
                         </div>
                     </div>
                 </n-message-provider>
