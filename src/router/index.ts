@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-const basePath = import.meta.env.MODE === 'production' 
+export const basePath = import.meta.env.MODE === 'production' 
   ? '/code-monkey-note' 
   : ''
 

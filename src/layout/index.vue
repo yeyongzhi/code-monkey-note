@@ -3,7 +3,7 @@ import { darkTheme, type GlobalTheme } from 'naive-ui'
 import { RouterView } from 'vue-router';
 import Header from './header/index.vue'
 import { ref, onMounted } from 'vue';
-import router, { gotoPage } from '@/router/index'
+import router, { gotoPage, basePath } from '@/router/index'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 
@@ -18,14 +18,19 @@ onMounted(() => {
     window.addEventListener('beforeunload', (event) => {
         console.log(event)
         console.log(router)
-        localStorage.setItem("before_refresh_path", router.currentRoute.value.path)
+        if(localStorage.getItem("before_refresh_path")) {
+            localStorage.setItem("before_refresh_path", router.currentRoute.value.path)
+        }
     });
     window.addEventListener('load', () => {
         const path = localStorage.getItem("before_refresh_path")
-        console.log(path)
         if (path && path !== "") {
             localStorage.setItem("before_refresh_path", "")
-            gotoPage(path)
+            window.location.href = window.location.origin + basePath;
+            setTimeout(() => {
+                console.log("刷新后重定向")
+                gotoPage(path)
+            }, 3000)
         }
     });
 })

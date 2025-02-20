@@ -15,7 +15,6 @@ import { initAMapSource, initMap } from '@/utils/gaode'
 
 const { proxy }: any = getCurrentInstance()
 const notification = useNotification()
-const AMap: any = (window as any).AMap
 
 const tagTypeList = [
     'success',
@@ -94,6 +93,7 @@ const map = ref<any>(null)
 const mapContainerRef = ref<any>(null)
 
 const initMarkers = () => {
+    const AMap = (window as any).AMap
     const myMarker = new AMap.Marker({
         position: [120.2, 30.3],
         icon: new AMap.Icon({

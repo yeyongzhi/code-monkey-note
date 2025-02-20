@@ -30,11 +30,11 @@ const initAMapSource = async (mapConfig: any) => {
     }
     initAMapSecurityConfig(mapConfig.securityJsCode)
     await initAMapLoader()
-    const res = await (window as any).AMapLoader.load({
+    const result: any = await (window as any).AMapLoader.load({
         key: mapConfig.key,
         version: mapConfig.version || '2.0'
     })
-    return res
+    return result
 }
 
 const initMap = (options: any) => {
