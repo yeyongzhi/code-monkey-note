@@ -18,6 +18,7 @@ onMounted(() => {
     window.addEventListener('beforeunload', (event) => {
         console.log(event)
         console.log(router)
+        window.location.href = window.location.origin + basePath;
         if(localStorage.getItem("before_refresh_path")) {
             localStorage.setItem("before_refresh_path", router.currentRoute.value.path)
         }
@@ -26,7 +27,6 @@ onMounted(() => {
         const path = localStorage.getItem("before_refresh_path")
         if (path && path !== "") {
             localStorage.setItem("before_refresh_path", "")
-            window.location.href = window.location.origin + basePath;
             setTimeout(() => {
                 console.log("刷新后重定向")
                 gotoPage(path)
