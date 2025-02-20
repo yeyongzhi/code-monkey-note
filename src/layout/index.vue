@@ -48,12 +48,13 @@ const handleChangeTheme = (value: string) => {
 }
 
 const changeComponent = (value: string) => {
-    console.log(value)
+    console.log("新的组件路径" + value)
     componentKey.value = value
+    window.location.hash = ""
 }
 
 watch(componentKey, (newVal) => {
-    if(newVal) {
+    if (newVal) {
         const re = routes.find((item: any) => {
             return item.path === `/${componentKey.value}`
         })

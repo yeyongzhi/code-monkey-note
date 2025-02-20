@@ -14,12 +14,12 @@ const getArticle = async () => {
     try {
         const response = await fetch(path);
         const contentType = response.headers.get('Content-Type')
-        if (contentType === 'text/markdown') {
-            data = await response.text();
-        }
+        console.log(contentType)
+        data = await response.text()
     } catch (err) {
         console.error("md文件读取出错")
     }
+    console.log(data)
     if (data) {
         // markdownContent.value = await marked(data);
         const result = formatMarkDown(data)
@@ -33,8 +33,11 @@ const getArticle = async () => {
     }
 }
 
-watch(() => path, () => {
-    getArticle()
+watch(() => path, (newVal) => {
+    console.log(newVal)
+    if(newVal) {
+        getArticle()
+    }
 }, { immediate: true })
 
 </script>

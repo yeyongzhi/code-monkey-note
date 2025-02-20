@@ -2,6 +2,7 @@
 import { onMounted, ref, watch } from 'vue';
 import Avatar from '@/assets/images/user/logo.png'
 import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkItem } from '@/data/header/index'
+import { ArrowClockwise20Filled } from '@vicons/fluent'
 // import { gotoPage } from '@/router/index'
 
 const emits = defineEmits(['changeTheme', 'changeComponent'])
@@ -30,7 +31,7 @@ watch(isDarkTheme, (newVal) => {
 
 onMounted(() => {
     const value = localStorage.getItem("codeMonkey_datatheme")
-    if(value) {
+    if (value) {
         isDarkTheme.value = (value === 'dark')
     }
 })
@@ -55,11 +56,20 @@ onMounted(() => {
                 </span>
                 <n-tooltip trigger="hover" placement="bottom">
                     <template #trigger>
-                        <n-switch style="margin-left: 20px;" v-model:value="isDarkTheme"/>
+                        <n-switch style="margin:0 20px;" v-model:value="isDarkTheme" />
                     </template>
                     {{ !isDarkTheme ? '打开黑夜模式' : '关闭黑夜模式' }}
                 </n-tooltip>
-
+                <!-- <n-tooltip trigger="hover" placement="bottom">
+                    <template #trigger>
+                        <n-button circle type="primary" size="small">
+                            <template #icon>
+                                <n-icon><ArrowClockwise20Filled /></n-icon>
+                            </template>
+                        </n-button>
+                    </template>
+                    刷新页面
+                </n-tooltip> -->
             </div>
         </div>
     </div>
