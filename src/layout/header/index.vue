@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from 'vue';
 import Avatar from '@/assets/images/user/logo.png'
 import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkItem } from '@/data/header/index'
-import { ArrowClockwise20Filled } from '@vicons/fluent'
+// import { ArrowClockwise20Filled } from '@vicons/fluent'
 // import { gotoPage } from '@/router/index'
 
 const emits = defineEmits(['changeTheme', 'changeComponent'])
