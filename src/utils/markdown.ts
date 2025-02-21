@@ -32,24 +32,35 @@ export function formatMarkDown(str: string) {
                 content: handleLineText(c.content)
             })
             i++
-            if (i < content.length - 1) {
+            if (i < content.length) {
                 fn()
             }
         } else if (noHandleTypeList.includes(c.type)) {
             // 处理单行的内容
             result.push(c)
             i++
-            if (i < content.length - 1) {
+            if (i < content.length) {
                 fn()
             }
-        } else if (c.type === 'unorderList') {
+        } else if (c.type === 'unorderList' || c.type === 'orderList') {
             const range = getContinuousRangeIndex(content, i)
+            const regex = (c.type === 'unorderList') ? /-/g : /^\s*\d+[\.\)\-]\s*/g;
+            result.push({
+                type: c.type,
+                content: content.slice(range[0], range[1] + 1).map(item => handleLineText(item.content.replace(regex, "")))
+            })
+            i = range[1] + 1
+            if (i < content.length) {
+                fn()
+            }
+        } else if (c.type === 'code') {
+            const range = getContinuousRangeIndex2(content, i)
             result.push({
                 type: c.type,
                 content: content.slice(range[0], range[1] + 1).map(item => item.content)
             })
-            i = range[1] + 1
-            if (i < content.length - 1) {
+            i = range[1] + 2
+            if (i < content.length) {
                 fn()
             }
         } else if (c.type === 'todo') {
@@ -66,7 +77,7 @@ export function formatMarkDown(str: string) {
                 })
             })
             i = range[1] + 1
-            if (i < content.length - 1) {
+            if (i < content.length) {
                 fn()
             }
         } else if (c.type === 'quote') {
@@ -76,7 +87,7 @@ export function formatMarkDown(str: string) {
                 content: content.slice(range[0], range[1] + 1).map(item => item.content)
             })
             i = range[1] + 1
-            if (i < content.length - 1) {
+            if (i < content.length) {
                 fn()
             }
         }
@@ -96,8 +107,14 @@ export function identifyLine(text: string) {
     if (text.startsWith("- ")) {
         type = 'unorderList' // 无序列表
     }
+    if(/^\s*\d+\.\s+(.*)/.test(text)) {
+        type = 'orderList' // 无序列表
+    }
     if (text.startsWith("> ")) {
         type = 'quote' // 无序列表
+    }
+    if (/```/g.test(text)) {
+        type = 'code' // 代码块
     }
     if (text === '---' || text === '***') {
         type = 'divider' // 
@@ -139,17 +156,25 @@ function handleLineText(content: string) {
         .replace(strikethroughRegex, "<del>$1</del>")
         .replace(inlineCodeRegex, "<code>$1</code>");
 
-    console.log(htmlText);
     return htmlText
 }
 
 export function getContinuousRangeIndex(content: Array<any>, start: number) {
     const type = content[start].type
     let end = start
-    while (end < content.length && content[end].type === type) {
+    while (end < content.length - 1 && content[end].type === type) {
         end++
     }
     return [start, end - 1]
+}
+
+export function getContinuousRangeIndex2(content: Array<any>, start: number) {
+    const type = content[start].type
+    let end = start
+    while (end === start || (end < content.length - 1 && content[end].type !== type)) {
+        end++
+    }
+    return [start + 1, end - 1]
 }
 
 export function getQuoteRangeIndex(content: Array<any>, start: number) {

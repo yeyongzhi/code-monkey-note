@@ -40,5 +40,13 @@
     "personalWorks": [
         { "name": "A Life清单", "descriptions": "一款个人开发的微信小程序，已上线，欢迎体验", "routePath": "/alife" },
         { "name": "js2geohash", "descriptions": "将gis坐标值快捷转换为geohash值的工具函数", "link": "https://www.npmjs.com/package/js2geohash" }
+    ],
+    "personalTechnology": [
+        "js",
+        "vue 3.0",
+        "react",
+        "高德地图、百度地图",
+        "openLayers",
+        "Cesium"
     ]
 }

@@ -201,8 +201,15 @@ onUnmounted(() => {
         </div>
         <div style="margin: 20px 0;">欢迎找我讨论💬</div>
         <Divider :margin="50" />
-        <div class="page_hover_title" style="margin-bottom: 20px;">知识库</div>
+        <!-- 技术栈 -->
+        <div class="page_hover_title">技术栈</div>
+        <div style="margin: 20px 0;">
+            <n-tag type="info" :bordered="false" :style="`margin-left: ${index === 0 ? '0' : '10px'};padding: 10px 15px;`" v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + item.key">
+                {{ item }}
+            </n-tag>
+        </div>
         <!-- 知识库 -->
+        <div class="page_hover_title" style="margin-bottom: 20px;">知识库</div>
         <div class="knowledge flex-start-center">
             <n-grid :x-gap="20" :y-gap="20" :cols="3">
                 <n-grid-item v-for="(item, index) in userKnowledge" :key="'knowledge' + index">
@@ -229,6 +236,7 @@ onUnmounted(() => {
             </n-grid>
         </div>
         <Divider :margin="50" />
+        <!-- 人生地图 -->
         <div class="page_hover_title" style="margin-bottom: 20px;">人生地图</div>
         <div style="margin: 20px 0;">
             <p>迄今为止，我已经踏足过 <span
@@ -240,6 +248,7 @@ onUnmounted(() => {
             <div ref="mapContainerRef" class="gaode_map"></div>
         </div>
         <Divider :margin="50" />
+        <!-- 个人作品 -->
         <div class="page_hover_title">个人作品</div>
         <div class="person_works">
             <div class="work_box" v-for="(item, index) in proxy.globalData.personalWorks" :key="'works' + index">

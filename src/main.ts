@@ -9,6 +9,8 @@ import MarkDown from '@/components/MarkDown/index.vue'
 import Article from '@/components/Article/index.vue'
 import globalData from '@/data/user.json'
 
+// import message from '@/plugins/message'
+
 const app = createApp(App)
 
 app.use(naive)
@@ -21,5 +23,8 @@ app.component('Article', Article)
 
 // 全局变量
 app.config.globalProperties.globalData = globalData;
+
+// 全局方法
+// app.config.globalProperties.$message = message
 
 app.mount('#app')

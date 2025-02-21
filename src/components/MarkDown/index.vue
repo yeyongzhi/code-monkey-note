@@ -2,6 +2,7 @@
 // import { marked } from 'marked';
 import { ref, watch } from 'vue';
 import { formatMarkDown } from '@/utils/markdown'
+import message from '@/plugins/message'
 
 const markdownContent = ref<any>(null)
 const { path } = defineProps({
@@ -33,9 +34,18 @@ const getArticle = async () => {
     }
 }
 
+const copyCode = (content: string) => {
+    navigator.clipboard.writeText(content)
+        .then(() => {
+            message.success("复制成功")
+        })
+        .catch(() => {
+            message.error("复制出错，请重试")
+        });
+}
+
 watch(() => path, (newVal) => {
-    console.log(newVal)
-    if(newVal) {
+    if (newVal) {
         getArticle()
     }
 }, { immediate: true })
@@ -77,8 +87,13 @@ watch(() => path, (newVal) => {
             </template>
             <template v-else-if="item.type === 'unorderList'">
                 <ul>
-                    <li v-for="(l, l_index) in item.content" :key="'unorder' + l_index">{{ l.replace(/-/g, "") }}</li>
+                    <li v-for="(l, l_index) in item.content" :key="'unorder' + l_index" v-html="l"></li>
                 </ul>
+            </template>
+            <template v-else-if="item.type === 'orderList'">
+                <ol>
+                    <li v-for="(l, l_index) in item.content" :key="'order' + l_index" v-html="l"></li>
+                </ol>
             </template>
             <template v-else-if="item.type === 'todo'">
                 <p v-for="(t, t_index) in item.content" :key="'todo' + t_index">
@@ -86,6 +101,12 @@ watch(() => path, (newVal) => {
                         {{ t.label }}
                     </n-checkbox>
                 </p>
+            </template>
+            <template v-else-if="item.type === 'code'">
+                <div class="code_header">
+                    <span @click="copyCode(item.content.join('\n'))">复制代码</span>
+                </div>
+                <n-code :code="item.content.join('\n')" language="javascript" />
             </template>
             <template v-else-if="item.type === 'text'">
                 <div v-html="item.content"></div>
@@ -140,6 +161,27 @@ watch(() => path, (newVal) => {
             background-color: #bfbfbf;
             left: 0;
             top: 0;
+        }
+    }
+
+    .md_code {
+        width: 100%;
+        padding: 0 10px 10px 10px;
+        background-color: #f0f0f0;
+        .code_header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 10px;
+            line-height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid var(--border-color);
+            span {
+                cursor: pointer;
+                &:hover {
+                    color: var(--primary-color);
+                }
+            }
         }
     }
 }
