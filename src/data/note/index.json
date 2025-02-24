@@ -32,6 +32,10 @@
         "label": "工程化",
         "children": [
             {
+                "key": "npm",
+                "label": "npm"
+            },
+            {
                 "key": "vite",
                 "label": "vite"
             }

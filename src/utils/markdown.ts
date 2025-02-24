@@ -44,6 +44,7 @@ export function formatMarkDown(str: string) {
             }
         } else if (c.type === 'unorderList' || c.type === 'orderList') {
             const range = getContinuousRangeIndex(content, i)
+            console.log(range)
             const regex = (c.type === 'unorderList') ? /-/g : /^\s*\d+[\.\)\-]\s*/g;
             result.push({
                 type: c.type,
@@ -162,7 +163,7 @@ function handleLineText(content: string) {
 export function getContinuousRangeIndex(content: Array<any>, start: number) {
     const type = content[start].type
     let end = start
-    while (end < content.length - 1 && content[end].type === type) {
+    while (end <= content.length - 1 && content[end].type === type) {
         end++
     }
     return [start, end - 1]
