@@ -204,7 +204,7 @@ onUnmounted(() => {
         <!-- 技术栈 -->
         <div class="page_hover_title">技术栈</div>
         <div style="margin: 20px 0;">
-            <n-tag type="info" :bordered="false" :style="`margin-left: ${index === 0 ? '0' : '10px'};padding: 10px 15px;`" v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + item.key">
+            <n-tag type="info" :bordered="false" :style="`margin-left: ${index === 0 ? '0' : '10px'};padding: 10px 15px;cursor: pointer;`" v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + item.key">
                 {{ item }}
             </n-tag>
         </div>

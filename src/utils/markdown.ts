@@ -85,7 +85,12 @@ export function formatMarkDown(str: string) {
             const range = getQuoteRangeIndex(content, i)
             result.push({
                 type: c.type,
-                content: content.slice(range[0], range[1] + 1).map(item => item.content)
+                content: content.slice(range[0], range[1] + 1).map((item, index) => {
+                    if(index === 0) {
+                        return handleLineText(item.content.trim().replace(/>/g, ""))
+                    }
+                    return handleLineText(item.content)
+                })
             })
             i = range[1] + 1
             if (i < content.length) {

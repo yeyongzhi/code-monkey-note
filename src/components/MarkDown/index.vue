@@ -8,7 +8,6 @@ const markdownContent = ref<any>(null)
 const { path } = defineProps({
     path: { type: String, required: true, default: '' },
 })
-// const ErrorPath = '/article/404.md'
 
 const getArticle = async () => {
     let data = null
@@ -44,7 +43,7 @@ const copyCode = (content: string) => {
         });
 }
 
-let title_index = {
+let title_index: any = {
     1: 0,
     2: 0,
     3: 0,
@@ -57,19 +56,19 @@ const markdown_nav = computed(() => {
     if (!markdownContent.value) {
         return []
     }
-    let list = []
-    let index = 0;
+    let list: any[] = []
+    let index: number = 0;
     markdownContent.value.forEach((m, i) => {
         // 属于标题
         if (m.type.startsWith("h")) {
-            const title_num = Number(m.type.replace("h", ""))
+            const title_num: number = Number(m.type.replace("h", ""))
             if (title_num === 1) {
                 list.push({
                     name: m.content.trim().replace(/#/g, ""),
                     key: `md_nav_${i}`,
                 })
             } else {
-                if(!list[title_index[title_num - 1]].children) {
+                if(!list[String(title_index[title_num - 1])].children) {
                     list[title_index[title_num - 1]].children = []
                 }
                 list[title_index[title_num - 1]].children.push({
@@ -83,7 +82,7 @@ const markdown_nav = computed(() => {
     return list
 })
 
-const handleNavClick = ({ option }) => {
+const handleNavClick = ({ option }: { option: any }) => {
     location.hash = `#${option.name}`
 }
 
@@ -114,7 +113,7 @@ onUnmounted(() => {
     window.removeEventListener('hashchange', scrollToSection);
 })
 
-const renderTitleId = (item) => {
+const renderTitleId = (item: any) => {
     return 'markdown_nav_' + item.content.trim().replace(/#/g, "")
 }
 
@@ -123,7 +122,7 @@ const renderTitleId = (item) => {
 <template>
     <!-- 方式一：采用marked.js 直接渲染 -->
     <!-- <div class="markdown_container" v-html="markdownContent"></div> -->
-    <div class="markdown_container flex-start-start">
+    <div class="markdown_container flex-between-start">
         <div class="markdown_content">
             <div :class="`md_content md_${item.type}`" v-for="(item, index) in markdownContent" :key="'md' + index">
                 <template v-if="item.type === 'h1'">
@@ -148,8 +147,7 @@ const renderTitleId = (item) => {
 
                 </template>
                 <template v-else-if="item.type === 'quote'">
-                    <div v-for="(q, q_index) in item.content" :key="'quote' + q_index">{{ q.trim().replace(/>/g, "") }}
-                    </div>
+                    <div v-for="(q, q_index) in item.content" :key="'quote' + q_index" v-html="q"></div>
                 </template>
                 <template v-else-if="item.type === 'link'">
                     <a :href="item.content[2]">{{ item.content[1] }}</a>
@@ -186,7 +184,7 @@ const renderTitleId = (item) => {
             </div>
         </div>
         <div class="markdown_guide">
-            <n-tree block-line :data="markdown_nav" key-field="key" label-field="name" children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick"/>
+            <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name" children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick"/>
         </div>
     </div>
 
@@ -196,22 +194,22 @@ const renderTitleId = (item) => {
 .markdown_container {
     .markdown_content {
         width: 80%;
-
         .md_content {
             width: fit-content;
             font-size: 14px;
             color: var(--text-color-base);
             height: auto;
+            margin: 10px 0;
         }
 
         .md_text {
-            line-height: 30px;
+            line-height: 20px;
         }
 
         .md_emptyLine {
             width: 100%;
-            height: 30px;
-            line-height: 30px;
+            height: 20px;
+            line-height: 20px;
         }
 
         .md_divider {
@@ -266,7 +264,10 @@ const renderTitleId = (item) => {
     }
 
     .markdown_guide {
-        width: 20%;
+        flex: 1;
+        position: fixed;
+        top: 100px;
+        right: 5%;
     }
 }
 </style>
