@@ -338,5 +338,17 @@ export const NavList: Array<NavItem> = [
                 descriptions: '图片的 BASE64 编码就是可以将一幅图片数据编码成一串字符串，使用该字符串代替图片地址，从而不需要使用图片的 URL 地址。'
             },
         ]
+    },
+    {
+        title: '金三银四',
+        descriptions: '我管你这那的，给我面',
+        linkList: [
+            {
+                name: '前端面试派',
+                icon: 'https://www.mianshipai.com/favicon.ico',
+                url: 'https://www.mianshipai.com/docs/first-exam/ComputerBase.html',
+                descriptions: '来自掘金——前端双越老师，专业的前端面试网站，包括写简历、刷题、面试技巧等，将解决前端面试资料碎片、过时、非专业等问题，开源免费。'
+            }
+        ]
     }
 ]

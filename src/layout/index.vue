@@ -6,7 +6,7 @@ import { ref, onMounted, watch, onBeforeMount, shallowRef, ComponentOptions } fr
 // import router, { gotoPage, basePath } from '@/router/index'
 import { routes } from '@/router/component'
 import hljs from 'highlight.js/lib/core'
-import message from '@/plugins/message'
+// import message from '@/plugins/message'
 import javascript from 'highlight.js/lib/languages/javascript'
 import ComponentsRouterManager from '@/utils/componentKeyManager'
 

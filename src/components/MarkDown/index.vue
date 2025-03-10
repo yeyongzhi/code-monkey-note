@@ -56,9 +56,8 @@ const markdown_nav = computed(() => {
     if (!markdownContent.value) {
         return []
     }
-    let list: any[] = []
-    let index: number = 0;
-    markdownContent.value.forEach((m, i) => {
+    let list: any = []
+    markdownContent.value.forEach((m: any, i: number) => {
         // 属于标题
         if (m.type.startsWith("h")) {
             const title_num: number = Number(m.type.replace("h", ""))
