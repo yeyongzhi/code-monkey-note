@@ -42,11 +42,9 @@
         { "name": "js2geohash", "descriptions": "将gis坐标值快捷转换为geohash值的工具函数", "link": "https://www.npmjs.com/package/js2geohash" }
     ],
     "personalTechnology": [
-        "js",
-        "vue 3.0",
-        "react",
-        "高德地图、百度地图",
-        "openLayers",
-        "Cesium"
+        { "name": "前端", "list": ["html", "js", "ts", "node.js"] },
+        { "name": "框架", "list": ["react", "vue 2/3", "uniapp", "微信小程序原生开发"] },
+        { "name": "GIS", "list": ["高德地图、百度地图", "openLayers", "Cesium js", "leaflet", "MapBox GL"] },
+        { "name": "服务端", "list": ["mysql"] }
     ]
 }

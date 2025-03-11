@@ -83,21 +83,24 @@ export const userTripMapData: Array<TripMapItem> = [
         code: 331100,
         date: '2018-09',
         level: "city",
-        center: [119.921786,28.451993]
+        center: [119.921786,28.451993],
+        descriptions: "始于2018.9，在此开启了我的大学四年生涯；同时，也在这里踏上了我的程序猿之路~"
     },
     {  
         name: '温州',
         code: 330300,
         date: '2022-05',
         level: "city",
-        center: [120.672111,28.000575]
+        center: [120.672111,28.000575],
+        descriptions: "毕业旅行的站点，也是我们三人行一路离别的起点。幸运的是，我们拍摄了一段当时的纪录vlog。"
     },
     {  
         name: '绍兴',
         code: 330600,
         date: '2024-03',
         level: "city",
-        center: [120.582112,29.997117]
+        center: [120.582112,29.997117],
+        descriptions: "一定要寻找到自己的人生底片，说来惭愧，自己第一次一个人尝试出远门，拜访了鲁迅故居。"
     },
     {  
         name: '舟山',
@@ -132,14 +135,16 @@ export const userTripMapData: Array<TripMapItem> = [
         code: 320100,
         date: '2021-05',
         level: "city",
-        center: [118.767413,32.041544]
+        center: [118.767413,32.041544],
+        descriptions: "与老友的久别重逢，更像是久旱逢甘露"
     },
     {  
         name: '常州',
         code: 320400,
         date: '2023-10',
         level: "city",
-        center: [119.946973,31.772752]
+        center: [119.946973,31.772752],
+        descriptions: "人生的第一次演唱会，献给了老薛的三巡，一场盛大的《天外来物》。不知从什么时候起，特别喜欢这首歌的副歌部分。"
     },
     {  
         name: '苏州',
@@ -147,5 +152,12 @@ export const userTripMapData: Array<TripMapItem> = [
         date: '2024-09',
         level: "city",
         center: [120.619585,31.299379]
+    },
+    {  
+        name: '贵阳',
+        code: 520100,
+        date: '2025-03',
+        level: "city",
+        center: [106.711127,26.84011]
     },
 ]

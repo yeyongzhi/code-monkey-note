@@ -68,6 +68,18 @@ export const NavList: Array<NavItem> = [
                 url: 'https://www.wenxiaobai.com/',
                 descriptions: 'deepseek 满血版R1🔥🔥🔥'
             },
+            {
+                name: '灵犀AI（WPS）',
+                icon: "https://qn.cache.wpscdn.cn/copilot/copilot/assets/logo_lx-Cg3dcATH.png",
+                url: 'https://lingxi.wps.cn/',
+                descriptions: '我能帮你进行搜索、总结、整理和创作。包含deepseek R1满血版'
+            },
+            {
+                name: '纳米 AI搜索',
+                icon: "https://deepseek.n.cn/favicon.ico",
+                url: 'https://deepseek.n.cn/',
+                descriptions: '我可以帮你搜索、答疑、分析、写作、提建议，请把你的任务交给我吧~包含deepseek R1满血版'
+            }
         ]
     },
     {
@@ -246,7 +258,7 @@ export const NavList: Array<NavItem> = [
                 name: '微信表情开放平台',
                 icon: 'https://res.wx.qq.com/t/fed_upload/94c61f37-1fe0-4e8f-bb46-d541c28eebe6/icon.png',
                 url: 'https://sticker.weixin.qq.com/cgi-bin/mmemoticonwebnode-bin/pages/timeout/login',
-                descriptions: '代码管理，小程序的发布等等'
+                descriptions: '制作、上传、发布自己专属的微信表情包，快来看看吧'
             }
         ]
     },

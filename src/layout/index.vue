@@ -106,7 +106,7 @@ watch(componentKey, (newVal) => {
                             <Header @changeTheme="handleChangeTheme" @changeComponent="changeComponent" @goHistoryBack="goHistoryBack" @goHistoryNext="goHistoryNext"/>
                         </div>
                         <div class="content">
-                            <component :is="componentName" @changeComponent="changeComponent" />
+                            <component :is="componentName" @changeComponent="changeComponent" :theme="theme"/>
                             <!-- <RouterView></RouterView> -->
                         </div>
                     </div>

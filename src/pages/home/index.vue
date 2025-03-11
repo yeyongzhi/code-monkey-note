@@ -4,10 +4,10 @@ import Wechat from '@/assets/images/user/wechat.jpg'
 import Yuque from '@/assets/images/yuque.png'
 import Location from '@/assets/images/location.png'
 import Star from '@/assets/images/star.png'
-// import Line1 from '@/assets/images/line_white.png'
+import Line1 from '@/assets/images/line_white.png'
 import Line2 from '@/assets/images/line_black.png'
-import { getCurrentInstance, h, onMounted, ref, onUnmounted } from 'vue';
-import { ArrowRight16Filled } from '@vicons/fluent'
+import { getCurrentInstance, h, onMounted, ref, onUnmounted, defineProps, computed } from 'vue';
+import { ArrowRight16Filled, CaretRight16Filled, CaretDown16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
 import { userKnowledge, userTripMapData } from '@/data/home/index'
 // import { gotoPage } from '@/router/index'
@@ -19,6 +19,16 @@ const { proxy }: any = getCurrentInstance()
 const notification = useNotification()
 
 const emits = defineEmits(['changeComponent'])
+const { theme } = defineProps({
+    theme: {}
+})
+
+const lineSrc = computed(() => {
+    if (!theme) {
+        return Line2
+    }
+    return Line1
+})
 
 const tagTypeList = [
     'success',
@@ -82,6 +92,11 @@ const gotoPersonWorks = (item: any) => {
 
 const gotoKonwledge = (item: any) => {
     emits('changeComponent', item.link.url.replace("/", ""))
+}
+
+const isExpandTrip = ref(false)
+const expandUserTripList = () => {
+    isExpandTrip.value = !isExpandTrip.value
 }
 
 const showAllTrip = () => {
@@ -160,7 +175,7 @@ onUnmounted(() => {
             <div class="title">
                 <div class="name">{{ proxy.globalData.name }}</div>
                 <div class="tips">{{ proxy.globalData.description }}</div>
-                <img :src="Line2" style="width: 25%;height: 40px;"/>
+                <img :src="lineSrc" style="width: 25%;height: 25px;" />
                 <div class="signature">{{ proxy.globalData.signature }}</div>
                 <div class="tag">
                     <n-tag :type="tagTypeList[index % 4]" round v-for="(item, index) in tagList" :key="'tag' + index">
@@ -204,9 +219,14 @@ onUnmounted(() => {
         <!-- 技术栈 -->
         <div class="page_hover_title">技术栈</div>
         <div style="margin: 20px 0;">
-            <n-tag type="info" :bordered="false" :style="`margin-left: ${index === 0 ? '0' : '10px'};padding: 10px 15px;cursor: pointer;`" v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + item.key">
-                {{ item }}
-            </n-tag>
+            <div style="margin-bottom: 10px;" v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + index">
+                <span style="margin-right: 10px;">{{ item.name }}：</span>
+                <n-tag type="info" size="small" :bordered="false"
+                    :style="`margin-left: ${index2 === 0 ? '0' : '10px'};padding: 10px 15px;cursor: pointer;`"
+                    v-for="(item2, index2) in item.list" :key="'technology_item' + index2">
+                    {{ item2 }}
+                </n-tag>
+            </div>
         </div>
         <!-- 知识库 -->
         <div class="page_hover_title" style="margin-bottom: 20px;">知识库</div>
@@ -239,9 +259,30 @@ onUnmounted(() => {
         <!-- 人生地图 -->
         <div class="page_hover_title" style="margin-bottom: 20px;">人生地图</div>
         <div style="margin: 20px 0;">
-            <p>迄今为止，我已经踏足过 <span
-                    style="font-weight: bolder;color: var(--primary-color);font-size: 25px;cursor: pointer;"
-                    @click="showAllTrip">{{ userTripMapData.length }}</span> 个城市/区县</p>
+            <div class="flex-start-center">
+                <Icon :size="25" style="margin-top: 5px;cursor: pointer;" @click="expandUserTripList">
+                    <CaretRight16Filled v-if="!isExpandTrip" />
+                    <CaretDown16Filled v-else />
+                </Icon>
+                <div>迄今为止，我已经踏足过 <span
+                        style="font-weight: bolder;color: var(--primary-color);font-size: 25px;cursor: pointer;"
+                        @click="showAllTrip">{{ userTripMapData.length }}</span> 个 城市/区县</div>
+            </div>
+            <div v-if="isExpandTrip" class="trip_box">
+                <div class="item" v-for="(item, index) in userTripMapData" :key="'trip' + index">
+                    <div class="flex-between-center">
+                        <span>
+                            {{ item.name }}
+                        </span>
+                        <n-tag type="success" size="small" round>
+                            {{ item.date }}
+                        </n-tag>
+                    </div>
+                    <p>
+                        {{ item.descriptions }}
+                    </p>
+                </div>
+            </div>
             <p>✈️勇敢的人先享受世界</p>
         </div>
         <div class="map_container">
@@ -428,6 +469,23 @@ onUnmounted(() => {
             top: 0;
             left: 0;
             z-index: 2;
+        }
+    }
+
+    .trip_box {
+        width: 100%;
+
+        .item {
+            width: 50%;
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+
+            &:hover {
+                border: 1px solid var(--primary-color);
+                cursor: pointer;
+            }
         }
     }
 
