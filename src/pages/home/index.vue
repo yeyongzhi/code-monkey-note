@@ -188,7 +188,7 @@ onUnmounted(() => {
         <!-- 介绍 -->
         <div class="page_hover_title">About</div>
         <div style="margin: 20px 0;line-height: 30px;">
-            坐标：{{ proxy.globalData.province }}-{{ proxy.globalData.city }}
+            坐标：{{ proxy.globalData.province }} · {{ proxy.globalData.city }}
             <br />
             一个最普通的程序猿，我就是一个破打工的啊💼...
             <br />
@@ -219,9 +219,10 @@ onUnmounted(() => {
         <!-- 技术栈 -->
         <div class="page_hover_title">技术栈</div>
         <div style="margin: 20px 0;">
-            <div style="margin-bottom: 10px;" v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + index">
-                <span style="margin-right: 10px;">{{ item.name }}：</span>
-                <n-tag type="info" size="small" :bordered="false"
+            <div class="flex-start-center" style="margin-bottom: 20px;"
+                v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + index">
+                <span style="margin-right: 10px;font-size: 16px;width: 120px;">{{ item.name }} </span>
+                <n-tag :type="tagTypeList[index % 4]" round
                     :style="`margin-left: ${index2 === 0 ? '0' : '10px'};padding: 10px 15px;cursor: pointer;`"
                     v-for="(item2, index2) in item.list" :key="'technology_item' + index2">
                     {{ item2 }}
@@ -258,6 +259,9 @@ onUnmounted(() => {
         <Divider :margin="50" />
         <!-- 人生地图 -->
         <div class="page_hover_title" style="margin-bottom: 20px;">人生地图</div>
+        <div class="map_container">
+            <div ref="mapContainerRef" class="gaode_map"></div>
+        </div>
         <div style="margin: 20px 0;">
             <div class="flex-start-center">
                 <Icon :size="25" style="margin-top: 5px;cursor: pointer;" @click="expandUserTripList">
@@ -270,7 +274,7 @@ onUnmounted(() => {
             </div>
             <div v-if="isExpandTrip" class="trip_box">
                 <div class="item" v-for="(item, index) in userTripMapData" :key="'trip' + index">
-                    <div class="flex-between-center">
+                    <div class="flex-between-center" style="margin-bottom: 10px;">
                         <span>
                             {{ item.name }}
                         </span>
@@ -283,10 +287,7 @@ onUnmounted(() => {
                     </p>
                 </div>
             </div>
-            <p>✈️勇敢的人先享受世界</p>
-        </div>
-        <div class="map_container">
-            <div ref="mapContainerRef" class="gaode_map"></div>
+            <p style="margin-top: 20px;">✈️勇敢的人先享受世界</p>
         </div>
         <Divider :margin="50" />
         <!-- 个人作品 -->
@@ -474,16 +475,18 @@ onUnmounted(() => {
 
     .trip_box {
         width: 100%;
-
+        display: flex;
+        justify-content: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
         .item {
-            width: 50%;
-            border: 1px solid var(--border-color);
+            width: 46%;
+            border: 2px solid var(--border-color);
             padding: 8px 10px;
             border-radius: 5px;
-            margin-bottom: 10px;
 
             &:hover {
-                border: 1px solid var(--primary-color);
+                border: 2px solid var(--primary-color);
                 cursor: pointer;
             }
         }

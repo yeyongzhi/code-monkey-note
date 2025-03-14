@@ -22,9 +22,9 @@
     },
     {
         "key": "chrome",
-        "label": "浏览器与网络",
+        "label": "浏览器",
         "children": [
-
+            { "key": "chromeRun", "label": "浏览器的运行原理" }
         ]
     },
     {

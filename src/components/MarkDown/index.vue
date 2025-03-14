@@ -87,6 +87,7 @@ const handleNavClick = ({ option }: { option: any }) => {
 
 watch(() => path, (newVal) => {
     if (newVal) {
+        console.log(newVal)
         getArticle()
     }
 }, { immediate: true })
@@ -114,6 +115,11 @@ onUnmounted(() => {
 
 const renderTitleId = (item: any) => {
     return 'markdown_nav_' + item.content.trim().replace(/#/g, "")
+}
+
+const getImageUrl = (url: string) => {
+    const basePath = path.substring(0, path.lastIndexOf("/"))
+    return basePath + url.replace(".", "")
 }
 
 </script>
@@ -150,6 +156,18 @@ const renderTitleId = (item: any) => {
                 </template>
                 <template v-else-if="item.type === 'link'">
                     <a :href="item.content[2]">{{ item.content[1] }}</a>
+                </template>
+                <template v-else-if="item.type === 'img'">
+                    <div class="single_img">
+                        <n-image
+                            width="700"
+                            height="400"
+                            :src="getImageUrl(item.content[2])"
+                            object-fit="contain"
+                            :title="item.content[1]"
+                        />
+                        <p>{{ item.content[1] }}</p>
+                    </div>
                 </template>
                 <template v-else-if="item.type === 'unorderList'">
                     <ul>
@@ -257,6 +275,19 @@ const renderTitleId = (item: any) => {
                     &:hover {
                         color: var(--primary-color);
                     }
+                }
+            }
+        }
+
+        .md_img {
+            .single_img {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                & p {
+                    text-decoration: underline;
+                    color: #c4c4c4;
                 }
             }
         }

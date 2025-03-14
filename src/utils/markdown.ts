@@ -1,3 +1,6 @@
+const LINK_REGEXP = /\[(.*?)\]\((.*?)(".*?")?\)/g
+const IMG_REGEXP = /!\[(.*?)\]\((.*?)\)/
+
 const noHandleTypeList = [
     "h1",
     "h2",
@@ -8,7 +11,8 @@ const noHandleTypeList = [
     "emptyLine",
     "text",
     "divider",
-    "link"
+    "link",
+    "img"
 ]
 
 /**
@@ -44,7 +48,6 @@ export function formatMarkDown(str: string) {
             }
         } else if (c.type === 'unorderList' || c.type === 'orderList') {
             const range = getContinuousRangeIndex(content, i)
-            console.log(range)
             const regex = (c.type === 'unorderList') ? /-/g : /^\s*\d+[\.\)\-]\s*/g;
             result.push({
                 type: c.type,
@@ -125,9 +128,13 @@ export function identifyLine(text: string) {
     if (text === '---' || text === '***') {
         type = 'divider' // 
     }
-    if (/\[([^\]]+)\]\(([^)]+)\s*("[^"]*")?\)/g.test(text)) {
+    if (LINK_REGEXP.test(text)) {
         type = 'link' // 链接
-        content = /\[([^\]]+)\]\(([^)]+)\)/g.exec(text)
+        content = LINK_REGEXP.exec(text)
+    }
+    if (IMG_REGEXP.test(text)) {
+        type = 'img' // 图片
+        content = IMG_REGEXP.exec(text)
     }
     if(text.startsWith("- [x] ") || text.startsWith("- [] ")) {
         type = 'todo'

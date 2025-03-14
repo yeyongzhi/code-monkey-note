@@ -16,8 +16,8 @@ const { nav } = defineProps({
                 </div>
             </template>
             <template v-else>
-                <div class="icon flex-center-center">
-                    <img :src="nav.icon" />
+                <div class="icon flex-center-center" :style="`width: ${nav.iconWidth || 40}px;`">
+                    <img :src="nav.icon" :style="`width: ${nav.iconWidth + 'px' || 'auto'};`"/>
                 </div>
                 <div class="name">
                     {{ nav.name }}
