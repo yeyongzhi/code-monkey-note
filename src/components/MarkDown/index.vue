@@ -43,13 +43,64 @@ const copyCode = (content: string) => {
         });
 }
 
-let title_index: any = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0
+const findTitleRange = (list: Array<any>, level: number, originResult: Array<any> = []) => {
+    let result: any[] = originResult
+    for (let i = 0; i < list.length; i++) {
+        if ((list[i].type.startsWith("h") && (Number(list[i].type.replace("h", "")) === level))) {
+            if (level === 1) {
+                result.push({
+                    ...list[i],
+                    index: i,
+                    name: list[i].content.replace(/#/g, "").trim(),
+                     key: `md_nav_${i}`
+                })
+            } else {
+                const findLastIndex = (list2: any) => {
+                    let parentTitleIndex = list2.findIndex((r: any) => {
+                        return r.index > i
+                    })
+                    if (parentTitleIndex === -1) {
+                        parentTitleIndex = list2.length - 1
+                    } else {
+                        parentTitleIndex = parentTitleIndex - 1
+                    }
+                    return parentTitleIndex
+                }
+                let targetIndex = findLastIndex(result)
+                let target = result[targetIndex]
+                if (level >= 3) {
+                    for (let j = 2; j < level; j++) {
+                        targetIndex = findLastIndex(target.children)
+                        target = target.children[targetIndex]
+                        if (j === level - 1) {
+                            if (!target.children) {
+                                target.children = []
+                            }
+                            target.children.push({
+                                ...list[i],
+                                index: i,
+                                // children: [],
+                                name: list[i].content.replace(/#/g, "").trim(),
+                                 key: `md_nav_${i}`
+                            })
+                        }
+                    }
+                } else {
+                    if (!target.children) {
+                        target.children = []
+                    }
+                    target.children.push({
+                        ...list[i],
+                        index: i,
+                        // children: [],
+                        name: list[i].content.replace(/#/g, "").trim(),
+                        key: `md_nav_${i}`
+                    })
+                }
+            }
+        }
+    }
+    return result
 }
 
 const markdown_nav = computed(() => {
@@ -57,45 +108,33 @@ const markdown_nav = computed(() => {
         return []
     }
     let list: any = []
-    markdownContent.value.forEach((m: any, i: number) => {
-        // 属于标题
-        if (m.type.startsWith("h")) {
-            const title_num: number = Number(m.type.replace("h", ""))
-            if (title_num === 1) {
-                list.push({
-                    name: m.content.trim().replace(/#/g, ""),
-                    key: `md_nav_${i}`,
-                })
-            } else {
-                if(!list[String(title_index[title_num - 1])].children) {
-                    list[title_index[title_num - 1]].children = []
-                }
-                list[title_index[title_num - 1]].children.push({
-                    name: m.content.trim().replace(/#/g, ""),
-                    key: `md_nav_${i}`,
-                })
-            }
-            title_index[title_num] = list.length - 1
-        }
-    })
+    list = findTitleRange(markdownContent.value, 1)
+    list = findTitleRange(markdownContent.value, 2, list)
+    list = findTitleRange(markdownContent.value, 3, list)
+    list = findTitleRange(markdownContent.value, 4, list)
+    list = findTitleRange(markdownContent.value, 5, list)
+    list = findTitleRange(markdownContent.value, 6, list)
+    console.log(list)
     return list
 })
 
+const selectTitleLevel = ref("")
 const handleNavClick = ({ option }: { option: any }) => {
+    selectTitleLevel.value = option.type
     location.hash = `#${option.name}`
 }
 
 watch(() => path, (newVal) => {
     if (newVal) {
-        console.log(newVal)
         getArticle()
     }
 }, { immediate: true })
 
 const scrollToSection = () => {
     const decodedHash = decodeURIComponent(location.hash.substring(1));
+    // const elements = document.getElementsByTagName(selectTitleLevel.value)
+    // console.log(elements)
     const element = document.getElementById('markdown_nav_' + decodedHash);
-
     if (element) {
         // 滚动到元素位置，并预留顶部间距
         window.scrollTo({
@@ -114,7 +153,7 @@ onUnmounted(() => {
 })
 
 const renderTitleId = (item: any) => {
-    return 'markdown_nav_' + item.content.trim().replace(/#/g, "")
+    return 'markdown_nav_' + item.content.replace(/#/g, "").trim()
 }
 
 const getImageUrl = (url: string) => {
@@ -159,13 +198,8 @@ const getImageUrl = (url: string) => {
                 </template>
                 <template v-else-if="item.type === 'img'">
                     <div class="single_img">
-                        <n-image
-                            width="700"
-                            height="400"
-                            :src="getImageUrl(item.content[2])"
-                            object-fit="contain"
-                            :title="item.content[1]"
-                        />
+                        <n-image width="700" height="400" :src="getImageUrl(item.content[2])" object-fit="contain"
+                            :title="item.content[1]" />
                         <p>{{ item.content[1] }}</p>
                     </div>
                 </template>
@@ -201,7 +235,8 @@ const getImageUrl = (url: string) => {
             </div>
         </div>
         <div class="markdown_guide">
-            <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name" children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick"/>
+            <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name"
+                children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick" />
         </div>
     </div>
 
@@ -211,6 +246,7 @@ const getImageUrl = (url: string) => {
 .markdown_container {
     .markdown_content {
         width: 80%;
+        padding-right: 350px;
         .md_content {
             width: fit-content;
             font-size: 14px;
@@ -285,6 +321,7 @@ const getImageUrl = (url: string) => {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+
                 & p {
                     text-decoration: underline;
                     color: #c4c4c4;
@@ -294,6 +331,7 @@ const getImageUrl = (url: string) => {
     }
 
     .markdown_guide {
+        width: 300px;
         flex: 1;
         position: fixed;
         top: 100px;

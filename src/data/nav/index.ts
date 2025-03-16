@@ -19,7 +19,7 @@ const KimiIcon: string = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABh
 
 export const NavList: Array<NavItem> = [
     {
-        title: 'AI',
+        title: 'AI🔥',
         descriptions: '',
         linkList: [
             {

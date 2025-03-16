@@ -24,7 +24,8 @@
         "key": "chrome",
         "label": "浏览器",
         "children": [
-            { "key": "chromeRun", "label": "浏览器的运行原理" }
+            { "key": "chromeRun", "label": "浏览器的运行原理" },
+            { "key": "chromeTest", "label": "测试标题" }
         ]
     },
     {
