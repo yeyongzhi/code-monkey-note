@@ -1,5 +1,7 @@
 const LINK_REGEXP = /\[(.*?)\]\((.*?)(".*?")?\)/g
 const IMG_REGEXP = /!\[(.*?)\]\((.*?)\)/
+const UNORDERLIST_REGEXP = /^- (.*)$/
+const ORDERLIST_REGEXP = /^\d+\.\s(.*)$/
 
 const noHandleTypeList = [
     "h1",
@@ -9,7 +11,6 @@ const noHandleTypeList = [
     "h5",
     "h6",
     "emptyLine",
-    "text",
     "divider",
     "link",
     "img"
@@ -26,11 +27,30 @@ export function formatMarkDown(str: string) {
         return identifyLine(t)
     })
     console.log(content)
+    // else if (c.type === 'unorderList' || c.type === 'orderList') {
+    //     const range = getContinuousRangeIndex(content, i)
+    //     const regex = (c.type === 'unorderList') ? /-/g : /^\s*\d+[\.\)\-]\s*/g;
+    //     result.push({
+    //         type: c.type,
+    //         content: content.slice(range[0], range[1] + 1).map(item => handleLineText(item.content.replace(regex, "")))
+    //     })
+    //     i = range[1] + 1
+    //     if (i < content.length) {
+    //         fn()
+    //     }
+    // } 
     let result: any = []
     let i = 0;
     const fn = () => {
         const c = content[i]
-        if (c.type === 'text') {
+        if (noHandleTypeList.includes(c.type)) {
+            // 处理单行的内容
+            result.push(c)
+            i++
+            if (i < content.length) {
+                fn()
+            }
+        } else if (c.type === 'text') {
             result.push({
                 type: c.type,
                 content: handleLineText(c.content)
@@ -39,21 +59,24 @@ export function formatMarkDown(str: string) {
             if (i < content.length) {
                 fn()
             }
-        } else if (noHandleTypeList.includes(c.type)) {
-            // 处理单行的内容
-            result.push(c)
+        } else if (c.type === 'unorderList') {
+            result.push({
+                type: c.type,
+                content: handleLineText(c.content)
+            })
             i++
             if (i < content.length) {
                 fn()
             }
-        } else if (c.type === 'unorderList' || c.type === 'orderList') {
-            const range = getContinuousRangeIndex(content, i)
-            const regex = (c.type === 'unorderList') ? /-/g : /^\s*\d+[\.\)\-]\s*/g;
+        } else if(c.type === 'orderList') {
             result.push({
                 type: c.type,
-                content: content.slice(range[0], range[1] + 1).map(item => handleLineText(item.content.replace(regex, "")))
+                content: [
+                    c.content[0],
+                    handleLineText(c.content[1])
+                ]
             })
-            i = range[1] + 1
+            i++
             if (i < content.length) {
                 fn()
             }
@@ -113,14 +136,18 @@ export function identifyLine(text: string) {
         const times = text.split("").filter(t => t === '#').length
         type = `h${times}`
     }
-    if (text.startsWith("- ")) {
+    if (UNORDERLIST_REGEXP.test(text)) {
         type = 'unorderList' // 无序列表
+        const result = UNORDERLIST_REGEXP.exec(text)
+        content = result ? result[1] : ""
     }
-    if(/^\s*\d+\.\s+(.*)/.test(text)) {
-        type = 'orderList' // 无序列表
+    if(ORDERLIST_REGEXP.test(text)) {
+        type = 'orderList' // 有序列表
+        const result = ORDERLIST_REGEXP.exec(text)
+        content = [text.substring(0, text.indexOf(".")), result ? result[1] : ""]
     }
     if (text.startsWith("> ")) {
-        type = 'quote' // 无序列表
+        type = 'quote' // 引用
     }
     if (/```/g.test(text)) {
         type = 'code' // 代码块
@@ -147,15 +174,6 @@ export function identifyLine(text: string) {
         content
     }
 }
-
-// const lineTextFormat = [
-//     "**",
-//     "__",
-//     "*",
-//     "_",
-//     "~~",
-//     "`",
-// ]
 
 function handleLineText(content: string) {
     const boldRegex = /(\*\*|__)(.*?)(\*\*|__)/g;

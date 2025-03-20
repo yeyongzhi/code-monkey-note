@@ -13,6 +13,7 @@ const getArticle = async () => {
     let data = null
     try {
         const response = await fetch(path);
+        console.log(response)
         const contentType = response.headers.get('Content-Type')
         console.log(contentType)
         data = await response.text()
@@ -114,6 +115,7 @@ const markdown_nav = computed(() => {
     list = findTitleRange(markdownContent.value, 4, list)
     list = findTitleRange(markdownContent.value, 5, list)
     list = findTitleRange(markdownContent.value, 6, list)
+    console.log("文章目录生成如下：")
     console.log(list)
     return list
 })
@@ -196,23 +198,26 @@ const getImageUrl = (url: string) => {
                 <template v-else-if="item.type === 'link'">
                     <a :href="item.content[2]">{{ item.content[1] }}</a>
                 </template>
+                <!-- 图片 -->
                 <template v-else-if="item.type === 'img'">
                     <div class="single_img">
-                        <n-image width="700" height="400" :src="getImageUrl(item.content[2])" object-fit="contain"
+                        <n-image width="700" height="auto" :src="getImageUrl(item.content[2])" object-fit="contain"
                             :title="item.content[1]" />
-                        <p>{{ item.content[1] }}</p>
+                        <p :title="item.content[1]">{{ item.content[1] }}</p>
                     </div>
                 </template>
+                <!-- 无序列表 -->
                 <template v-else-if="item.type === 'unorderList'">
-                    <ul>
-                        <li v-for="(l, l_index) in item.content" :key="'unorder' + l_index" v-html="l"></li>
-                    </ul>
+                    <div v-html="item.content"></div>
                 </template>
+                <!-- 有序列表 -->
                 <template v-else-if="item.type === 'orderList'">
-                    <ol>
-                        <li v-for="(l, l_index) in item.content" :key="'order' + l_index" v-html="l"></li>
-                    </ol>
+                    <div class="orderList_box">
+                        <span>{{ item.content[0] }}. </span>
+                        <span v-html="item.content[1]"></span>
+                    </div>
                 </template>
+                <!-- 待办事项 -->
                 <template v-else-if="item.type === 'todo'">
                     <p v-for="(t, t_index) in item.content" :key="'todo' + t_index">
                         <n-checkbox :checked="t.finished">
@@ -220,6 +225,7 @@ const getImageUrl = (url: string) => {
                         </n-checkbox>
                     </p>
                 </template>
+                <!-- 代码片段 -->
                 <template v-else-if="item.type === 'code'">
                     <div class="code_header">
                         <span @click="copyCode(item.content.join('\n'))">复制代码</span>
@@ -234,7 +240,7 @@ const getImageUrl = (url: string) => {
                 </template>
             </div>
         </div>
-        <div class="markdown_guide">
+        <div class="markdown_guide" v-if="markdown_nav && markdown_nav.length > 0">
             <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name"
                 children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick" />
         </div>
@@ -247,22 +253,83 @@ const getImageUrl = (url: string) => {
     .markdown_content {
         width: 80%;
         padding-right: 350px;
+
+        h1, h2, h3, h4, h5, h6 {
+            
+        }
+
         .md_content {
             width: fit-content;
             font-size: 14px;
             color: var(--text-color-base);
             height: auto;
+        }
+
+        .md_h1 {
+            margin: 30px 0;
+        }
+
+        .md_h2 {
+            margin: 25px 0;
+        }
+
+        .md_h3 {
+            margin: 20px 0;
+        }
+
+        .md_h4 {
+            margin: 15px 0;
+        }
+
+        .md_h5 {
             margin: 10px 0;
         }
 
+        .md_h6 {
+            margin: 5px 0;
+        }
+
         .md_text {
-            line-height: 20px;
+            line-height: 30px;
         }
 
         .md_emptyLine {
             width: 100%;
-            height: 20px;
-            line-height: 20px;
+            height: 30px;
+            line-height: 30px;
+            margin: 0 !important;
+        }
+
+        .md_unorderList {
+            position: relative;
+            padding-left: 15px;
+            line-height: 30px;
+            &::before {
+                content: "";
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background-color: var(--primary-color);
+                left: 0;
+                top: 13px;
+            }
+        }
+
+        .md_orderList {
+            .orderList_box {
+                & span {
+                    &:nth-child(1) {
+                        color: var(--primary-color);
+                        font-weight: bolder;
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+
+        .md_unorderList,.md_orderList {
+            margin-bottom: 10px;
         }
 
         .md_divider {
@@ -274,16 +341,17 @@ const getImageUrl = (url: string) => {
 
         .md_quote {
             width: 100%;
-            padding: 10px;
+            padding: 10px 10px 10px 15px;
             background-color: #f0f0f0;
             color: var(--text-color-3);
             border-radius: 5px;
             position: relative;
+            line-height: 30px;
 
             &::before {
                 content: "";
                 position: absolute;
-                width: 2px;
+                width: 3px;
                 height: 100%;
                 background-color: #bfbfbf;
                 left: 0;
@@ -323,8 +391,10 @@ const getImageUrl = (url: string) => {
                 align-items: center;
 
                 & p {
-                    text-decoration: underline;
+                    padding-bottom: 2px;
+                    border-bottom: 1px solid #c4c4c4;
                     color: #c4c4c4;
+                    margin-top: 20px;
                 }
             }
         }

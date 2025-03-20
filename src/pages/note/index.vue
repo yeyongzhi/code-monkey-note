@@ -46,7 +46,7 @@ const getFullPath = (path: string) => {
 	return fullPath.join("/")
 }
 
-const handleTreeSelected = (keys: any, option: any, meta: any) => {
+const handleTreeSelected = (keys: any, _: any, meta: any) => {
 	const path = keys[0]
 	if (!meta.node.children || meta.node.children.length === 0) {
 		articlePath.value = `${baseNotePath}/${getFullPath(path)}.md`
