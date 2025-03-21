@@ -6,9 +6,11 @@ import { basePath } from '@/router/index'
 const baseNotePath = basePath + '/article/note'
 
 const articlePath = ref<string | null>(null)
+const expandedKeys = ref<Array<string | number>>([])
 const selectKeys = ref<Array<string | number>>([])
 const defaultArticleKey = ref("chromeRun") // 默认打开的文章
 
+// 查找文章路径
 const findPath = (tree: Array<any>, targetId: string) => {
 	// 定义递归函数
 	const traverse: any = (node: any, path: Array<any>) => {
@@ -46,18 +48,31 @@ const getFullPath = (path: string) => {
 	return fullPath.join("/")
 }
 
+// 处理Note的选中事件
 const handleTreeSelected = (keys: any, _: any, meta: any) => {
 	const path = keys[0]
 	if (!meta.node.children || meta.node.children.length === 0) {
-		articlePath.value = `${baseNotePath}/${getFullPath(path)}.md`
+		const fullPath = getFullPath(path)
+		articlePath.value = `${baseNotePath}/${fullPath}.md`
 		selectKeys.value = keys
 	}
 }
 
+// 处理Note的展开事件
+const handleTreeExpanded = (keys: any) => {
+	expandedKeys.value = keys
+}
+
 onMounted(() => {
-	if(defaultArticleKey.value) {
-		articlePath.value = `${baseNotePath}/${getFullPath(defaultArticleKey.value)}.md`
-		selectKeys.value = [defaultArticleKey.value]
+	if (defaultArticleKey.value) {
+		const path = getFullPath(defaultArticleKey.value)
+		if (path) {
+			const pathList = path.split("/")
+			pathList.pop()
+			expandedKeys.value = pathList
+			articlePath.value = `${baseNotePath}/${path}.md`
+			selectKeys.value = [defaultArticleKey.value]
+		}
 	}
 })
 
@@ -67,7 +82,8 @@ onMounted(() => {
 	<div class="app_container note_container flex-between-start">
 		<div class="tab_container">
 			<n-tree block-line :data="NoteData" expand-on-click :selected-keys="selectKeys"
-				:on-update:selected-keys="handleTreeSelected" />
+				:expanded-keys="expandedKeys" :on-update:selected-keys="handleTreeSelected"
+				:on-update:expanded-keys="handleTreeExpanded" />
 		</div>
 		<div class="note_content_container">
 			<MarkDown v-if="articlePath" :path="articlePath" />

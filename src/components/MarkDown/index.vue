@@ -13,24 +13,26 @@ const getArticle = async () => {
     let data = null
     try {
         const response = await fetch(path);
-        console.log(response)
         const contentType = response.headers.get('Content-Type')
-        console.log(contentType)
+        if (contentType !== "text/markdown") {
+            markdownContent.value = null;
+            return false;
+        }
         data = await response.text()
     } catch (err) {
         console.error("md文件读取出错")
     }
     console.log(data)
-    if (data) {
+    if (data && data.length > 0) {
         // markdownContent.value = await marked(data);
         const result = formatMarkDown(data)
-        console.log("md文件读取结果：")
-        console.log(result)
+        // console.log("md文件读取结果：")
+        // console.log(result)
         markdownContent.value = result;
     } else {
         // const errorRes = await fetch(ErrorPath);
         // const errorData = await errorRes.text();
-        // markdownContent.value = await marked(errorData);
+        markdownContent.value = [];
     }
 }
 
@@ -53,7 +55,7 @@ const findTitleRange = (list: Array<any>, level: number, originResult: Array<any
                     ...list[i],
                     index: i,
                     name: list[i].content.replace(/#/g, "").trim(),
-                     key: `md_nav_${i}`
+                    key: `md_nav_${i}`
                 })
             } else {
                 const findLastIndex = (list2: any) => {
@@ -82,7 +84,7 @@ const findTitleRange = (list: Array<any>, level: number, originResult: Array<any
                                 index: i,
                                 // children: [],
                                 name: list[i].content.replace(/#/g, "").trim(),
-                                 key: `md_nav_${i}`
+                                key: `md_nav_${i}`
                             })
                         }
                     }
@@ -115,8 +117,8 @@ const markdown_nav = computed(() => {
     list = findTitleRange(markdownContent.value, 4, list)
     list = findTitleRange(markdownContent.value, 5, list)
     list = findTitleRange(markdownContent.value, 6, list)
-    console.log("文章目录生成如下：")
-    console.log(list)
+    // console.log("文章目录生成如下：")
+    // console.log(list)
     return list
 })
 
@@ -169,7 +171,7 @@ const getImageUrl = (url: string) => {
     <!-- 方式一：采用marked.js 直接渲染 -->
     <!-- <div class="markdown_container" v-html="markdownContent"></div> -->
     <div class="markdown_container flex-between-start">
-        <div class="markdown_content">
+        <div class="markdown_content" v-if="markdownContent && markdownContent.length > 0">
             <div :class="`md_content md_${item.type}`" v-for="(item, index) in markdownContent" :key="'md' + index">
                 <template v-if="item.type === 'h1'">
                     <h1 :id="renderTitleId(item)">{{ item.content.trim().replace(/#/g, "") }}</h1>
@@ -240,7 +242,8 @@ const getImageUrl = (url: string) => {
                 </template>
             </div>
         </div>
-        <div class="markdown_guide" v-if="markdown_nav && markdown_nav.length > 0">
+        <n-empty class="flex-center-center" style="width: 100%;height: 500px;" :description="(Array.isArray(markdownContent) && markdownContent.length === 0) ? '暂无数据' : '找不到文章~'" v-else></n-empty>
+        <div class="markdown_guide" v-if="markdownContent && markdown_nav && markdown_nav.length > 0">
             <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name"
                 children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick" />
         </div>
@@ -254,13 +257,16 @@ const getImageUrl = (url: string) => {
         width: 80%;
         padding-right: 350px;
 
-        h1, h2, h3, h4, h5, h6 {
-            
-        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {}
 
         .md_content {
             width: fit-content;
-            font-size: 14px;
+            font-size: 15px;
             color: var(--text-color-base);
             height: auto;
         }
@@ -295,24 +301,24 @@ const getImageUrl = (url: string) => {
 
         .md_emptyLine {
             width: 100%;
-            height: 30px;
-            line-height: 30px;
+            height: 20px;
             margin: 0 !important;
         }
 
         .md_unorderList {
             position: relative;
             padding-left: 15px;
-            line-height: 30px;
+            line-height: 20px;
+
             &::before {
                 content: "";
                 position: absolute;
-                width: 6px;
-                height: 6px;
+                width: 5px;
+                height: 5px;
                 border-radius: 50%;
                 background-color: var(--primary-color);
                 left: 0;
-                top: 13px;
+                top: 8px;
             }
         }
 
@@ -328,7 +334,8 @@ const getImageUrl = (url: string) => {
             }
         }
 
-        .md_unorderList,.md_orderList {
+        .md_unorderList,
+        .md_orderList {
             margin-bottom: 10px;
         }
 

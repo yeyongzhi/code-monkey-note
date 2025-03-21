@@ -26,19 +26,7 @@ export function formatMarkDown(str: string) {
     const content: Array<any> = text.map(t => {
         return identifyLine(t)
     })
-    console.log(content)
-    // else if (c.type === 'unorderList' || c.type === 'orderList') {
-    //     const range = getContinuousRangeIndex(content, i)
-    //     const regex = (c.type === 'unorderList') ? /-/g : /^\s*\d+[\.\)\-]\s*/g;
-    //     result.push({
-    //         type: c.type,
-    //         content: content.slice(range[0], range[1] + 1).map(item => handleLineText(item.content.replace(regex, "")))
-    //     })
-    //     i = range[1] + 1
-    //     if (i < content.length) {
-    //         fn()
-    //     }
-    // } 
+    // console.log(content)
     let result: any = []
     let i = 0;
     const fn = () => {

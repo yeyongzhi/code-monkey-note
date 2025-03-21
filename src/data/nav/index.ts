@@ -19,7 +19,7 @@ const KimiIcon: string = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABh
 
 export const NavList: Array<NavItem> = [
     {
-        title: 'AI🔥',
+        title: 'AI🔥大模型',
         descriptions: '',
         linkList: [
             {
@@ -83,11 +83,10 @@ export const NavList: Array<NavItem> = [
                 descriptions: '我可以帮你搜索、答疑、分析、写作、提建议，请把你的任务交给我吧~包含deepseek R1满血版'
             },
             {
-                name: 'CSDN-AI',
-                icon: "https://cdn-static-devbit.csdn.net/ai100/chat/imgs/icon-logo-new.png",
+                name: 'CSDN AI',
+                icon: "https://csdnimg.cn/public/favicon.ico",
                 url: 'https://ai.csdn.net/',
                 descriptions: 'C知道由CSDN和外部合作伙伴联合研发的领先AI产品，能高效完成AI问答、AI对话、文件分析、代码生成以及开发相关的问题，帮您提高工作和学习效率。~包含deepseek R1满血版。',
-                iconWidth: 100
             }
         ]
     },

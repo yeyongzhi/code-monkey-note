@@ -3,29 +3,49 @@
         "key": "js",
         "label": "Javascript基础",
         "children": [
-            { "key": "dataType", "label": "数据类型" }
+            {
+                "key": "dataType",
+                "label": "数据类型"
+            }
         ]
     },
     {
         "key": "ts",
         "label": "TypeScript",
-        "children": [
-
-        ]
+        "children": []
     },
     {
         "key": "vue",
         "label": "vue",
         "children": [
-            { "key": "vueRouter", "label": "vue-router" }
+            {
+                "key": "vueRouter",
+                "label": "vue-router"
+            }
         ]
     },
     {
         "key": "chrome",
         "label": "浏览器",
         "children": [
-            { "key": "chromeRun", "label": "浏览器的运行原理" },
-            { "key": "chromeTest", "label": "测试标题" }
+            {
+                "key": "chromeRun",
+                "label": "浏览器的运行原理"
+            },
+            {
+                "key": "chromeTest",
+                "label": "测试标题"
+            },
+            {
+                "key": "chromeStorge",
+                "label": "浏览器的本地存储",
+                "children": [
+                    {
+                        "key": "localStorge",
+                        "label": "localStorge类的简易存储"
+                    }
+                ]
+            }
         ]
     },
     {
