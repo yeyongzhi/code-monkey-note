@@ -103,7 +103,7 @@ watch(componentKey, (newVal) => {
                 <n-message-provider>
                     <div class="main_container">
                         <div class="header">
-                            <Header @changeTheme="handleChangeTheme" @changeComponent="changeComponent" @goHistoryBack="goHistoryBack" @goHistoryNext="goHistoryNext"/>
+                            <Header :componentKey="componentKey" @changeTheme="handleChangeTheme" @changeComponent="changeComponent" @goHistoryBack="goHistoryBack" @goHistoryNext="goHistoryNext"/>
                         </div>
                         <div class="content">
                             <component :is="componentName" @changeComponent="changeComponent" :theme="theme"/>

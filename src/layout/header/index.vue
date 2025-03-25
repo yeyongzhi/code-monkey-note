@@ -5,6 +5,12 @@ import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkIte
 import { ArrowLeft16Filled, ArrowRight16Filled } from '@vicons/fluent'
 // import { gotoPage } from '@/router/index'
 
+const { componentKey } = defineProps({
+    componentKey: {
+        type: String,
+    }
+})
+
 const emits = defineEmits(['changeTheme', 'changeComponent', 'goHistoryBack', 'goHistoryNext'])
 
 const gotoLink = (link: HeaderLinkItem) => {
@@ -82,7 +88,7 @@ onMounted(() => {
         <!-- 右侧菜单 -->
         <div class="flex-center-center">
             <div class="link flex-start-center">
-                <span class="link_item hover_color_text" @click="gotoLink(link)" v-for="(link, index) in HeaderLink"
+                <span class="link_item hover_color_text" :style="`color: ${componentKey === link.key ? 'var(--primary-color)' : 'var(--text-color-1)'};font-weight: ${componentKey === link.key ? 'bolder' : 'normal'};`" @click="gotoLink(link)" v-for="(link, index) in HeaderLink"
                     :key="'link' + index">{{ link.name }}</span>
             </div>
             <div class="userInfo flex-center-center">
@@ -131,7 +137,7 @@ onMounted(() => {
         .link_item {
             margin: 0 15px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
         }
     }
 

@@ -34,6 +34,7 @@ const scrollToSection = () => {
 }
 
 onMounted(() => {
+    goBacktoTop()
     window.addEventListener('hashchange', scrollToSection);
 })
 

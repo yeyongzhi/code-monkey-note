@@ -76,6 +76,12 @@
                 "icon": "https://new.inews.gtimg.com/tnews/d64ca7e6-a0c1-47dd-80bf-7cd7d6d53fef/pc-logo-white.png",
                 "descriptions": "腾讯体育是全国亿万体育迷喜爱的社区平台，我们提供顶级赛事直播和丰富高燃的精彩视频，还有专业实时的赛场数据、及时权威的热点资讯、懂球有梗的聊球社区。等你一起为热爱加冕！",
                 "url": "https://sports.qq.com/nba/"
+            },
+            {
+                "name": "虎扑NBA",
+                "icon": "https://w1.hoopchina.com.cn/images/pc/old/favicon.ico",
+                "descriptions": "虎扑篮球专注于NBA、CBA等顶级篮球比赛，提供包含一手资讯、球员交易、詹姆斯、库里、杜兰特、易建联、郭艾伦等国内外知名球员的动态资讯。",
+                "url": "https://nba.hupu.com/"
             }
         ]
     }

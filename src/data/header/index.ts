@@ -1,6 +1,7 @@
 export interface HeaderLinkItem {
     name: string;
     url: string;
+    key: string;
 }
 
 export interface HeaderUserLinkItem {
@@ -10,11 +11,11 @@ export interface HeaderUserLinkItem {
 }
 
 export const HeaderLink: Array<HeaderLinkItem> = [
-    { name: '前端导航', url: '/nav' },
-    { name: '主页', url: '/home' },
-    { name: '笔记', url: '/note' },
-    { name: '面经', url: '/interview' },
-    { name: 'A Life清单', url: '/alife' },
+    { name: '前端导航', url: '/nav', key: 'nav'  },
+    { name: '主页', url: '/home', key: 'home' },
+    { name: '笔记', url: '/note', key: 'note' },
+    { name: '面经', url: '/interview', key: 'interview'  },
+    { name: 'A Life清单', url: '/alife', key: 'alife' },
 ]
 
 export const HeaderUserLink: Array<HeaderUserLinkItem> = [
