@@ -113,7 +113,7 @@ export function formatMarkDown(str: string) {
             const range = getContinuousRangeIndex(content, i)
             result.push({
                 type: "imgList",
-                content: content.slice(range[0], range[1] + 1).map((item, index) => {
+                content: content.slice(range[0], range[1] + 1).map((item) => {
                     return {
                         name: item.content[1],
                         url: item.content[2]
