@@ -4,11 +4,13 @@ import PageContentGuide from '@/components/PageContentGuide/index.vue'
 import LifeList from '@/data/toolbox/life.json'
 import StudyList from '@/data/toolbox/study.json'
 import PlayList from '@/data/toolbox/play.json'
+import SourceList from '@/data/toolbox/source.json'
 
 const tabList = ref([
     { label: '生活日常', value: 'life', data: LifeList },
     { label: '学习提效', value: 'study', data: StudyList },
-    { label: '好玩好用', value: 'play', data: PlayList }
+    { label: '好玩好用', value: 'play', data: PlayList },
+    { label: '资源下载', value: 'source', data: SourceList },
 ])
 const tabKey = ref<string>('life')
 

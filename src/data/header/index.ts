@@ -1,3 +1,5 @@
+import GitHub from '@/assets/images/github.png'
+
 export interface HeaderLinkItem {
     name: string;
     url: string;
@@ -19,5 +21,5 @@ export const HeaderLink: Array<HeaderLinkItem> = [
 ]
 
 export const HeaderUserLink: Array<HeaderUserLinkItem> = [
-    { name: 'github', url: 'https://github.com/yeyongzhi/code-monkey-note', icon: "https://github.com/fluidicon.png" },
+    { name: 'github', url: 'https://github.com/yeyongzhi/code-monkey-note', icon: GitHub },
 ]

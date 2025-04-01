@@ -1,0 +1,19 @@
+[
+    {
+        "title": "字体下载",
+        "children": [
+            {
+                "name": "font-China",
+                "icon": "https://font.chinaz.com/favicon.ico",
+                "descriptions": "中文字体提供:中文字体下载,中文字体下载大全,中文字体打包下载-font.chinaz.com。",
+                "url": "https://font.chinaz.com/zhongwenziti.html"
+            },
+            {
+                "name": "找字网",
+                "icon": "https://www.zhaozi.cn/favicon.ico",
+                "descriptions": "提供中英文免费字体下载、手写字体下载、书法字体下载、艺术字体下载、手机字体下载预览服务！字体商用在线全自动授权！老牌专业字体市场、字体网站。",
+                "url": "https://www.zhaozi.cn/s/freefont/"
+            }
+        ]
+    }
+]

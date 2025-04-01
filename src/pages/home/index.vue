@@ -14,6 +14,7 @@ import { userKnowledge, userTripMapData } from '@/data/home/index'
 import { openTab } from '@/utils/index'
 import { useNotification, NImage } from 'naive-ui'
 import { initAMapSource, initMap } from '@/utils/gaode'
+import GitHub from '@/assets/images/github.png'
 
 const { proxy }: any = getCurrentInstance()
 const notification = useNotification()
@@ -44,7 +45,7 @@ const social_icon: any = {
 
 const code_icon: any = {
     "npm": "https://static-production.npmjs.com/b0f1a8318363185cc2ea6a40ac23eeb2.png",
-    "github": "https://github.com/fluidicon.png",
+    "github": GitHub,
     "gitee": "https://gitee.com/assets/favicon_message.ico?1581387642851",
     "CSDN": "https://g.csdnimg.cn/static/logo/favicon32.ico"
 }

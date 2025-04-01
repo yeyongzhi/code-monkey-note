@@ -1,4 +1,4 @@
-const LINK_REGEXP = /\[(.*?)\]\((.*?)(".*?")?\)/g
+const LINK_REGEXP = /^\[(.*?)\]\((.*?)\)$/
 const IMG_REGEXP = /!\[(.*?)\]\((.*?)\)/
 const UNORDERLIST_REGEXP = /^- (.*)$/
 const ORDERLIST_REGEXP = /^\d+\.\s(.*)$/
@@ -13,7 +13,6 @@ const noHandleTypeList = [
     "emptyLine",
     "divider",
     "link",
-    "img"
 ]
 
 /**
@@ -110,6 +109,21 @@ export function formatMarkDown(str: string) {
             if (i < content.length) {
                 fn()
             }
+        } else if (c.type === 'img') {
+            const range = getContinuousRangeIndex(content, i)
+            result.push({
+                type: "imgList",
+                content: content.slice(range[0], range[1] + 1).map((item, index) => {
+                    return {
+                        name: item.content[1],
+                        url: item.content[2]
+                    }
+                })
+            })
+            i = range[1] + 1
+            if (i < content.length) {
+                fn()
+            }
         }
     }
     fn()
@@ -145,7 +159,8 @@ export function identifyLine(text: string) {
     }
     if (LINK_REGEXP.test(text)) {
         type = 'link' // 链接
-        content = LINK_REGEXP.exec(text)
+        const result = LINK_REGEXP.exec(text)
+        content = result
     }
     if (IMG_REGEXP.test(text)) {
         type = 'img' // 图片

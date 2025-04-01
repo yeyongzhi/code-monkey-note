@@ -3,13 +3,16 @@ import { onMounted, ref, watch } from 'vue';
 import LifeData from '@/data/life/index.json'
 import { basePath } from '@/router/index'
 import { getMarkDownContent } from '@/utils/index'
+import { formatMarkDown } from '@/utils/customMarkdown'
 
 const baseLifePath = basePath + '/article/life'
 
-// 文章路径
-const articlePath = ref<string | null>(null)
+const DEFAULT_ARTICLE_KEY = "joker_xue"
+
 const expandedKeys = ref<Array<string | number>>([])
 const selectKeys = ref<Array<string | number>>([])
+const articlePath = ref<string | null>(null) // 文章路径
+const articleContent = ref<Array<any>>([])
 
 const findPath = (tree: Array<any>, targetId: string) => {
     // 定义递归函数
@@ -64,13 +67,25 @@ const handleTreeExpanded = (keys: any) => {
 // 读取文章内容
 watch(articlePath, async (newVal) => {
     if (newVal) {
-        const result = await getMarkDownContent(newVal)
-        console.log(result)
+        const result = await getMarkDownContent(newVal) // 获取markdown文档内容
+        if(result) {
+            const content = formatMarkDown(result) // 识别格式化内容（自定义）
+            articleContent.value = content
+        }
     }
 })
 
 onMounted(() => {
-
+    if (DEFAULT_ARTICLE_KEY) {
+		const path = getFullPath(DEFAULT_ARTICLE_KEY)
+		if (path) {
+			const pathList = path.split("/")
+			pathList.pop()
+			expandedKeys.value = pathList
+			articlePath.value = `${baseLifePath}/${path}.md`
+			selectKeys.value = [DEFAULT_ARTICLE_KEY]
+		}
+	}
 })
 
 </script>
@@ -83,7 +98,7 @@ onMounted(() => {
                 :on-update:expanded-keys="handleTreeExpanded" />
         </div>
         <div class="life_content_container">
-			
+			<Article v-if="articlePath && articlePath.length > 0" :path="articlePath" />
 		</div>
     </div>
 </template>
@@ -97,8 +112,9 @@ onMounted(() => {
         left: 5%;
     }
     .life_content_container {
-		width: 100%;
-		margin-left: 280px;
+		width: calc(100% - 300px);
+		margin-left: 300px;
+        box-sizing: border-box;
 	}
 }
 </style>

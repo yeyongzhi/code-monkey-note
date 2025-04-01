@@ -1,3 +1,6 @@
+import CSDN from '@/assets/images/csdn.png'
+import BASE64 from '@/assets/images/base64.png'
+
 export interface LinkItem {
     name: string;
     icon?: string;
@@ -84,7 +87,7 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: 'CSDN AI',
-                icon: "https://csdnimg.cn/public/favicon.ico",
+                icon: CSDN,
                 url: 'https://ai.csdn.net/',
                 descriptions: 'C知道由CSDN和外部合作伙伴联合研发的领先AI产品，能高效完成AI问答、AI对话、文件分析、代码生成以及开发相关的问题，帮您提高工作和学习效率。~包含deepseek R1满血版。',
             }
@@ -109,7 +112,7 @@ export const NavList: Array<NavItem> = [
             {
                 name: 'Naive UI',
                 icon: 'https://www.naiveui.com/assets/naivelogo-BdDVTUmz.svg',
-                url: 'https://www.naiveui.com/zh-CN/light',
+                url: 'https://www.naiveui.com/zh-CN/light/components/button',
                 descriptions: '一个 Vue 3 组件库，比较完整，主题可调，使用 TypeScript，有点意思'
             },
             {
@@ -353,7 +356,7 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: '图片转base64',
-                icon: 'https://static.jyshare.com/images/c-runoob-logo.ico',
+                icon: BASE64,
                 url: 'https://www.jyshare.com/front-end/59/',
                 descriptions: '图片的 BASE64 编码就是可以将一幅图片数据编码成一串字符串，使用该字符串代替图片地址，从而不需要使用图片的 URL 地址。'
             },
@@ -363,6 +366,18 @@ export const NavList: Array<NavItem> = [
         title: '金三银四',
         descriptions: '我管你这那的，给我面',
         linkList: [
+            {
+                name: "BOSS直聘",
+                icon: "https://www.zhipin.com/favicon.ico",
+                descriptions: "BOSS直聘是权威领先的招聘网，开启人才网招聘求职新时代，招聘求职找工作，上BOSS直聘，直接谈！",
+                url: "https://www.zhipin.com/"
+            },
+            {
+                name: "智联招聘",
+                icon: "https://common-bucket.zhaopin.cn/img/zhilian-ico/zhilian-ico-1.0.0.png",
+                descriptions: "智联招聘求职招聘网站,为求职者提供2025年真实准确的全国求职招聘信息,海量的高薪职位招聘信息供求职者选择,找工作就上智联招聘！",
+                url: "https://www.zhaopin.com/"
+            },
             {
                 name: '前端面试派',
                 icon: 'https://www.mianshipai.com/favicon.ico',

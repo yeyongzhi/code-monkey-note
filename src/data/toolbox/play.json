@@ -1,5 +1,22 @@
 [
     {
+        "title": "导航页",
+        "children": [
+            {
+                "name": "抓鱼鸭",
+                "icon": "https://www.zhuayuya.com/favicon.svg",
+                "descriptions": "【摸鱼中国】抓鱼鸭 - 不仅仅是起始页,它能帮你收藏网站,还能帮你找到好玩的网站,还有聚合搜索帮你快速找到自己想要的,还有弹幕功能,跟小伙伴一起分享点有趣的事。",
+                "url": "https://www.zhuayuya.com/"
+            },
+            {
+                "name": "iTab",
+                "icon": "https://go.itab.link/favicon.ico",
+                "descriptions": "自定义您新标签页上的网站和壁纸以及搜索引擎,创建和编辑属于您自己的浏览器标签页,精美日历、炫酷天气、每日头条、海量壁纸、常用网址随心订制。",
+                "url": "https://go.itab.link/"
+            }
+        ]
+    },
+    {
         "title": "内容生成",
         "children": [
             {
@@ -27,7 +44,7 @@
             },
             {
                 "name": "B站",
-                "icon": "https://i0.hdslb.com/bfs/static/jinkela/long/images/favicon.ico",
+                "icon": "/images/icon/bilibili.png",
                 "descriptions": "哔哩哔哩（bilibili.com)是国内知名的视频弹幕网站，这里有及时的动漫新番，活跃的ACG氛围，有创意的Up主。大家可以在这里找到许多欢乐。",
                 "url": "https://www.bilibili.com/"
             },
@@ -40,8 +57,14 @@
             {
                 "name": "爱奇艺",
                 "icon": "https://www.iqiyi.com/favicon.ico",
-                "descriptions": "",
+                "descriptions": "爱奇艺-在线视频网站-海量正版高清视频在线观看",
                 "url": "https://www.iqiyi.com/"
+            },
+            {
+                "name": "M3U8在线播放器",
+                "icon": "https://tool.liumingye.cn/favicon.ico",
+                "descriptions": "M3U8在线播放,M3U8播放器,M3U8直播源,M3U8在线测试。",
+                "url": "https://tool.liumingye.cn/m3u8/"
             }
         ]
     },
@@ -73,13 +96,13 @@
         "children": [
             {
                 "name": "腾讯NBA",
-                "icon": "https://new.inews.gtimg.com/tnews/d64ca7e6-a0c1-47dd-80bf-7cd7d6d53fef/pc-logo-white.png",
+                "icon": "/images/icon/tecentNBA.png",
                 "descriptions": "腾讯体育是全国亿万体育迷喜爱的社区平台，我们提供顶级赛事直播和丰富高燃的精彩视频，还有专业实时的赛场数据、及时权威的热点资讯、懂球有梗的聊球社区。等你一起为热爱加冕！",
                 "url": "https://sports.qq.com/nba/"
             },
             {
                 "name": "虎扑NBA",
-                "icon": "https://w1.hoopchina.com.cn/images/pc/old/favicon.ico",
+                "icon": "/images/icon/hupu.png",
                 "descriptions": "虎扑篮球专注于NBA、CBA等顶级篮球比赛，提供包含一手资讯、球员交易、詹姆斯、库里、杜兰特、易建联、郭艾伦等国内外知名球员的动态资讯。",
                 "url": "https://nba.hupu.com/"
             }

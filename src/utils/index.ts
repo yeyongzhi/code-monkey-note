@@ -19,6 +19,6 @@ export async function getMarkDownContent(markdown_path: string) {
         // const result = formatMarkDown(data)
         return data
     } else {
-        return []
+        return ""
     }
 }

@@ -1,21 +1,67 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { watch, ref } from 'vue';
+import { getMarkDownContent, openTab } from '@/utils/index'
+import { formatMarkDown } from '@/utils/customMarkdown'
+import { Link24Filled } from '@vicons/fluent'
 
-const { data } = defineProps({
-    data: { type: Object, required: true, default: '' },
+
+const { path } = defineProps({
+    path: { type: String, required: true, default: '' },
 })
+const data = ref<any>(null)
 
-onMounted(() => {
+watch(() => path, async (newVal) => {
+    if (newVal) {
+        const result = await getMarkDownContent(newVal) // 获取markdown文档内容
+        if (result) {
+            const content = formatMarkDown(result) // 识别格式化内容（自定义）
+            console.log(content)
+            data.value = content
+        }
+    }
+}, { immediate: true })
 
-})
+const getImageUrl = (url: string) => {
+    const basePath = path.substring(0, path.lastIndexOf("/"))
+    return basePath + url.replace(".", "")
+}
 
 </script>
 
 <template>
     <div class="article_container">
         <div :class="item.type" v-for="(item, index) in data" :key="index">
+            <template v-if="item.type === 'h1'">
+                <h1>{{ item.content.trim().replace(/#/g, "") }}</h1>
+            </template>
+            <template v-else-if="item.type === 'h2'">
+                <h2>{{ item.content.trim().replace(/#/g, "") }}</h2>
+            </template>
+            <template v-else-if="item.type === 'h3'">
+                <h3>{{ item.content.trim().replace(/#/g, "") }}</h3>
+            </template>
+            <template v-else-if="item.type === 'h4'">
+                <h4>{{ item.content.trim().replace(/#/g, "") }}</h4>
+            </template>
+            <template v-else-if="item.type === 'h5'">
+                <h5>{{ item.content.trim().replace(/#/g, "") }}</h5>
+            </template>
+            <template v-else-if="item.type === 'h6'">
+                <h6>{{ item.content.trim().replace(/#/g, "") }}</h6>
+            </template>
+            <!-- 空行 -->
+            <template v-else-if="item.type === 'emptyLine'">
+
+            </template>
+            <!-- 链接 -->
+            <template v-else-if="item.type === 'link'">
+                <span @click="openTab(item.content[2])" :title="item.content[1]" class="flex-start-center">
+                    <n-icon :size="20" style="cursor: pointer;margin-right: 10px;" :component="Link24Filled" />
+                    {{ item.content[1] }}
+                </span>
+            </template>
             <!-- 有序列表 -->
-            <template v-if="item.type === 'orderList'">
+            <template v-else-if="item.type === 'orderList'">
                 <div class="orderList_item" v-for="(c, index) in item.content" :key="'order' + index">
                     <span class="orderList_index">{{ index + 1 }} . </span>
                     {{ c }}
@@ -27,24 +73,22 @@ onMounted(() => {
             </template>
             <!-- 单张图片 -->
             <template v-else-if="item.type === 'image'">
-                <n-image :src="item.content" :style="`width: ${item.params.width ? item.params.width + 'px' : 'auto'};height: ${item.params.height ? item.params.height + 'px' : 'auto'};`" />
+                <n-image :src="item.content"
+                    :style="`width: ${item.params.width ? item.params.width + 'px' : 'auto'};height: ${item.params.height ? item.params.height + 'px' : 'auto'};`" />
             </template>
             <!-- 图片列表 -->
             <template v-else-if="item.type === 'imgList'">
                 <n-image-group>
-                    <n-image :src="c.url" v-for="(c, index) in item.content" :key="'imgList' + index" />
-                </n-image-group>
-            </template>
-            <!-- 轮播图 TODO -->
-            <template v-else-if="item.type === 'carousel'">
-                <n-image-group>
-                    <n-carousel autoplay show-arrow style="width: 600px;">
-                        <n-image style="width: 600px;" :src="c.url" v-for="(c, index) in item.content" :key="'carousel' + index" />
-                    </n-carousel>
+                    <n-grid x-gap="20" y-gap="20" :cols="3">
+                        <n-gi class="imgList_grid_item flex-center-center" v-for="(c, index) in item.content"
+                            :key="'imgList_item' + index">
+                            <n-image class="imgList_item" :src="getImageUrl(c.url)" />
+                        </n-gi>
+                    </n-grid>
                 </n-image-group>
             </template>
             <template v-else>
-                {{ item.content }}
+                <span v-html="item.content"></span>
             </template>
         </div>
     </div>
@@ -54,68 +98,45 @@ onMounted(() => {
 .article_container {
     padding-bottom: 100px;
     font-size: 15px;
-    .title {
-        font-size: 30px;
-        font-weight: bolder;
-        margin: 40px 0;
-    }
 
-    .title1 {
-        font-size: 25px;
-        font-weight: bolder;
-        margin: 30px 0;
-    }
-
-    .title2 {
-        font-size: 22px;
-        font-weight: bolder;
-        margin: 20px 0;
-    }
-
-    .title2 {
-        font-size: 18px;
-        font-weight: bolder;
-        margin-bottom: 20px;
-    }
-
-    .content {
-        margin-bottom: 10px;
-    }
-
-    .unorderList {
-        margin-bottom: 10px;
-        padding-left: 10px;
-
-        .unorderList_item {
-            height: 30px;
-            line-height: 30px;
+    .link {
+        span {
+            width: fit-content;
+            color: var(--primary-color);
+            cursor: pointer;
+            border-bottom: 1px solid transparent;
+            &:hover {
+                border-bottom: 1px solid var(--primary-color);
+            }
         }
     }
 
-    .orderList {
-        margin-bottom: 10px;
-        padding-left: 10px;
-
-        .orderList_index {
-            margin-right: 5px;
-        }
-
-        .orderList_item {
-            height: 30px;
-            line-height: 30px;
-        }
+    .emptyLine {
+        height: 30px;
+        line-height: 30px;
     }
 
     .imgList {
-        width: 100%;
-        height: 500px;
+        width: 1240px;
         display: flex;
-        gap: 0 40px;
-    }
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
 
-    .carousel {
-        img {
-            
+        .imgList_grid_item {
+            border-radius: 5px;
+            border: 2px solid var(--border-color);
+            padding: 10px;
+            box-sizing: border-box;
+
+            &:hover {
+                border: 2px solid var(--primary-color);
+            }
+        }
+
+        .imgList_item {
+            height: 500px;
+            max-width: 380px;
         }
     }
 }
