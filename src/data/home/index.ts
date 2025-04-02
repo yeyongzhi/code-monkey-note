@@ -77,7 +77,7 @@ export const userTripMapData: Array<TripMapItem> = [
         date: '2018-09',
         level: "city",
         center: [119.921786,28.451993],
-        descriptions: "始于2018年金秋，在此开启了我的大学四年生涯；同时也在这里结识了我的一生挚友。我很幸运在这里能有一段长达4年的时光，"
+        descriptions: "始于2018年金秋，在此开启了我的大学四年生涯；同时也在这里结识了我的一些挚友。"
     },
     {  
         name: '温州',
@@ -93,35 +93,39 @@ export const userTripMapData: Array<TripMapItem> = [
         date: '2024-03',
         level: "city",
         center: [120.582112,29.997117],
-        descriptions: "一定要寻找到自己的25号人生底片。说来惭愧，自己第一次一个人尝试出远门，非常充实的一天，我也会更加。"
+        descriptions: "说来惭愧，自己第一次一个人尝试出远门，但是非常充实的一天。"
     },
     {  
         name: '舟山',
         code: 330900,
         date: '2015-09',
         level: "city",
-        center: [122.106863,30.016028]
+        center: [122.106863,30.016028],
+        descriptions: "毕业后和发小的一段旅行，这是第一次外出吧应该，哦对了舟山才算是我第一次看到大海！"
     },
     {  
         name: '平潭',
         code: 350128,
         date: '2023-05',
         level: "district",
-        center: [119.791197,25.503672]
+        center: [119.791197,25.503672],
+        descriptions: "第一次看到了真正的大海，非常难忘。也是和我的女朋友的第一次双人旅行。"
     },
     {  
         name: '长沙',
         code: 430100,
         date: '2024-03',
         level: "city",
-        center: [112.982279,28.19409]
+        center: [112.982279,28.19409],
+        descriptions: "俗话说三人行，必有三个人。"
     },
     {  
         name: '宁县',
         code: 621026,
         date: '2025-02',
         level: "district",
-        center: [107.921182,35.50201]
+        center: [107.921182,35.50201],
+        descriptions: "与老友的久别重逢，更像是久旱逢甘露。"
     },
     {  
         name: '南京',
@@ -129,28 +133,30 @@ export const userTripMapData: Array<TripMapItem> = [
         date: '2021-05',
         level: "city",
         center: [118.767413,32.041544],
-        descriptions: "与老友的久别重逢，更像是久旱逢甘露"
+        descriptions: "与老友的久别重逢，更像是久旱逢甘露。"
     },
     {  
         name: '常州',
         code: 320400,
         date: '2023-10',
         level: "city",
-        center: [119.946973,31.772752],
-        descriptions: "人生的第一次演唱会，献给了老薛的三巡，一场盛大的《天外来物》。不知从什么时候起，特别喜欢这首歌的副歌部分。也是第一次踏入常州这块土地，这会是我人生最难忘的经历之一~"
+        center: [119.946973, 31.772752],
+        descriptions: "人生的第一次演唱会，亲自见证一场盛大的《天外来物》~"
     },
     {  
         name: '苏州',
         code: 320500,
         date: '2024-09',
         level: "city",
-        center: [120.619585,31.299379]
+        center: [120.619585, 31.299379],
+        descriptions: "又是周末特种兵~"
     },
     {  
         name: '贵阳',
         code: 520100,
         date: '2025-03',
         level: "city",
-        center: [106.711127,26.84011]
+        center: [106.711127,26.84011],
+        descriptions: "这应该是有史以来持续最长的一段旅行，一路黔行，翻山越岭，有吃有喝~"
     },
 ]

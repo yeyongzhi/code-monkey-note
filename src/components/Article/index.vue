@@ -11,13 +11,10 @@ const { path } = defineProps({
 const data = ref<any>(null)
 
 watch(() => path, async (newVal) => {
-    console.log("Article 组件 path变化：" + newVal)
     if (newVal) {
         const result = await getMarkDownContent(newVal) // 获取markdown文档内容
-        console.log(result)
         if (result) {
             const content = formatMarkDown(result) // 识别格式化内容（自定义）
-            console.log(content)
             data.value = content
         } else {
             data.value = null

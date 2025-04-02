@@ -45,12 +45,13 @@ const findPath = (tree: Array<any>, targetId: string) => {
 
 const getFullPath = (path: string) => {
     const fullPath = findPath(LifeData, path)
-    console.log(fullPath)
     return fullPath.join("/")
 }
 
 const handleTreeSelected = (keys: any, _: any, meta: any) => {
-    console.log(keys, _, meta)
+    if(!(keys.length > 0)) {
+        return false;
+    }
     const path = keys[0]
     if (!meta.node.children || meta.node.children.length === 0) {
         const fullPath = getFullPath(path)
@@ -101,11 +102,24 @@ onMounted(() => {
         position: fixed;
         top: 100px;
         left: 5%;
+        border: 2px solid var(--border-color);
+        padding: 5px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        font-weight: bolder;
+        :deep(.n-tree-node--selected) {
+            .n-tree-node-content {
+                color: var(--primary-color) !important;
+            }
+            
+        }
     }
     .life_content_container {
 		width: calc(100% - 300px);
 		margin-left: 300px;
         box-sizing: border-box;
+        // border: 2px solid var(--border-color);
+        // padding: 10px;
 	}
 }
 </style>

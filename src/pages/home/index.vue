@@ -271,7 +271,7 @@ onUnmounted(() => {
                 </Icon>
                 <div>迄今为止，我已经踏足过 <span
                         style="font-weight: bolder;color: var(--primary-color);font-size: 25px;cursor: pointer;"
-                        @click="showAllTrip">{{ userTripMapData.length }}</span> 个 城市/区县</div>
+                        @click="showAllTrip">{{ userTripMapData.length }}</span> 个 城市、区县</div>
             </div>
             <div v-if="isExpandTrip" class="trip_box">
                 <div class="item" v-for="(item, index) in userTripMapData" :key="'trip' + index">

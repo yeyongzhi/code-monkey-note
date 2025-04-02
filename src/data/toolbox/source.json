@@ -15,5 +15,34 @@
                 "url": "https://www.zhaozi.cn/s/freefont/"
             }
         ]
+    },
+    {
+        "title": "壁纸下载",
+        "children": [
+            {
+                "name": "wallhaven超清壁纸下载",
+                "icon": "https://wallhaven.cc/favicon.ico",
+                "descriptions": "Your source for the best high quality wallpapers on the Net!",
+                "url": "https://wallhaven.cc/"
+            },
+            {
+                "name": "极简壁纸",
+                "icon": "/images/icon/jijianbizhi.png",
+                "descriptions": "极简壁纸,4K高清电脑桌面壁纸图库,海量4K电脑壁纸,壁纸网站,美女,动漫,风景,4k高清,4k超清,电脑壁纸桌面。",
+                "url": "https://bz.zzzmh.cn/index"
+            },
+            {
+                "name": "致美化",
+                "icon": "https://zhutix.com/favicon.ico",
+                "descriptions": "致美化是国内专注于视觉美化的研究及交流平台，聚集了超过50万的活跃用户，你可以在此个性化你的设备，探索及下载丰富多彩的电脑主题、壁纸、图标、皮肤等酷炫的美化素材及教程。",
+                "url": "https://zhutix.com/"
+            },
+            {
+                "name": "Wallpaper Abyss",
+                "icon": "https://wall.alphacoders.com/favicon-32x32.png",
+                "descriptions": "Alpha Coders - Your Source For Desktop Wallpapers, Phone Wallpapers, Gifs, PFP, and More!",
+                "url": "https://wall.alphacoders.com/"
+            }
+        ]
     }
 ]
