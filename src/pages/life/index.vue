@@ -50,6 +50,7 @@ const getFullPath = (path: string) => {
 }
 
 const handleTreeSelected = (keys: any, _: any, meta: any) => {
+    console.log(keys, _, meta)
     const path = keys[0]
     if (!meta.node.children || meta.node.children.length === 0) {
         const fullPath = getFullPath(path)
