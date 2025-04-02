@@ -10,33 +10,6 @@ const { path } = defineProps({
     path: { type: String, required: true, default: '' },
 })
 
-const getArticle = async () => {
-    let data = null
-    try {
-        const response = await fetch(path);
-        const contentType = response.headers.get('Content-Type')
-        if (contentType !== "text/markdown") {
-            markdownContent.value = null;
-            return false;
-        }
-        data = await response.text()
-    } catch (err) {
-        console.error("md文件读取出错")
-    }
-    console.log(data)
-    if (data && data.length > 0) {
-        // markdownContent.value = await marked(data);
-        const result = formatMarkDown(data)
-        // console.log("md文件读取结果：")
-        // console.log(result)
-        markdownContent.value = result;
-    } else {
-        // const errorRes = await fetch(ErrorPath);
-        // const errorData = await errorRes.text();
-        markdownContent.value = [];
-    }
-}
-
 const copyCode = (content: string) => {
     navigator.clipboard.writeText(content)
         .then(() => {
