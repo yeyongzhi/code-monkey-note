@@ -11,7 +11,7 @@ export async function getMarkDownContent(markdown_path: string) {
         console.log(response)
         const contentType = response.headers.get('Content-Type')
         console.log(contentType)
-        if (contentType !== "text/markdown") {
+        if (!contentType?.includes("text/markdown")) {
             return null;
         }
         data = await response.text()

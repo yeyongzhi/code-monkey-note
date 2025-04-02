@@ -3,6 +3,7 @@
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { formatMarkDown } from '@/utils/markdown'
 import message from '@/plugins/message'
+import { getMarkDownContent } from '@/utils/index'
 
 const markdownContent = ref<any>(null)
 const { path } = defineProps({
@@ -128,9 +129,13 @@ const handleNavClick = ({ option }: { option: any }) => {
     location.hash = `#${option.name}`
 }
 
-watch(() => path, (newVal) => {
+watch(() => path, async (newVal) => {
     if (newVal) {
-        getArticle()
+        const result = await getMarkDownContent(newVal)
+        if(result) {
+            const data = formatMarkDown(result)
+            markdownContent.value = data;
+        }
     }
 }, { immediate: true })
 
