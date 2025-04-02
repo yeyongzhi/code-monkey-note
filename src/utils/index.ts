@@ -10,10 +10,12 @@ export async function getMarkDownContent(markdown_path: string) {
         const response = await fetch(markdown_path);
         console.log(response)
         const contentType = response.headers.get('Content-Type')
+        console.log(contentType)
         if (contentType !== "text/markdown") {
             return null;
         }
         data = await response.text()
+        console.log(data)
     } catch (err) {
         console.error("md文件读取出错")
         return null;
