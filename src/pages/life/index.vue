@@ -2,8 +2,6 @@
 import { onMounted, ref, watch } from 'vue';
 import LifeData from '@/data/life/index.json'
 import { basePath } from '@/router/index'
-import { getMarkDownContent } from '@/utils/index'
-import { formatMarkDown } from '@/utils/customMarkdown'
 
 const baseLifePath = basePath + '/article/life'
 
@@ -12,7 +10,6 @@ const DEFAULT_ARTICLE_KEY = "joker_xue"
 const expandedKeys = ref<Array<string | number>>([])
 const selectKeys = ref<Array<string | number>>([])
 const articlePath = ref<string | null>(null) // 文章路径
-const articleContent = ref<Array<any>>([])
 
 const findPath = (tree: Array<any>, targetId: string) => {
     // 定义递归函数
@@ -48,6 +45,7 @@ const findPath = (tree: Array<any>, targetId: string) => {
 
 const getFullPath = (path: string) => {
     const fullPath = findPath(LifeData, path)
+    console.log(fullPath)
     return fullPath.join("/")
 }
 
@@ -55,6 +53,7 @@ const handleTreeSelected = (keys: any, _: any, meta: any) => {
     const path = keys[0]
     if (!meta.node.children || meta.node.children.length === 0) {
         const fullPath = getFullPath(path)
+        console.log(fullPath)
         articlePath.value = `${baseLifePath}/${fullPath}.md`
         selectKeys.value = keys
     }
@@ -64,25 +63,16 @@ const handleTreeExpanded = (keys: any) => {
     expandedKeys.value = keys
 }
 
-// 读取文章内容
-watch(articlePath, async (newVal) => {
-    if (newVal) {
-        const result = await getMarkDownContent(newVal) // 获取markdown文档内容
-        if(result) {
-            const content = formatMarkDown(result) // 识别格式化内容（自定义）
-            articleContent.value = content
-        }
-    }
-})
-
 onMounted(() => {
     if (DEFAULT_ARTICLE_KEY) {
 		const path = getFullPath(DEFAULT_ARTICLE_KEY)
+        console.log(path)
 		if (path) {
 			const pathList = path.split("/")
 			pathList.pop()
 			expandedKeys.value = pathList
 			articlePath.value = `${baseLifePath}/${path}.md`
+            console.log(articlePath.value)
 			selectKeys.value = [DEFAULT_ARTICLE_KEY]
 		}
 	}
