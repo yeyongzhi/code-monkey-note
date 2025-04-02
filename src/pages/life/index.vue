@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import LifeData from '@/data/life/index.json'
 import { basePath } from '@/router/index'
 
