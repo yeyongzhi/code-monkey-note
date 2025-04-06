@@ -346,13 +346,13 @@ export const NavList: Array<NavItem> = [
                 name: 'Can I Use',
                 icon: 'https://caniuse.com/img/favicon-128.png',
                 url: 'https://caniuse.com/',
-                descriptions: '前端API 兼容性查询'
+                descriptions: '前端API 兼容性查询。'
             },
             {
                 name: 'JSON 工具箱',
                 icon: 'https://static.json.cn/r/img/favicon/favicon.ico',
                 url: 'https://www.json.cn/',
-                descriptions: '前端API 兼容性查询'
+                descriptions: 'JSON 在线解析、格式化、压缩、转换等工具箱。'
             },
             {
                 name: '图片转base64',
@@ -360,6 +360,12 @@ export const NavList: Array<NavItem> = [
                 url: 'https://www.jyshare.com/front-end/59/',
                 descriptions: '图片的 BASE64 编码就是可以将一幅图片数据编码成一串字符串，使用该字符串代替图片地址，从而不需要使用图片的 URL 地址。'
             },
+            {
+                name: 'MDN',
+                icon: '/images/icon/MDN.png',
+                url: 'https://developer.mozilla.org/zh-CN/',
+                descriptions: 'MDN Web Docs网站提供有关Open Web技术的信息，包括网站和渐进式Web应用程序的HTML、CSS和API。'
+            }
         ]
     },
     {

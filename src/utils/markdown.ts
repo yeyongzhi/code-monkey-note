@@ -1,4 +1,4 @@
-const LINK_REGEXP = /\[(.*?)\]\((.*?)(".*?")?\)/g
+const LINK_REGEXP = /\[(.*?)\]\((.*?)(".*?")?\)/
 const IMG_REGEXP = /!\[(.*?)\]\((.*?)\)/
 const UNORDERLIST_REGEXP = /^- (.*)$/
 const ORDERLIST_REGEXP = /^\d+\.\s(.*)$/

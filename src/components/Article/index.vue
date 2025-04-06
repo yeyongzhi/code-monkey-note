@@ -15,6 +15,7 @@ watch(() => path, async (newVal) => {
         const result = await getMarkDownContent(newVal) // 获取markdown文档内容
         if (result) {
             const content = formatMarkDown(result) // 识别格式化内容（自定义）
+            console.log(content)
             data.value = content
         } else {
             data.value = null
@@ -70,12 +71,11 @@ const getImageUrl = (url: string) => {
             </template>
             <!-- 无序列表 -->
             <template v-else-if="item.type === 'unorderList'">
-                <div class="unorderList_item" v-for="(c, index) in item.content" :key="'unorder' + index">{{ c }}</div>
+                <div class="unorderList_item" :key="'unorder' + index">{{ item.content }}</div>
             </template>
             <!-- 单张图片 -->
-            <template v-else-if="item.type === 'image'">
-                <n-image :src="item.content"
-                    :style="`width: ${item.params.width ? item.params.width + 'px' : 'auto'};height: ${item.params.height ? item.params.height + 'px' : 'auto'};`" />
+            <template v-else-if="item.type === 'img'">
+                <n-image class="img_image" :src="getImageUrl(item.content[2])" />
             </template>
             <!-- 图片列表 -->
             <template v-else-if="item.type === 'imgList'">
@@ -138,6 +138,31 @@ const getImageUrl = (url: string) => {
         .imgList_item {
             height: 500px;
             max-width: 380px;
+        }
+    }
+
+    .img {
+        .img_image {
+            height: 500px;
+            max-width: 380px;
+        }
+    }
+
+    .unorderList {
+        .unorderList_item {
+            position: relative;
+            padding-left: 20px;
+            &::before {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 2px;
+                content: '';
+                background-color: var(--primary-color);
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+            }
         }
     }
 }

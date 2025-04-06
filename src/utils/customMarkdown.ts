@@ -111,6 +111,18 @@ export function formatMarkDown(str: string) {
             }
         } else if (c.type === 'img') {
             const range = getContinuousRangeIndex(content, i)
+            console.log(range)
+            if(range[0] === range[1]) {
+                result.push({
+                    type: "img",
+                    content: c.content
+                })
+                i++
+                if (i < content.length) {
+                    fn()
+                }
+                return false
+            }
             result.push({
                 type: "imgList",
                 content: content.slice(range[0], range[1] + 1).map((item) => {

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { AlifeArticle } from '@/data/article/alife'
+import { ref } from 'vue'
+import { basePath } from '@/router/index'
 
-onMounted(async () => {
-    
-})
+const baseLifePath = basePath + '/article/life'
+const alifePath = ref(`${baseLifePath}/alife/alife.md`)
+
 </script>
 
 <template>
     <div class="container app_container">
-        <Article :data="AlifeArticle" />
+        <Article :path="alifePath" />
     </div>
 </template>
 

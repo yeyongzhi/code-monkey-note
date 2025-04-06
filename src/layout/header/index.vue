@@ -88,8 +88,11 @@ onMounted(() => {
         <!-- 右侧菜单 -->
         <div class="flex-center-center">
             <div class="link flex-start-center">
-                <span class="link_item hover_color_text" :style="`color: ${componentKey === link.key ? 'var(--primary-color)' : 'var(--text-color-1)'};font-weight: ${componentKey === link.key ? 'bolder' : 'normal'};`" @click="gotoLink(link)" v-for="(link, index) in HeaderLink"
-                    :key="'link' + index">{{ link.name }}</span>
+                <span :class="`link_item hover_color_text ${componentKey === link.key ? 'link_item_selected' : ''}`" @click="gotoLink(link)" v-for="(link, index) in HeaderLink"
+                    :key="'link' + index">
+                    <span v-if="componentKey === link.key">📌</span>
+                    {{ link.name }}
+                </span>
             </div>
             <div class="userInfo flex-center-center">
                 <span class="flex-center-center" @click="gotoUserLink(link)" v-for="(link, index) in HeaderUserLink"
@@ -138,6 +141,12 @@ onMounted(() => {
             margin: 0 15px;
             cursor: pointer;
             font-size: 15px;
+            padding: 5px 0;
+        }
+        .link_item_selected {
+            color: var(--primary-color);
+            font-weight: bolder;
+            border-bottom: 2px solid var(--primary-color);
         }
     }
 
