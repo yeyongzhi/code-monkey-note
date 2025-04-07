@@ -173,7 +173,7 @@ function handleLineText(content: string) {
         .replace(boldRegex, "<strong>$2</strong>")
         .replace(italicRegex, "<em>$2</em>")
         .replace(strikethroughRegex, "<del>$1</del>")
-        .replace(inlineCodeRegex, "<code>$1</code>");
+        .replace(inlineCodeRegex, "<code class='md_line_code'>$1</code>");
 
     return htmlText
 }

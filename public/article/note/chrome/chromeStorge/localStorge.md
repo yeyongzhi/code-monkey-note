@@ -1,9 +1,7 @@
 # 浏览器本地存储
-
 本文主要介绍localStorge以及sessionStorge两个本地存储的解决方案
 
 ## localStorge
-
 localStorge是浏览器存储中最常见的一种方法，它是存在于全局对象window上：`window.localStorge`
 它的特点是：
 1. **持久化存储**（除非用户手动清除、或者删除浏览器的缓存记录等等），会一直存在于设备当中。
@@ -29,6 +27,9 @@ localStorage.clear();
 // 根据索引获取键名
 localStorage.key(0);
 
+// 返回localStorge的长度（存储的参数个数）
+localStorage.length()
+
 // 返回localStorge实例对象，包含了全部属性
 localStorage.valueOf()
 
@@ -44,3 +45,15 @@ localStorage.setItem("colorSetting", "#a4509b");
 ```
 
 ## sessionStorge
+
+sessionStorge的用法和local基本完全一致，它们的区别在于存储的有效期。
+
+- localStorege：永久有效（除非手动清除）
+- sessionStorege：仅在会话期间有效（当前浏览器标签页关闭，会话就消失）
+
+## 存储容量
+`localStorege`和`sessionStorege`两者的容量均在**5MB**左右，具体可能因为浏览器的机制不同而表现不同。
+不过这相比于，cookie来说已经是足够大了，一般情况下我们存储数据都能满足要求。
+
+## 同步
+`localStorege`和`sessionStorege`两者都是同步的，<u>操作会立即执行并阻塞现有的进程</u>。

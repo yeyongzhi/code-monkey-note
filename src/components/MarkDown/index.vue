@@ -105,7 +105,7 @@ const handleNavClick = ({ option }: { option: any }) => {
 watch(() => path, async (newVal) => {
     if (newVal) {
         const result = await getMarkDownContent(newVal)
-        if(result) {
+        if (result) {
             const data = formatMarkDown(result)
             markdownContent.value = data;
         }
@@ -208,7 +208,7 @@ const getImageUrl = (url: string) => {
                 <!-- 代码片段 -->
                 <template v-else-if="item.type === 'code'">
                     <div class="code_header">
-                        <span @click="copyCode(item.content.join('\n'))">复制代码</span>
+                        <span @click="copyCode(item.content.join('\n'))">📄复制代码</span>
                     </div>
                     <n-code :code="item.content.join('\n')" language="javascript" />
                 </template>
@@ -220,7 +220,9 @@ const getImageUrl = (url: string) => {
                 </template>
             </div>
         </div>
-        <n-empty class="flex-center-center" style="width: 100%;height: 500px;" :description="(Array.isArray(markdownContent) && markdownContent.length === 0) ? '暂无数据' : '找不到文章~'" v-else></n-empty>
+        <n-empty class="flex-center-center" style="width: 100%;height: 500px;"
+            :description="(Array.isArray(markdownContent) && markdownContent.length === 0) ? '暂无数据' : '找不到文章~'"
+            v-else></n-empty>
         <div class="markdown_guide" v-if="markdownContent && markdown_nav && markdown_nav.length > 0">
             <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name"
                 children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick" />
@@ -347,7 +349,9 @@ const getImageUrl = (url: string) => {
         .md_code {
             width: 100%;
             padding: 0 10px 10px 10px;
-            background-color: #f0f0f0;
+            background-color: var(--code-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
 
             .code_header {
                 display: flex;

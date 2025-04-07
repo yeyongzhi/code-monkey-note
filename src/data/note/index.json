@@ -5,7 +5,7 @@
         "children": [
             {
                 "key": "dataType",
-                "label": "数据类型"
+                "label": "数据类型✔️"
             }
         ]
     },
@@ -33,16 +33,16 @@
                 "label": "浏览器的运行原理"
             },
             {
-                "key": "chromeTest",
-                "label": "测试标题"
-            },
-            {
                 "key": "chromeStorge",
                 "label": "浏览器的本地存储",
                 "children": [
                     {
+                        "key": "cookie",
+                        "label": "cookie"
+                    },
+                    {
                         "key": "localStorge",
-                        "label": "localStorge类的简易存储"
+                        "label": "local等简单存储✔️"
                     }
                 ]
             }
@@ -52,6 +52,10 @@
         "key": "engineering",
         "label": "工程化",
         "children": [
+            {
+                "key": "jsDoc",
+                "label": "jsDoc规则"
+            },
             {
                 "key": "npm",
                 "label": "npm"

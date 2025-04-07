@@ -8,7 +8,7 @@ const baseNotePath = basePath + '/article/note'
 const articlePath = ref<string | null>(null)
 const expandedKeys = ref<Array<string | number>>([])
 const selectKeys = ref<Array<string | number>>([])
-const defaultArticleKey = ref("chromeRun") // 默认打开的文章
+const defaultArticleKey = ref("jsDoc") // 默认打开的文章
 
 // 查找文章路径
 const findPath = (tree: Array<any>, targetId: string) => {
@@ -45,11 +45,13 @@ const findPath = (tree: Array<any>, targetId: string) => {
 
 const getFullPath = (path: string) => {
 	const fullPath = findPath(NoteData, path)
+    console.log(fullPath)
 	return fullPath.join("/")
 }
 
 // 处理Note的选中事件
 const handleTreeSelected = (keys: any, _: any, meta: any) => {
+    if(keys.length === 0) return
 	const path = keys[0]
 	if (!meta.node.children || meta.node.children.length === 0) {
 		const fullPath = getFullPath(path)

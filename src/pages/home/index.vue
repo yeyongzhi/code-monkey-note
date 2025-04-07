@@ -187,7 +187,7 @@ onUnmounted(() => {
             <img class="logo" :src="logo" />
         </div>
         <!-- 介绍 -->
-        <div class="page_hover_title">About</div>
+        <div class="page_hover_title">关于</div>
         <div style="margin: 20px 0;line-height: 30px;">
             坐标：{{ proxy.globalData.province }} · {{ proxy.globalData.city }}
             <br />
@@ -223,7 +223,7 @@ onUnmounted(() => {
             <div class="flex-start-center" style="margin-bottom: 20px;"
                 v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + index">
                 <span style="margin-right: 10px;font-size: 16px;width: 120px;">{{ item.name }} </span>
-                <n-tag :type="tagTypeList[index % 4]" round
+                <n-tag :type="tagTypeList[Math.floor(Math.random() * 4)]" round
                     :style="`margin-left: ${index2 === 0 ? '0' : '10px'};padding: 10px 15px;cursor: pointer;`"
                     v-for="(item2, index2) in item.list" :key="'technology_item' + index2">
                     {{ item2 }}
