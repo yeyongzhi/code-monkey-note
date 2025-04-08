@@ -329,7 +329,7 @@ const getImageUrl = (url: string) => {
         .md_quote {
             width: 100%;
             padding: 10px 10px 10px 15px;
-            background-color: #f0f0f0;
+            background-color: var(--tab-color);
             color: var(--text-color-3);
             border-radius: 5px;
             position: relative;
@@ -338,7 +338,7 @@ const getImageUrl = (url: string) => {
             &::before {
                 content: "";
                 position: absolute;
-                width: 3px;
+                width: 4px;
                 height: 100%;
                 background-color: #bfbfbf;
                 left: 0;

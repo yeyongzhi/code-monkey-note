@@ -37,3 +37,12 @@ body::-webkit-scrollbar {
     width: 100px;
     height: 100px;
 }
+
+.md_line_code {
+    padding: 3px 6px;
+    border-radius: 5px;
+    background-color: var(--code-color);
+    font-weight: bolder;
+    border: 1px solid var(--border-color);
+    margin: 0 3px;
+}
