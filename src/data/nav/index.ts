@@ -365,6 +365,12 @@ export const NavList: Array<NavItem> = [
                 icon: '/images/icon/MDN.png',
                 url: 'https://developer.mozilla.org/zh-CN/',
                 descriptions: 'MDN Web Docs网站提供有关Open Web技术的信息，包括网站和渐进式Web应用程序的HTML、CSS和API。'
+            },
+            {
+                name: '进制转换工具',
+                icon: 'https://static.jyshare.com/images/c-runoob-logo.ico',
+                url: 'https://www.jyshare.com/front-end/58/',
+                descriptions: '在线进制转换器提供了二进制，八进制，十进制，十六进制等相互转换功能。如：      二进制转十进制     二进制转八进制     二进制转十六进制     八进制转十进制     八进制转换成十六进制     八进制转二进制     十进制转二进制     十进制转八进制     十进制转十六进制     十六进制转二进制     十六进制转八进制     十六进制转十进制    ……     常见进位制及其用途   底/基数  名称..'
             }
         ]
     },

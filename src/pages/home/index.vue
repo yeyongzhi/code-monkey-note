@@ -346,10 +346,27 @@ onUnmounted(() => {
             }
         }
 
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         .logo {
             width: 300px;
             height: 300px;
+            padding: 2px;
+            box-sizing: border-box;
             border-radius: 50%;
+
+            &:hover {
+                border: 2px solid var(--primary-color);
+                animation: rotate 4s infinite linear;
+            }
         }
     }
 
@@ -480,6 +497,7 @@ onUnmounted(() => {
         justify-content: flex-start;
         gap: 20px;
         flex-wrap: wrap;
+
         .item {
             width: 46%;
             border: 2px solid var(--border-color);
