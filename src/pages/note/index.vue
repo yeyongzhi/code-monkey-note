@@ -83,8 +83,10 @@ onMounted(() => {
 <template>
 	<div class="app_container note_container flex-between-start">
 		<div class="tab_container">
-			<n-tree block-line :data="NoteData" expand-on-click :selected-keys="selectKeys"
-				:expanded-keys="expandedKeys" :on-update:selected-keys="handleTreeSelected"
+			<div>学无止境👋</div>
+			<!-- :expanded-keys="expandedKeys"  -->
+			<n-tree :default-expand-all="true" block-line :data="NoteData" expand-on-click :selected-keys="selectKeys"
+				:on-update:selected-keys="handleTreeSelected"
 				:on-update:expanded-keys="handleTreeExpanded" />
 		</div>
 		<div class="note_content_container">
@@ -100,6 +102,7 @@ onMounted(() => {
 		position: fixed;
 		top: 100px;
 		left: 5%;
+		border-right: 1px solid var(--border-color);
 	}
 
 	.note_content_container {

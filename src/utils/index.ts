@@ -2,6 +2,10 @@ export function openTab(url: string) {
     window.open(url)
 }
 
+export function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 // 根据路径获取markdown文件内容
 export async function getMarkDownContent(markdown_path: string) {
     let data = null

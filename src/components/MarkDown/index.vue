@@ -3,7 +3,7 @@
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { formatMarkDown } from '@/utils/markdown'
 import message from '@/plugins/message'
-import { getMarkDownContent } from '@/utils/index'
+import { getMarkDownContent, scrollToTop } from '@/utils/index'
 
 const markdownContent = ref<any>(null)
 const { path } = defineProps({
@@ -103,12 +103,19 @@ const handleNavClick = ({ option }: { option: any }) => {
 }
 
 watch(() => path, async (newVal) => {
+    console.log("新的文章路径：", newVal)
     if (newVal) {
         const result = await getMarkDownContent(newVal)
+        console.log("文章内容：")
+        console.log(result)
         if (result) {
             const data = formatMarkDown(result)
             markdownContent.value = data;
+        } else {
+            message.error("未找到文章")
+            markdownContent.value = null;
         }
+        scrollToTop()
     }
 }, { immediate: true })
 
@@ -142,6 +149,13 @@ const getImageUrl = (url: string) => {
     const basePath = path.substring(0, path.lastIndexOf("/"))
     return basePath + url.replace(".", "")
 }
+
+const getEmptyDescription = computed(() => {
+    if(Array.isArray(markdownContent) && markdownContent.length === 0) {
+        return '暂无内容'
+    }
+    return `【${path}】: 找不到文章~`
+})
 
 </script>
 
@@ -221,7 +235,7 @@ const getImageUrl = (url: string) => {
             </div>
         </div>
         <n-empty class="flex-center-center" style="width: 100%;height: 500px;"
-            :description="(Array.isArray(markdownContent) && markdownContent.length === 0) ? '暂无数据' : '找不到文章~'"
+            :description="getEmptyDescription"
             v-else></n-empty>
         <div class="markdown_guide" v-if="markdownContent && markdown_nav && markdown_nav.length > 0">
             <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name"

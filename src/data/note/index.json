@@ -58,7 +58,7 @@
             },
             {
                 "key": "npm",
-                "label": "npm"
+                "label": "npm✔️"
             },
             {
                 "key": "vite",
@@ -76,7 +76,13 @@
             },
             {
                 "key": "gaode",
-                "label": "高德地图"
+                "label": "高德地图",
+                "children": [
+                    {
+                        "key": "2VersionMap",
+                        "label": "双版本地图✔️"
+                    }
+                ]
             }
         ]
     },
