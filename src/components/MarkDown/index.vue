@@ -409,6 +409,7 @@ const getEmptyDescription = computed(() => {
         position: fixed;
         top: 100px;
         right: 5%;
+        border-left: 1px solid var(--border-color);
     }
 }
 </style>

@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import NoteData from '@/data/note/index.json'
 import { basePath } from '@/router/index'
+import { Bookmark24Regular } from '@vicons/fluent'
 
 const baseNotePath = basePath + '/article/note'
 
@@ -45,13 +46,13 @@ const findPath = (tree: Array<any>, targetId: string) => {
 
 const getFullPath = (path: string) => {
 	const fullPath = findPath(NoteData, path)
-    console.log(fullPath)
+	console.log(fullPath)
 	return fullPath.join("/")
 }
 
 // 处理Note的选中事件
 const handleTreeSelected = (keys: any, _: any, meta: any) => {
-    if(keys.length === 0) return
+	if (keys.length === 0) return
 	const path = keys[0]
 	if (!meta.node.children || meta.node.children.length === 0) {
 		const fullPath = getFullPath(path)
@@ -83,11 +84,21 @@ onMounted(() => {
 <template>
 	<div class="app_container note_container flex-between-start">
 		<div class="tab_container">
-			<div>学无止境👋</div>
+			<div class="flex-start-center header">
+				<span>学无止境❗👋</span>
+				<n-tooltip trigger="hover">
+					<template #trigger>
+						<n-icon :size="25" style="cursor: pointer;margin-left: 5px;">
+							<Bookmark24Regular />
+						</n-icon>
+					</template>
+					已写文章：{{ NoteData.flat(Infinity).length }}篇
+				</n-tooltip>
+
+			</div>
 			<!-- :expanded-keys="expandedKeys"  -->
 			<n-tree :default-expand-all="true" block-line :data="NoteData" expand-on-click :selected-keys="selectKeys"
-				:on-update:selected-keys="handleTreeSelected"
-				:on-update:expanded-keys="handleTreeExpanded" />
+				:on-update:selected-keys="handleTreeSelected" :on-update:expanded-keys="handleTreeExpanded" />
 		</div>
 		<div class="note_content_container">
 			<MarkDown v-if="articlePath" :path="articlePath" />
@@ -103,6 +114,8 @@ onMounted(() => {
 		top: 100px;
 		left: 5%;
 		border-right: 1px solid var(--border-color);
+
+		.header {}
 	}
 
 	.note_content_container {

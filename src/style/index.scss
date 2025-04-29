@@ -45,4 +45,14 @@ body::-webkit-scrollbar {
     font-weight: bolder;
     border: 1px solid var(--border-color);
     margin: 0 3px;
+    color: var(--primary-color);
+}
+
+
+u {
+    text-decoration-color: var(--primary-color);
+    color: var(--primary-color);
+    text-underline-offset: 5px;
+    margin: 0 5px;
+    cursor: pointer;
 }

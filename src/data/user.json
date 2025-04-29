@@ -39,7 +39,8 @@
     },
     "personalWorks": [
         { "name": "A Life清单", "descriptions": "一款个人开发的微信小程序，已上线，欢迎体验", "routePath": "/alife" },
-        { "name": "js2geohash", "descriptions": "将gis坐标值快捷转换为geohash值的工具函数", "link": "https://www.npmjs.com/package/js2geohash" }
+        { "name": "js2geohash", "descriptions": "将gis坐标值快捷转换为geohash值的工具函数", "link": "https://www.npmjs.com/package/js2geohash" },
+        { "name": "browser-localstorge", "descriptions": "一个浏览器本地存储化工具包", "link": "https://www.npmjs.com/package/browser-localstorge" }
     ],
     "personalTechnology": [
         { "name": "💻️前端基础", "list": ["html", "js", "ts", "ES6"] },

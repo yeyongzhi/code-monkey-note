@@ -55,7 +55,7 @@ export function sum(a: number, b: number) {
  * @param {StudentOptions} options - 学生对象的初始化参数
  */
 export function createStudent(options: any) {
-    
+    console.log(options)
 }
 
 createStudent({ name: '张三', age: 18 }) // 正确

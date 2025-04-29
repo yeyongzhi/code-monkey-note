@@ -14,13 +14,23 @@ hljs.registerLanguage('javascript', javascript)
 
 const componentManager = shallowRef<ComponentsRouterManager>()
 
+/**
+   * js 文件下使用这个做类型提示
+   * @type import('naive-ui').GlobalThemeOverrides
+   */
+const themeOverrides = {
+    common: {
+        primaryColor: '#be4bdb'
+    },
+}
+
 const componentKey = ref<string>("")
 const componentName = ref<ComponentOptions<any>>()
 
 onBeforeMount(() => {
     componentManager.value = new ComponentsRouterManager(routes)
     const defaultKey = localStorage.getItem("before_refresh_key")
-    if(defaultKey && defaultKey !== "") {
+    if (defaultKey && defaultKey !== "") {
         componentKey.value = defaultKey
         localStorage.setItem("before_refresh_key", "")
     } else {
@@ -45,14 +55,14 @@ onMounted(() => {
         // }
     });
     // window.addEventListener('load', () => {
-        // const path = localStorage.getItem("before_refresh_path")
-        // if (path && path !== "") {
-        //     localStorage.setItem("before_refresh_path", "")
-        //     setTimeout(() => {
-        //         console.log("刷新后重定向")
-        //         gotoPage(path)
-        //     }, 3000)
-        // }
+    // const path = localStorage.getItem("before_refresh_path")
+    // if (path && path !== "") {
+    //     localStorage.setItem("before_refresh_path", "")
+    //     setTimeout(() => {
+    //         console.log("刷新后重定向")
+    //         gotoPage(path)
+    //     }, 3000)
+    // }
     // });
 })
 
@@ -73,14 +83,14 @@ const changeComponent = (value: string) => {
 
 const goHistoryBack = () => {
     const newKey = componentManager.value?.back()
-    if(newKey) {
+    if (newKey) {
         componentKey.value = newKey
     }
 }
 
 const goHistoryNext = () => {
     const newKey = componentManager.value?.next()
-    if(newKey) {
+    if (newKey) {
         componentKey.value = newKey
     }
 }
@@ -97,16 +107,18 @@ watch(componentKey, (newVal) => {
 </script>
 
 <template>
-    <n-config-provider :theme="theme" :hljs="hljs">
+    <n-config-provider :theme="theme" :hljs="hljs" :theme-overrides="themeOverrides">
         <n-el>
             <n-notification-provider>
                 <n-message-provider>
                     <div class="main_container">
                         <div class="header">
-                            <Header :componentKey="componentKey" @changeTheme="handleChangeTheme" @changeComponent="changeComponent" @goHistoryBack="goHistoryBack" @goHistoryNext="goHistoryNext"/>
+                            <Header :componentKey="componentKey" @changeTheme="handleChangeTheme"
+                                @changeComponent="changeComponent" @goHistoryBack="goHistoryBack"
+                                @goHistoryNext="goHistoryNext" />
                         </div>
                         <div class="content">
-                            <component :is="componentName" @changeComponent="changeComponent" :theme="theme"/>
+                            <component :is="componentName" @changeComponent="changeComponent" :theme="theme" />
                             <!-- <RouterView></RouterView> -->
                         </div>
                     </div>
