@@ -11,7 +11,15 @@ export async function getMarkDownContent(markdown_path: string) {
     let data = null
     try {
         const response = await fetch(markdown_path);
+        console.log(response)
         const contentType = response.headers.get('Content-Type')
+        let lastModified = response.headers.get('Last-Modified') || new Date().toLocaleDateString();
+        // lastModified = new Date(lastModified).toLocaleDateString('zh-CN', {
+        //     year: 'numeric',
+        //     month: '2-digit',
+        //     day: '2-digit'
+        // });
+        console.log(lastModified)
         if (!contentType?.includes("text/markdown")) {
             return null;
         }
@@ -26,6 +34,44 @@ export async function getMarkDownContent(markdown_path: string) {
     } else {
         return ""
     }
+}
+
+export async function getMarkDownInfo(markdown_path: string) {
+    let lastModified = null
+    try {
+        const response = await fetch(markdown_path);
+        lastModified = response.headers.get('Last-Modified') || new Date().toLocaleDateString();
+        console.log(lastModified)
+        if (!lastModified) {
+            return null;
+        }
+    } catch (err) {
+        return null;
+    }
+    return lastModified
+}
+
+/**
+ * 根据文章内容获取字数
+ * @param content 
+ */
+export function getArticleTextCount(content: Array<any>) {
+    let total = 0
+    content.forEach((item: any) => {
+        if(item.type.startsWith("h")) {
+            total += item.content.trim().replace(/#/g, "").length
+        }
+        if(item.type === 'text') {
+            total += item.content.length
+        }
+        if(item.type === 'code' || item.type === 'quote') {
+            total += item.content.join("").length
+        }
+        if(item.type === 'link') {
+            total += item.content[1].length
+        }
+    })
+    return total
 }
 
 /**

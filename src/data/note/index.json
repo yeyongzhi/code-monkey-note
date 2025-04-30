@@ -98,6 +98,7 @@
     },
     {
         "key": "cesium",
-        "label": "Cesium"
+        "label": "Cesium",
+        "children": []
     }
 ]

@@ -3,7 +3,8 @@
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { formatMarkDown } from '@/utils/markdown'
 import message from '@/plugins/message'
-import { getMarkDownContent, scrollToTop } from '@/utils/index'
+import { getMarkDownContent, scrollToTop, getArticleTextCount } from '@/utils/index'
+import { BookInformation24Regular } from '@vicons/fluent'
 
 const markdownContent = ref<any>(null)
 const { path } = defineProps({
@@ -106,8 +107,8 @@ watch(() => path, async (newVal) => {
     console.log("新的文章路径：", newVal)
     if (newVal) {
         const result = await getMarkDownContent(newVal)
-        console.log("文章内容：")
-        console.log(result)
+        // console.log("文章内容：")
+        // console.log(result)
         if (result) {
             const data = formatMarkDown(result)
             markdownContent.value = data;
@@ -155,6 +156,13 @@ const getEmptyDescription = computed(() => {
         return '暂无内容'
     }
     return `【${path}】: 找不到文章~`
+})
+
+const articelTextTotal = computed(() => {
+    if(!markdownContent.value) {
+        return '-'
+    }
+    return getArticleTextCount(markdownContent.value)
 })
 
 </script>
@@ -241,6 +249,14 @@ const getEmptyDescription = computed(() => {
             <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name"
                 children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick" />
         </div>
+        <div class="articel_info_container flex-end-center">
+			<div class="content flex-center-center">
+                <n-icon size="20" style="margin-right: 5px;">
+                    <BookInformation24Regular />
+                </n-icon>
+                <div style="height: 20px;">{{ articelTextTotal }}字</div>
+            </div>
+		</div>
     </div>
 
 </template>
@@ -411,5 +427,20 @@ const getEmptyDescription = computed(() => {
         right: 5%;
         border-left: 1px solid var(--border-color);
     }
+
+    .articel_info_container {
+		position: fixed;
+		width: 250px;
+		box-sizing: border-box;
+		left: calc(5%);
+		bottom: 10px;
+		font-size: 12px;
+		color: var(--text-color-3);
+		.content {
+			padding: 5px 10px;
+			border-radius: 5px;
+			border: 1px solid var(--border-color);
+		}
+	}
 }
 </style>

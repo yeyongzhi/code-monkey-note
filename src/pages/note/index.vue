@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import NoteData from '@/data/note/index.json'
 import { basePath } from '@/router/index'
 import { Bookmark24Regular } from '@vicons/fluent'
@@ -66,6 +66,22 @@ const handleTreeExpanded = (keys: any) => {
 	expandedKeys.value = keys
 }
 
+const articleTotalNum = computed(() => {
+	const getTotal = (tree: Array<any>) => {
+		let total = 0
+		tree.forEach((item) => {
+			if (item.children && item.children.length > 0) {
+				total += getTotal(item.children)
+			}
+			if(!item.children) {
+				total++
+			}
+		})
+		return total
+	}
+	return getTotal(NoteData)
+})
+
 onMounted(() => {
 	if (defaultArticleKey.value) {
 		const path = getFullPath(defaultArticleKey.value)
@@ -85,14 +101,14 @@ onMounted(() => {
 	<div class="app_container note_container flex-between-start">
 		<div class="tab_container">
 			<div class="flex-start-center header">
-				<span>学无止境❗👋</span>
+				<span>学无止境👋</span>
 				<n-tooltip trigger="hover">
 					<template #trigger>
 						<n-icon :size="25" style="cursor: pointer;margin-left: 5px;">
 							<Bookmark24Regular />
 						</n-icon>
 					</template>
-					已写文章：{{ NoteData.flat(Infinity).length }}篇
+					已写文章：{{ articleTotalNum }}篇
 				</n-tooltip>
 
 			</div>
