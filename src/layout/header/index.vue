@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from 'vue';
 import Avatar from '@/assets/images/user/logo.png'
 import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkItem } from '@/data/header/index'
-import { ArrowLeft16Filled, ArrowRight16Filled } from '@vicons/fluent'
+import { ArrowLeft16Filled, ArrowRight16Filled, ArrowClockwise16Filled } from '@vicons/fluent'
 // import { gotoPage } from '@/router/index'
 
 const { componentKey } = defineProps({
@@ -43,6 +43,10 @@ const gotoHistroy = (key: number) => {
     }
 }
 
+const refresh = () => {
+    window.location.reload()
+}
+
 onMounted(() => {
     const value = localStorage.getItem("codeMonkey_datatheme")
     if (value) {
@@ -61,7 +65,19 @@ onMounted(() => {
             <div style="margin-left: 20px;">
                 <n-tooltip trigger="hover">
                     <template #trigger>
-                        <n-button quaternary circle type="primary" @click="gotoHistroy(1)">
+                        <n-button quaternary circle type="primary" @click="refresh">
+                            <template #icon>
+                                <n-icon :size="25">
+                                    <ArrowClockwise16Filled />
+                                </n-icon>
+                            </template>
+                        </n-button>
+                    </template>
+                    刷新
+                </n-tooltip>
+                <n-tooltip trigger="hover">
+                    <template #trigger>
+                        <n-button quaternary circle type="primary" style="margin-left: 10px;" @click="gotoHistroy(1)">
                             <template #icon>
                                 <n-icon :size="25">
                                     <ArrowLeft16Filled />
@@ -73,7 +89,7 @@ onMounted(() => {
                 </n-tooltip>
                 <n-tooltip trigger="hover">
                     <template #trigger>
-                        <n-button quaternary circle type="primary" style="margin-left: 5px;" @click="gotoHistroy(2)">
+                        <n-button quaternary circle type="primary" style="margin-left: 10px;" @click="gotoHistroy(2)">
                             <template #icon>
                                 <n-icon :size="25">
                                     <ArrowRight16Filled />

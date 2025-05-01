@@ -276,7 +276,7 @@ onUnmounted(() => {
             <div v-if="isExpandTrip" class="trip_box">
                 <div class="item" v-for="(item, index) in userTripMapData" :key="'trip' + index">
                     <div class="flex-between-center" style="margin-bottom: 10px;">
-                        <span>
+                        <span style="font-weight: bolder;">
                             {{ item.name }}
                         </span>
                         <n-tag type="success" size="small" round>

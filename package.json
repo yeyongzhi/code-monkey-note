@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
     "highlight.js": "^11.11.1",
     "marked": "^15.0.7",
     "sass": "^1.84.0",

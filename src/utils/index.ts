@@ -36,12 +36,16 @@ export async function getMarkDownContent(markdown_path: string) {
     }
 }
 
+/**
+ * 根据文章路径获取文章信息
+ * @param {string} markdown_path 
+ * @returns 
+ */
 export async function getMarkDownInfo(markdown_path: string) {
     let lastModified = null
     try {
         const response = await fetch(markdown_path);
-        lastModified = response.headers.get('Last-Modified') || new Date().toLocaleDateString();
-        console.log(lastModified)
+        lastModified = response.headers.get('Last-Modified') || null;
         if (!lastModified) {
             return null;
         }

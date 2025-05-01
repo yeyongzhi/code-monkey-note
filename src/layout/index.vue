@@ -15,13 +15,23 @@ hljs.registerLanguage('javascript', javascript)
 const componentManager = shallowRef<ComponentsRouterManager>()
 
 /**
-   * js 文件下使用这个做类型提示
-   * @type import('naive-ui').GlobalThemeOverrides
-   */
+ * js 文件下使用这个做类型提示
+ * @type import('naive-ui').GlobalThemeOverrides
+ */
 const themeOverrides = {
     common: {
         primaryColor: '#be4bdb'
     },
+    Tag: {
+        textColor: '#be4bdb',
+        textColorSuccess: '#be4bdb',
+        border: '#be4bdb',
+        borderSuccess: '#be4bdb',
+        colorBorderedSuccess: '#be4bdb1A',
+    },
+    Switch: {
+        railColorActive: '#be4bdb'
+    }
 }
 
 const componentKey = ref<string>("")

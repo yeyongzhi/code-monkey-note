@@ -69,7 +69,7 @@ export const NavList: Array<NavItem> = [
             },
             {
                 name: '问小白',
-                icon: "https://www.wenxiaobai.com/new_favicon.ico",
+                icon: "https://wy-static.wenxiaobai.com/wenxiaobai-web/production/3.7.3/_next/static/media/new_favicon.6d31cfe4.png",
                 url: 'https://www.wenxiaobai.com/',
                 descriptions: 'deepseek 满血版R1🔥🔥🔥'
             },

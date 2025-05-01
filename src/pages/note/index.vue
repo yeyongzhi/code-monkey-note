@@ -130,8 +130,10 @@ onMounted(() => {
 		top: 100px;
 		left: 5%;
 		border-right: 1px solid var(--border-color);
+		padding-right: 10px;
 
 		.header {}
+
 	}
 
 	.note_content_container {

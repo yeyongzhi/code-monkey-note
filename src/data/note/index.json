@@ -82,7 +82,13 @@
         "children": [
             {
                 "key": "openlayers",
-                "label": "openlayers"
+                "label": "openlayers",
+                "children": [
+                    {
+                        "key": "tileCache",
+                        "label": "瓦片缓存✔️"
+                    }
+                ]
             },
             {
                 "key": "gaode",

@@ -3,10 +3,18 @@
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { formatMarkDown } from '@/utils/markdown'
 import message from '@/plugins/message'
-import { getMarkDownContent, scrollToTop, getArticleTextCount } from '@/utils/index'
-import { BookInformation24Regular } from '@vicons/fluent'
+import { getMarkDownContent, scrollToTop, getArticleTextCount, getMarkDownInfo } from '@/utils/index'
+import { BookInformation24Regular, Timer24Regular } from '@vicons/fluent'
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+// 扩展插件
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const markdownContent = ref<any>(null)
+const markdownInfo = ref<any>(null) // 文章信息
 const { path } = defineProps({
     path: { type: String, required: true, default: '' },
 })
@@ -109,7 +117,15 @@ watch(() => path, async (newVal) => {
         const result = await getMarkDownContent(newVal)
         // console.log("文章内容：")
         // console.log(result)
+        const info = await getMarkDownInfo(newVal)
+        if (info) {
+            const localTime = dayjs(info).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss');
+            markdownInfo.value = {
+                lastModified: localTime
+            }
+        }
         if (result) {
+            message.success("文章加载成功")
             const data = formatMarkDown(result)
             markdownContent.value = data;
         } else {
@@ -152,14 +168,14 @@ const getImageUrl = (url: string) => {
 }
 
 const getEmptyDescription = computed(() => {
-    if(Array.isArray(markdownContent) && markdownContent.length === 0) {
+    if (Array.isArray(markdownContent) && markdownContent.length === 0) {
         return '暂无内容'
     }
     return `【${path}】: 找不到文章~`
 })
 
 const articelTextTotal = computed(() => {
-    if(!markdownContent.value) {
+    if (!markdownContent.value) {
         return '-'
     }
     return getArticleTextCount(markdownContent.value)
@@ -242,21 +258,40 @@ const articelTextTotal = computed(() => {
                 </template>
             </div>
         </div>
-        <n-empty class="flex-center-center" style="width: 100%;height: 500px;"
-            :description="getEmptyDescription"
+        <n-empty class="flex-center-center" style="width: 100%;height: 500px;" :description="getEmptyDescription"
             v-else></n-empty>
         <div class="markdown_guide" v-if="markdownContent && markdown_nav && markdown_nav.length > 0">
             <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name"
                 children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick" />
         </div>
         <div class="articel_info_container flex-end-center">
-			<div class="content flex-center-center">
-                <n-icon size="20" style="margin-right: 5px;">
-                    <BookInformation24Regular />
-                </n-icon>
-                <div style="height: 20px;">{{ articelTextTotal }}字</div>
+            <div class="content">
+                <div class="flex-start-center" style="margin-bottom: 5px;">
+                    <n-tooltip trigger="hover">
+                        <template #trigger>
+                            <n-icon size="20" style="margin-right: 5px;">
+                                <BookInformation24Regular />
+                            </n-icon>
+                        </template>
+                        字数统计
+                    </n-tooltip>
+                    <div style="height: 20px;line-height: 20px;cursor: pointer;">{{ articelTextTotal }}字</div>
+                </div>
+                <div class="flex-start-center">
+                    <n-tooltip trigger="hover">
+                        <template #trigger>
+                            <n-icon size="20" style="margin-right: 5px;">
+                        <Timer24Regular />
+                    </n-icon>
+                        </template>
+                        最后修改时间
+                    </n-tooltip>
+                    <div style="height: 20px;line-height: 20px;cursor: pointer;">{{ markdownInfo ? (markdownInfo.lastModified || '-') :
+                        '-' }}
+                    </div>
+                </div>
             </div>
-		</div>
+        </div>
     </div>
 
 </template>
@@ -426,21 +461,23 @@ const articelTextTotal = computed(() => {
         top: 100px;
         right: 5%;
         border-left: 1px solid var(--border-color);
+        padding-left: 10px;
     }
 
     .articel_info_container {
-		position: fixed;
-		width: 250px;
-		box-sizing: border-box;
-		left: calc(5%);
-		bottom: 10px;
-		font-size: 12px;
-		color: var(--text-color-3);
-		.content {
-			padding: 5px 10px;
-			border-radius: 5px;
-			border: 1px solid var(--border-color);
-		}
-	}
+        position: fixed;
+        width: 250px;
+        box-sizing: border-box;
+        left: calc(5%);
+        bottom: 10px;
+        font-size: 12px;
+        color: var(--text-color-3);
+
+        .content {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+    }
 }
 </style>
