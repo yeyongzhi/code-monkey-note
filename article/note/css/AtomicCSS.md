@@ -12,7 +12,6 @@
 ---
 下面是一些常见的原子化CSS代码合集
 ---
-
 ## 原子CSS合集
 ### 内外边距（margin、padding）
 ```css
@@ -82,7 +81,6 @@
 ```
 
 ### 文字部分（text）
-
 ```css
 /* 字体大小 */
 .f-12 { font-size: 12px; }
@@ -100,5 +98,90 @@
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
+.text-decoration-underline { text-decoration: underline; }
+.text-decoration-line-through { text-decoration: line-through; }
+.text-decoration-overline { text-decoration: overline; }
+
+.text-word-break { word-break: break-all; }
+.text-word-break { word-break: keep-all; }
+
+...
 ```
 ### flex布局（display: felx;）🔥🔥🔥
+
+```css
+.flex-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-start-center {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.flex-start-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.flex-end-center {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.flex-between-start {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.flex-between-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-around-center {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.flex-evenly-center {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+
+.flex-column-center-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flex-column-center-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.flex-column-start-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.flex-column-start-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+...
+```
+
+## 总结思考
+在平常的项目开发中，对于`flex布局`的使用评率是很高的。比如这个`个人的博客网站`。因为自己也写了一套flex布局的原子化css样式（参考上面）来使用，能有效的减少一些类名的申明，提高开发效率。
+除了flex布局以外，像`背景色（background-color）`，`文字对齐方式（text-align）`，`内外边距（margin、padding）`等等都是一些使用频率较高的样式，都可以定义一套自己的样式来方便我们使用。
+不过如果我们要使用**一整套的原子化CSS样式**，可能上手难度会不小，开发效率肯定没有直接使用CSS样式高（因为需要去找**对应的样式和类名**）。
+建议是慢慢上手、等到对于原子化CSS的**语法，规则，命名**有了一定的了解之后，再去使用。
