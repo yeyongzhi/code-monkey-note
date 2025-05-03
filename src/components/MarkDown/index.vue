@@ -281,12 +281,14 @@ const articelTextTotal = computed(() => {
                     <n-tooltip trigger="hover">
                         <template #trigger>
                             <n-icon size="20" style="margin-right: 5px;">
-                        <Timer24Regular />
-                    </n-icon>
+                                <Timer24Regular />
+                            </n-icon>
                         </template>
                         最后修改时间
                     </n-tooltip>
-                    <div style="height: 20px;line-height: 20px;cursor: pointer;">{{ markdownInfo ? (markdownInfo.lastModified || '-') :
+                    <div style="height: 20px;line-height: 20px;cursor: pointer;">{{ markdownInfo ?
+                        (markdownInfo.lastModified ||
+                            '-') :
                         '-' }}
                     </div>
                 </div>
@@ -408,6 +410,17 @@ const articelTextTotal = computed(() => {
                 background-color: #bfbfbf;
                 left: 0;
                 top: 0;
+            }
+        }
+
+        .md_link {
+            a {
+                text-decoration-color: var(--primary-color);
+                color: var(--primary-color);
+                text-underline-offset: 5px;
+                margin: 0 5px;
+                cursor: pointer;
+                font-weight: bolder;
             }
         }
 
