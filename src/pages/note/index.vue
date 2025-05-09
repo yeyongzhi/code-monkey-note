@@ -9,7 +9,7 @@ const baseNotePath = basePath + '/article/note'
 const articlePath = ref<string | null>(null)
 const expandedKeys = ref<Array<string | number>>([])
 const selectKeys = ref<Array<string | number>>([])
-const defaultArticleKey = ref("jsDoc") // 默认打开的文章
+const defaultArticleKey = ref("cookie") // 默认打开的文章
 
 // 查找文章路径
 const findPath = (tree: Array<any>, targetId: string) => {
@@ -137,7 +137,8 @@ onMounted(() => {
 	}
 
 	.note_content_container {
-		width: 100%;
+		box-sizing: border-box;
+		width: calc(100% - 280px);
 		margin-left: 280px;
 	}
 }

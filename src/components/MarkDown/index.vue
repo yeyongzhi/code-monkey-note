@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import { marked } from 'marked';
-import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
+import { ref, watch, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import { formatMarkDown } from '@/utils/markdown'
 import message from '@/plugins/message'
 import { getMarkDownContent, scrollToTop, getArticleTextCount, getMarkDownInfo } from '@/utils/index'
@@ -15,6 +15,7 @@ dayjs.extend(timezone);
 
 const markdownContent = ref<any>(null)
 const markdownInfo = ref<any>(null) // 文章信息
+const markdownLoading = ref(false)
 const { path } = defineProps({
     path: { type: String, required: true, default: '' },
 })
@@ -114,6 +115,7 @@ const handleNavClick = ({ option }: { option: any }) => {
 watch(() => path, async (newVal) => {
     console.log("新的文章路径：", newVal)
     if (newVal) {
+        markdownLoading.value = true
         const result = await getMarkDownContent(newVal)
         // console.log("文章内容：")
         // console.log(result)
@@ -127,12 +129,16 @@ watch(() => path, async (newVal) => {
         if (result) {
             message.success("文章加载成功")
             const data = formatMarkDown(result)
+            console.log(data)
             markdownContent.value = data;
         } else {
             message.error("未找到文章")
             markdownContent.value = null;
         }
-        scrollToTop()
+        markdownLoading.value = false
+        nextTick(() => {
+            scrollToTop()
+        })
     }
 }, { immediate: true })
 
@@ -186,7 +192,14 @@ const articelTextTotal = computed(() => {
 <template>
     <!-- 方式一：采用marked.js 直接渲染 -->
     <!-- <div class="markdown_container" v-html="markdownContent"></div> -->
-    <div class="markdown_container flex-between-start">
+    <template v-if="markdownLoading">
+        <n-spin vertical class="flex-center-center" style="width: 100%;height: 500px;">
+            <template #description>
+                <span style="color: var(--primary-color)">正在加载中...</span>
+            </template>
+        </n-spin>
+    </template>
+    <div class="markdown_container flex-between-start" v-else>
         <div class="markdown_content" v-if="markdownContent && markdownContent.length > 0">
             <div :class="`md_content md_${item.type}`" v-for="(item, index) in markdownContent" :key="'md' + index">
                 <template v-if="item.type === 'h1'">
@@ -214,7 +227,16 @@ const articelTextTotal = computed(() => {
                     <div v-for="(q, q_index) in item.content" :key="'quote' + q_index" v-html="q"></div>
                 </template>
                 <template v-else-if="item.type === 'link'">
-                    <a :href="item.content[2]">{{ item.content[1] }}</a>
+                    <span style="margin-right: 5px;" v-if="item.content[0] && item.content[0] !== ''">{{ item.content[0]
+                        }}</span>
+                    <n-tooltip trigger="hover">
+                        <template #trigger>
+                            <a :href="item.content[2]">{{ item.content[1] }}</a>
+                        </template>
+                        {{ item.content[2] }}
+                    </n-tooltip>
+                    <span style="margin-left: 5px;" v-if="item.content[0] && item.content[0] !== ''">{{ item.content[3]
+                        }}</span>
                 </template>
                 <!-- 图片 -->
                 <template v-else-if="item.type === 'img'">
@@ -264,7 +286,7 @@ const articelTextTotal = computed(() => {
             <n-tree block-line :default-expand-all="true" :data="markdown_nav" key-field="key" label-field="name"
                 children-field="children" :selectable="false" :override-default-node-click-behavior="handleNavClick" />
         </div>
-        <div class="articel_info_container flex-end-center">
+        <div class="articel_info_container flex-end-center" v-if="markdownContent && markdownContent.length > 0">
             <div class="content">
                 <div class="flex-start-center" style="margin-bottom: 5px;">
                     <n-tooltip trigger="hover">
@@ -295,13 +317,12 @@ const articelTextTotal = computed(() => {
             </div>
         </div>
     </div>
-
 </template>
 
 <style scoped lang="scss">
 .markdown_container {
     .markdown_content {
-        width: 80%;
+        width: calc(100% - 350px);
         padding-right: 350px;
 
         h1,
@@ -418,7 +439,6 @@ const articelTextTotal = computed(() => {
                 text-decoration-color: var(--primary-color);
                 color: var(--primary-color);
                 text-underline-offset: 5px;
-                margin: 0 5px;
                 cursor: pointer;
                 font-weight: bolder;
             }
@@ -430,6 +450,7 @@ const articelTextTotal = computed(() => {
             background-color: var(--code-color);
             border-radius: 8px;
             border: 1px solid var(--border-color);
+            margin: 20px 0;
 
             .code_header {
                 display: flex;
@@ -448,6 +469,14 @@ const articelTextTotal = computed(() => {
                     }
                 }
             }
+
+            // 允许代码块中的注释换行显示
+            :deep(.n-code) {
+                .hljs-comment {
+                    white-space: normal !important;
+                }
+            }
+
         }
 
         .md_img {

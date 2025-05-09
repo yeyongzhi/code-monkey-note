@@ -51,9 +51,16 @@ sessionStorge的用法和local基本完全一致，它们的区别在于存储�
 - localStorege：永久有效（除非手动清除）
 - sessionStorege：仅在会话期间有效（当前浏览器标签页关闭，会话就消失）
 
-## 存储容量
+## 存储容量比较
 `localStorege`和`sessionStorege`两者的容量均在**5MB**左右，具体可能因为浏览器的机制不同而表现不同。
 不过这相比于，cookie来说已经是足够大了，一般情况下我们存储数据都能满足要求。
 
 ## 同步
 `localStorege`和`sessionStorege`两者都是同步的，<u>操作会立即执行并阻塞现有的进程</u>。
+
+## 区别
+local和session适合存储一些比较小、短时间内经常会变动的数据，indexedDB适合存储一些比较大、长时间内需要存储的数据。
+
+## browser-localstorge 🔥🔥🔥
+这是一款浏览器本地存储化工具包，支持`localStorege`、`sessionStorege`和`indexedDB`三种方式。为本人自主开发。
+可前往[npm](https://www.npmjs.com/package/browser-localstorge)查看。

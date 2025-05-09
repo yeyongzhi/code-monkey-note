@@ -127,6 +127,12 @@ export const NavList: Array<NavItem> = [
                 url: 'https://tdesign.tencent.com/',
                 descriptions: '腾讯旗下出品的官方组件库，有react、vue、小程序以及Flutter等各框架版本'
             },
+            {
+                name: 'ChatUI',
+                icon: 'https://gw.alicdn.com/tfs/TB17TaySSzqK1RjSZFHXXb3CpXa-80-80.svg',
+                url: 'https://chatui.io/docs/quick-start',
+                descriptions: '由阿里小蜜团队开发的对话式界面组件库，专注于智能对话领域的设计和技术研发。它旨在帮助开发者快速搭建高质量的对话界面，目前已经应用在阿里经济体80多个事业部的数千个Chatbot。'
+            }
         ]
     },
     {

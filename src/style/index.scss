@@ -28,6 +28,7 @@ body::-webkit-scrollbar {
 }
 
 .app_container {
+    box-sizing: border-box;
     width: 100%;
     padding-top: 30px;
     padding-bottom: 50px;

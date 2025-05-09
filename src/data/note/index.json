@@ -48,11 +48,11 @@
                 "children": [
                     {
                         "key": "cookie",
-                        "label": "cookie"
+                        "label": "cookie❓"
                     },
                     {
                         "key": "localStorge",
-                        "label": "local等简单存储✔️"
+                        "label": "localStorge等存储✔️"
                     }
                 ]
             }

@@ -19,7 +19,6 @@ AMapLoader.reset()
 ```
 
 然后我们去加载对应版本的JS资源，并将结果赋值到`window.AMap2`上。`AMap2`可以是一个任意变量名，主要是为了与`AMap`区分开。
-
 ```javascript
 AMapLoader.load({
     key: 'xxx',
@@ -29,9 +28,7 @@ AMapLoader.load({
     resolve(true)
 })
 ```
-
 将上面两段代码结合起来，我们可以实现一个简单的**双版本高德地图**的切换：
-
 ```javascript
 loadMapSource () {
     window.AMap = null
@@ -56,7 +53,6 @@ loadMapSource () {
 核心思路基本一致，当切换版本的时候，**销毁之前加载某个js版本的记录**，然后**重新加载对应版本的js资源**。
 
 参考代码：
-
 ```html
 <script>
   window._AMapSecurityConfig = { securityJsCode: '73c21e805abce9f1a798bd4453a52994' }
@@ -103,7 +99,6 @@ loadMapSource () {
   <div id="view02" style="flex: 1; height: 100%"></div>
 </div>
 ```
-
 ## 总结反思
 高德地图的JS API在各个版本之间的差异不小，如果强行要升级肯定会带来很多的问题、工作量。因此在初次开发的时候，尽量选择**版本较新的资源**进行开发，也便于后期的**迭代、维护**。
 在代码中，尽量将**和地图有关的代码单独抽离**出来，便于后续的维护。
