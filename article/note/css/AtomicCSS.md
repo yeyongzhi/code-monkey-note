@@ -1,6 +1,57 @@
 # 原子化CSS
 原子化CSS是一种CSS设计方法，它将CSS样式分解为**更小、更具体的原子单元**，每个原子单元都代表**一个特定的样式属性（注意这里只能是一种）**。
+比如`class类名`为`mb-8`，代表的是`margin-bottom: 8px`。
 这种方法的核心思想是将复杂的CSS样式分解为一系列简单的、可重用的原子样式，从而实现样式的模块化和可维护性。
+## 新旧对比
+原来我们写一段比较基础的css样式可能是这样的：
+
+```html
+<div class="main_content"></div>
+```
+
+```css
+.main_content {
+  width: 100%;
+  height: 500px;
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+而现在我们可以这样写：
+
+```html
+<div class="wid-100p bg-white border1 border-raduis-5 flex-column-center-center"></div>
+```
+
+```css
+.wid-100p {
+  width: 100%;
+}
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.border1 {
+  border: 1px solid #CCCCCC;
+}
+
+.border-raduis-5 {
+  border-radius: 5px;
+}
+
+.flex-column-center-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+```
 ---
 原子化CSS的**主要优点**包括：
 
@@ -12,7 +63,7 @@
 ---
 下面是一些常见的原子化CSS代码合集
 ---
-## 原子CSS合集
+## 原子CSS模板（不断更新完善中...）
 ### 内外边距（margin、padding）
 ```css
 /* margin部分 */
@@ -183,5 +234,7 @@
 ## 总结思考
 在平常的项目开发中，对于`flex布局`的使用评率是很高的。比如这个`个人的博客网站`。因为自己也写了一套flex布局的原子化css样式（参考上面）来使用，能有效的减少一些类名的申明，提高开发效率。
 除了flex布局以外，像`背景色（background-color）`，`文字对齐方式（text-align）`，`内外边距（margin、padding）`等等都是一些使用频率较高的样式，都可以定义一套自己的样式来方便我们使用。
-不过如果我们要使用**一整套的原子化CSS样式**，可能上手难度会不小，开发效率肯定没有直接使用CSS样式高（因为需要去找**对应的样式和类名**）。
-建议是慢慢上手、等到对于原子化CSS的**语法，规则，命名**有了一定的了解之后，再去使用。
+
+不过如果我们要使用**一整套的原子化CSS样式**，可能<u>存在一定的上手难度</u>，开发效率肯定没有直接使用CSS样式高（因为我们需要去找**对应的样式和类名**，并且最好是记住它们）。
+
+作为一个程序猿，原子化css的思想类似于我们的组件化开发思想、全局css变量的思想。都是可以保证我们的项目可维护、迭代性强。我们可以慢慢熟悉。逐渐上手起来。我相信这一定是一个不错的💡

@@ -1,9 +1,7 @@
 # 前端工程化的基础——包依赖
-
 它不仅是Node.js的包管理器，也是前端开发中用于管理项目依赖、运行脚本、发布包等任务的重要工具。
 
 ## 1.基础使用
-
 首先，要确保我们的项目（系统）中已经存在node环境。在安装node环境的时候，`npm`一般会作为**附属物**一并下载安装。
 我们可以使用`npm -v`来验证npm是否安装成功。
 
@@ -13,8 +11,22 @@
 - 执行脚本
 - ...
 
-## 2.第三方npm
+npm——常用命令
+```javascript
+npm update <package-name> // 更新指定包
 
+npm info <package-name> // 查看指定包的详细信息
+
+npm view <package-name> versions // 查看指定包的所有版本
+
+npm config get registry // 查看当前npm的镜像源
+
+npm config set registry https://registry.npmmirror.com // 切换npm镜像源
+...
+
+```
+
+## 2.第三方npm
 ### cnpm
 npm是来自npm.js官方镜像的安装依赖工具，因此网络可能会存在一些波动。cnpm是一个专门为国内用户开发的工具，作用等同于npm（完全一致），旨在**解决网络波动**等问题。
 我们可以通过npm来安装cnpm（如下），然后就可以和npm一样使用cnpm（几乎全部命令都相同）
@@ -69,13 +81,11 @@ pnpm解决了传统npm的一些棘手问题：
 
 
 ## 参考资料
-
 [pnpm是怎么做到"又快又省又稳"](https://juejin.cn/post/7443866293755592742)
 [聊一聊前端包管理中的幽灵依赖](https://zhuanlan.zhihu.com/p/685433254)
 
 
 ## 附：常用的镜像地址
-
 ```
 官方源（npm registry）：https://registry.npmjs.org/
  
