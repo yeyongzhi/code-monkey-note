@@ -222,7 +222,7 @@ onUnmounted(() => {
         <div style="margin: 20px 0;">
             <div class="flex-start-center" style="margin-bottom: 20px;"
                 v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + index">
-                <span style="margin-right: 10px;font-size: 16px;width: 120px;">{{ item.name }} </span>
+                <span style="margin-right: 10px;font-size: 1.1rem;width: 120px;font-weight: bolder;letter-spacing: 2px;">{{ item.name }} </span>
                 <n-tag :type="tagTypeList[Math.floor(Math.random() * 4)]" round
                     :style="`margin-left: ${index2 === 0 ? '0' : '10px'};padding: 10px 15px;cursor: pointer;`"
                     v-for="(item2, index2) in item.list" :key="'technology_item' + index2">
@@ -270,7 +270,7 @@ onUnmounted(() => {
                     <CaretDown16Filled v-else />
                 </Icon>
                 <div>迄今为止，我已经踏足过 <span
-                        style="font-weight: bolder;color: var(--primary-color);font-size: 25px;cursor: pointer;"
+                        style="font-weight: bolder;color: var(--primary-color);font-size: 1.8rem;cursor: pointer;"
                         @click="showAllTrip">{{ userTripMapData.length }}</span> 个 城市、区县</div>
             </div>
             <div v-if="isExpandTrip" class="trip_box">
@@ -322,19 +322,19 @@ onUnmounted(() => {
 
         .title {
             .name {
-                font-size: 60px;
+                font-size: 4.3rem;
                 font-weight: 700;
-                font-family: "OPPO-H";
+                font-family: 'Mi-Normal';
             }
 
             .tips {
-                font-size: 45px;
+                font-size: 3.2rem;
                 font-weight: 500;
             }
 
             .signature {
-                font-size: 25px;
-                font-family: "OPPO-M";
+                font-size: 1.8rem;
+                font-family: 'Mi-Bold';
             }
 
             .tag {
@@ -449,14 +449,12 @@ onUnmounted(() => {
 
             .descriptions {
                 height: 60px;
-                font-size: 14px;
                 margin-top: 10px;
                 color: var(--text-color-3);
             }
 
             .link {
                 color: var(--text-color-3);
-                font-size: 14px;
 
                 span {
                     margin-right: 5px;

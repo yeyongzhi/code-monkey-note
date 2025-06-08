@@ -204,7 +204,7 @@ onUnmounted(() => {
             line-height: 30px;
             color: var(--text-color-3);
             cursor: pointer;
-            font-size: var(--font-size);
+            font-size: 1.0rem;
             text-decoration: none;
 
             &:hover {
@@ -227,7 +227,7 @@ onUnmounted(() => {
         height: 50px;
         line-height: 50px;
         margin-bottom: 20px;
-        font-size: 18px;
+        font-size: 1.3rem;
         background-color: var(--body-color);
     }
 

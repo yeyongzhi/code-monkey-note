@@ -1,4 +1,29 @@
 @font-face {
+    font-family: 'Mi-Thin';
+    src: url('@/assets/font/mi/MiSans-Thin.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mi-Light';
+    src: url('@/assets/font/mi/MiSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mi-Normal';
+    src: url('@/assets/font/mi/MiSans-Normal.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mi-Regular';
+    src: url('@/assets/font/mi/MiSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mi-Bold';
+    src: url('@/assets/font/mi/MiSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
     font-family: 'MovieFont';
     src: url('@/assets/font/movie.ttf') format('truetype');
     font-size: 20px;
@@ -34,7 +59,7 @@
 
 .page_hover_title {
     width: fit-content;
-    font-size: 24px;
+    font-size: 1.7rem;
     font-weight: bolder;
     cursor: pointer;
     position: relative;

@@ -52,7 +52,7 @@ const { nav } = defineProps({
             width: 40px;
             height: 40px;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 1.14rem;
         }
 
         .icon {
@@ -79,7 +79,7 @@ const { nav } = defineProps({
         }
 
         .name {
-            font-size: 15px;
+            font-size: 1.07rem;
             font-weight: bolder;
             margin-left: 10px;
         }
@@ -89,7 +89,6 @@ const { nav } = defineProps({
         height: 55px;
         width: 100%;
         margin-top: 5px;
-        font-size: 14px;
         color: var(--text-color-2);
     }
 

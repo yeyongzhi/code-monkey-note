@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref, watch, getCurrentInstance } from 'vue';
 import Avatar from '@/assets/images/user/logo.png'
 import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkItem } from '@/data/header/index'
-import { ArrowLeft16Filled, ArrowRight16Filled, ArrowClockwise16Filled } from '@vicons/fluent'
-// import { gotoPage } from '@/router/index'
+import { ArrowLeft16Filled, ArrowRight16Filled, ArrowClockwise16Filled, Settings24Regular } from '@vicons/fluent'
 
-const { componentKey } = defineProps({
+const { proxy }: any = getCurrentInstance()
+
+const { componentKey, primaryColor } = defineProps({
     componentKey: {
+        type: String,
+    },
+    primaryColor: {
         type: String,
     }
 })
 
-const emits = defineEmits(['changeTheme', 'changeComponent', 'goHistoryBack', 'goHistoryNext'])
+const emits = defineEmits(['changeTheme', 'changeComponent', 'goHistoryBack', 'goHistoryNext', 'upodate-primaryColor'])
 
 const gotoLink = (link: HeaderLinkItem) => {
     if (!link.url) {
@@ -36,7 +40,7 @@ watch(isDarkTheme, (newVal) => {
 })
 
 const gotoHistroy = (key: number) => {
-    if(key === 1) {
+    if (key === 1) {
         emits('goHistoryBack')
     } else {
         emits('goHistoryNext')
@@ -46,6 +50,18 @@ const gotoHistroy = (key: number) => {
 const refresh = () => {
     window.location.reload()
 }
+
+const settingVisible = ref<Boolean>(false)
+const handleSettingColorChanged = (value: string) => {
+    emits('upodate-primaryColor', value)
+}
+
+// 全局设置
+const htmlFontSize = ref<number>(14)
+watch(htmlFontSize, (newVal) => {
+    document.documentElement.style.fontSize = `${newVal}px`;
+    localStorage.setItem("codeMonkey_fontsize", newVal.toString())
+})
 
 onMounted(() => {
     const value = localStorage.getItem("codeMonkey_datatheme")
@@ -61,7 +77,7 @@ onMounted(() => {
         <!-- 左侧头像 -->
         <div class="user flex-start-center">
             <n-avatar round :size="40" :src="Avatar" />
-            <span class="name">Aurora</span>
+            <span class="name">{{ proxy.globalData.name }}</span>
             <div style="margin-left: 20px;">
                 <n-tooltip trigger="hover">
                     <template #trigger>
@@ -104,8 +120,8 @@ onMounted(() => {
         <!-- 右侧菜单 -->
         <div class="flex-center-center">
             <div class="link flex-start-center">
-                <span :class="`link_item hover_color_text ${componentKey === link.key ? 'link_item_selected' : ''}`" @click="gotoLink(link)" v-for="(link, index) in HeaderLink"
-                    :key="'link' + index">
+                <span :class="`link_item hover_color_text ${componentKey === link.key ? 'link_item_selected' : ''}`"
+                    @click="gotoLink(link)" v-for="(link, index) in HeaderLink" :key="'link' + index">
                     <span v-if="componentKey === link.key">📌</span>
                     {{ link.name }}
                 </span>
@@ -121,18 +137,46 @@ onMounted(() => {
                     </template>
                     {{ !isDarkTheme ? '打开黑夜模式' : '关闭黑夜模式' }}
                 </n-tooltip>
-                <!-- <n-tooltip trigger="hover" placement="bottom">
+                <n-tooltip trigger="hover" placement="bottom">
                     <template #trigger>
-                        <n-button circle type="primary" size="small">
+                        <n-button quaternary circle type="primary" @click="settingVisible = !settingVisible">
                             <template #icon>
-                                <n-icon><ArrowClockwise20Filled /></n-icon>
+                                <n-icon :size="25">
+                                    <Settings24Regular />
+                                </n-icon>
                             </template>
                         </n-button>
                     </template>
-                    刷新页面
-                </n-tooltip> -->
+                    设置
+                </n-tooltip>
             </div>
         </div>
+        <n-drawer v-model:show="settingVisible" :width="400" placement="right">
+            <n-drawer-content title="设置" body-content-class="setting_drawer_content">
+                <div class="box">
+                    <div class="title">颜色设置</div>
+                    <n-color-picker :default-value="primaryColor" :show-alpha="false" :modes="['hex', 'rgb']"
+                        :on-update:value="handleSettingColorChanged" :swatches="[
+                            '#18a058',
+                            '#e03131',
+                            '#f76707',
+                            '#f59f00',
+                            '#37b24d',
+                            '#1098ad',
+                            '#1c7ed6',
+                            '#ae3ec9',
+                        ]" />
+                </div>
+                <div class="box">
+                    <div class="title">字体大小</div>
+                    <n-input-number v-model:value="htmlFontSize">
+                        <template #suffix>
+                            px
+                        </template>
+                    </n-input-number>
+                </div>
+            </n-drawer-content>
+        </n-drawer>
     </div>
 </template>
 
@@ -159,6 +203,7 @@ onMounted(() => {
             font-size: 15px;
             padding: 5px 0;
         }
+
         .link_item_selected {
             color: var(--primary-color);
             font-weight: bolder;
@@ -175,6 +220,18 @@ onMounted(() => {
             &:nth-child(n + 1) {
                 margin-left: 10px;
             }
+        }
+    }
+}
+
+.setting_drawer_content {
+    .box {
+        margin-bottom: 10px;
+
+        .title {
+            font-size: 1.0rem;
+            font-weight: bolder;
+            margin-bottom: 10px;
         }
     }
 }

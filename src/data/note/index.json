@@ -55,6 +55,11 @@
                         "label": "local等简单存储✔️"
                     }
                 ]
+            },
+            {
+                "key": "fingerprint",
+                "label": "浏览器指纹",
+                "default": true
             }
         ]
     },

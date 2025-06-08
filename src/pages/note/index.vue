@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, onBeforeMount } from 'vue'
 import NoteData from '@/data/note/index.json'
 import { basePath } from '@/router/index'
 import { Bookmark24Regular } from '@vicons/fluent'
@@ -9,7 +9,7 @@ const baseNotePath = basePath + '/article/note'
 const articlePath = ref<string | null>(null)
 const expandedKeys = ref<Array<string | number>>([])
 const selectKeys = ref<Array<string | number>>([])
-const defaultArticleKey = ref("jsDoc") // 默认打开的文章
+const defaultArticleKey = ref(null) // 默认打开的文章
 
 // 查找文章路径
 const findPath = (tree: Array<any>, targetId: string) => {
@@ -80,6 +80,23 @@ const articleTotalNum = computed(() => {
 		return total
 	}
 	return getTotal(NoteData)
+})
+
+const findDefaultArticle = (tree: Array<any>) => {
+	tree.forEach((item) => {
+		if (item.children && item.children.length > 0) {
+			findDefaultArticle(item.children)
+		} else {
+			if (item.default) {
+				defaultArticleKey.value = item.key
+			}
+		}
+	})
+}
+
+onBeforeMount(() => {
+	// 默认文章
+	findDefaultArticle(NoteData)
 })
 
 onMounted(() => {

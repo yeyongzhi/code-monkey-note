@@ -2,7 +2,7 @@
 import { darkTheme, type GlobalTheme } from 'naive-ui'
 // import { RouterView } from 'vue-router';
 import Header from './header/index.vue'
-import { ref, onMounted, watch, onBeforeMount, shallowRef, ComponentOptions } from 'vue';
+import { ref, onMounted, watch, onBeforeMount, shallowRef, ComponentOptions, reactive, computed } from 'vue';
 // import router, { gotoPage, basePath } from '@/router/index'
 import { routes } from '@/router/component'
 import hljs from 'highlight.js/lib/core'
@@ -11,28 +11,18 @@ import javascript from 'highlight.js/lib/languages/javascript'
 import ComponentsRouterManager from '@/utils/componentKeyManager'
 
 hljs.registerLanguage('javascript', javascript)
-
+const defaultPrimaryColor = "#18a058"
 const componentManager = shallowRef<ComponentsRouterManager>()
 
 /**
  * js 文件下使用这个做类型提示
  * @type import('naive-ui').GlobalThemeOverrides
  */
-const themeOverrides = {
+const themeOverrides = ref({
     common: {
-        primaryColor: '#be4bdb'
-    },
-    Tag: {
-        textColor: '#be4bdb',
-        textColorSuccess: '#be4bdb',
-        border: '#be4bdb',
-        borderSuccess: '#be4bdb',
-        colorBorderedSuccess: '#be4bdb1A',
-    },
-    Switch: {
-        railColorActive: '#be4bdb'
+        primaryColor: defaultPrimaryColor
     }
-}
+})
 
 const componentKey = ref<string>("")
 const componentName = ref<ComponentOptions<any>>()
@@ -48,6 +38,49 @@ onBeforeMount(() => {
     }
     componentManager.value?.push(componentKey.value)
 })
+
+const getThemeOverrides = (promaryColor: string) => {
+    return {
+        common: {
+            primaryColor: promaryColor
+        },
+        Tag: {
+            textColor: promaryColor,
+            textColorSuccess: promaryColor,
+            border: promaryColor,
+            borderSuccess: promaryColor,
+            colorBorderedSuccess: promaryColor + '1A',
+        },
+        Switch: {
+            railColorActive: promaryColor
+        }
+    }
+}
+
+const initAppPrimaryColor = () => {
+    const primaryColor = localStorage.getItem("codeMonkey_primaryColor")
+    if (primaryColor && primaryColor !== "") {
+        themeOverrides.value = getThemeOverrides(primaryColor)
+    } else {
+        themeOverrides.value = getThemeOverrides(defaultPrimaryColor)
+        localStorage.setItem("codeMonkey_primaryColor", defaultPrimaryColor)
+    }
+}
+
+const updateAppPrimaryColor = (value: string) => {
+    themeOverrides.value = getThemeOverrides(value)
+    localStorage.setItem("codeMonkey_primaryColor", value)
+}
+
+const initAppFontSize = () => {
+    const fontSize = localStorage.getItem("codeMonkey_fontsize")
+    if (fontSize && fontSize !== "") {
+        document.documentElement.style.fontSize = `${fontSize}px`;
+    } else {
+        document.documentElement.style.fontSize = "14px";
+        localStorage.setItem("codeMonkey_fontsize", "14")
+    }
+}
 
 onMounted(() => {
     const value = localStorage.getItem("codeMonkey_datatheme")
@@ -74,6 +107,8 @@ onMounted(() => {
     //     }, 3000)
     // }
     // });
+    initAppPrimaryColor()
+    initAppFontSize()
 })
 
 const theme = ref<GlobalTheme | null>(null)
@@ -123,7 +158,8 @@ watch(componentKey, (newVal) => {
                 <n-message-provider>
                     <div class="main_container">
                         <div class="header">
-                            <Header :componentKey="componentKey" @changeTheme="handleChangeTheme"
+                            <Header :componentKey="componentKey" :primaryColor="themeOverrides.common.primaryColor"
+                                @upodate-primaryColor="updateAppPrimaryColor" @changeTheme="handleChangeTheme"
                                 @changeComponent="changeComponent" @goHistoryBack="goHistoryBack"
                                 @goHistoryNext="goHistoryNext" />
                         </div>

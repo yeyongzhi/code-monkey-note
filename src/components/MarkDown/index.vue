@@ -3,8 +3,8 @@
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
 import { formatMarkDown } from '@/utils/markdown'
 import message from '@/plugins/message'
-import { getMarkDownContent, scrollToTop, getArticleTextCount, getMarkDownInfo } from '@/utils/index'
-import { BookInformation24Regular, Timer24Regular } from '@vicons/fluent'
+import { openTab, getMarkDownContent, scrollToTop, getArticleTextCount, getMarkDownInfo } from '@/utils/index'
+import { BookInformation24Regular, Timer24Regular, Link24Regular } from '@vicons/fluent'
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
@@ -213,8 +213,20 @@ const articelTextTotal = computed(() => {
                 <template v-else-if="item.type === 'quote'">
                     <div v-for="(q, q_index) in item.content" :key="'quote' + q_index" v-html="q"></div>
                 </template>
+                <!-- 超链接 -->
                 <template v-else-if="item.type === 'link'">
-                    <a :href="item.content[2]">{{ item.content[1] }}</a>
+                    <!-- <a :href="item.content[2]">{{ item.content[1] }}</a> -->
+                    <n-tooltip trigger="hover">
+                        <template #trigger>
+                            <span @click="openTab(item.content[2])">
+                                <n-icon size="20" style="margin-right: 5px;">
+                                    <Link24Regular />
+                                </n-icon>
+                                {{ item.content[1] }}
+                            </span>
+                        </template>
+                        点击前往
+                    </n-tooltip>
                 </template>
                 <!-- 图片 -->
                 <template v-else-if="item.type === 'img'">
@@ -281,12 +293,14 @@ const articelTextTotal = computed(() => {
                     <n-tooltip trigger="hover">
                         <template #trigger>
                             <n-icon size="20" style="margin-right: 5px;">
-                        <Timer24Regular />
-                    </n-icon>
+                                <Timer24Regular />
+                            </n-icon>
                         </template>
                         最后修改时间
                     </n-tooltip>
-                    <div style="height: 20px;line-height: 20px;cursor: pointer;">{{ markdownInfo ? (markdownInfo.lastModified || '-') :
+                    <div style="height: 20px;line-height: 20px;cursor: pointer;">{{ markdownInfo ?
+                        (markdownInfo.lastModified ||
+                        '-') :
                         '-' }}
                     </div>
                 </div>
@@ -311,7 +325,7 @@ const articelTextTotal = computed(() => {
 
         .md_content {
             width: fit-content;
-            font-size: 15px;
+            font-size: 1.07rem;
             color: var(--text-color-base);
             height: auto;
         }
@@ -350,6 +364,17 @@ const articelTextTotal = computed(() => {
             margin: 0 !important;
         }
 
+        .md_link {
+            span {
+                color: var(--primary-color);
+                font-weight: bolder;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+
         .md_unorderList {
             position: relative;
             padding-left: 15px;
@@ -370,18 +395,15 @@ const articelTextTotal = computed(() => {
         .md_orderList {
             .orderList_box {
                 & span {
-                    &:nth-child(1) {
-                        color: var(--primary-color);
-                        font-weight: bolder;
-                        font-size: 15px;
-                    }
+                    font-weight: bolder;
+                    font-size: 1.07rem;
                 }
             }
         }
 
         .md_unorderList,
         .md_orderList {
-            margin-bottom: 10px;
+            margin: 10px 0;
         }
 
         .md_divider {
@@ -470,7 +492,7 @@ const articelTextTotal = computed(() => {
         box-sizing: border-box;
         left: calc(5%);
         bottom: 10px;
-        font-size: 12px;
+        font-size: 0.85rem;
         color: var(--text-color-3);
 
         .content {
