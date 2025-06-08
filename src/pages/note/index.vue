@@ -154,7 +154,8 @@ onMounted(() => {
 	}
 
 	.note_content_container {
-		width: 100%;
+		box-sizing: border-box;
+		width: calc(100% - 280px);
 		margin-left: 280px;
 	}
 }

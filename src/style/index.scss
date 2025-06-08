@@ -32,6 +32,7 @@ body::-webkit-scrollbar {
 }
 
 .app_container {
+    box-sizing: border-box;
     width: 100%;
     padding-top: 30px;
     padding-bottom: 50px;
@@ -54,11 +55,12 @@ body::-webkit-scrollbar {
 
 
 u {
-    text-decoration-color: var(--primary-color);
-    color: var(--primary-color);
+    // text-decoration-color: var(--primary-color);
+    // color: var(--primary-color);
     text-underline-offset: 5px;
     margin: 0 5px;
     cursor: pointer;
+    font-weight: bolder;
 }
 
 .aaa {

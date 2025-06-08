@@ -195,7 +195,7 @@ onUnmounted(() => {
             <br />
             理想是念头通达，学会思考，早日去码头整薯条🍟
             <br />
-            兴趣爱好是<span style="text-decoration: line-through;margin: 0 5px;">唱跳、Rap</span>和篮球，没事喜欢写着写那的，拿着破手机拍来拍去的
+            兴趣爱好是<span style="text-decoration: line-through;margin: 0 5px;">唱跳、Rap</span>和篮球🏀，没事喜欢写着写那的，拿着破手机📱拍来拍去的
         </div>
         <div class="contact flex-start-center">
             <div @click="handleContactClick(item)" :class="`box flex-center-center ${item.type}`"
@@ -295,7 +295,7 @@ onUnmounted(() => {
         <div class="page_hover_title">个人作品</div>
         <div class="person_works">
             <div class="work_box" v-for="(item, index) in proxy.globalData.personalWorks" :key="'works' + index">
-                <div class="title hover_color_text" @click="gotoPersonWorks(item)">· {{ item.name }}</div>
+                <div class="title hover_color_text" @click="gotoPersonWorks(item)">📌 {{ item.name }}</div>
                 <div class="descriptions">
                     {{ item.descriptions }}
                 </div>
@@ -517,6 +517,7 @@ onUnmounted(() => {
             margin-bottom: 20px;
 
             .title {
+                width: fit-content;
                 font-size: 16px;
                 font-weight: bolder;
             }

@@ -1,4 +1,4 @@
-const LINK_REGEXP = /\[(.*?)\]\((.*?)(".*?")?\)/
+const LINK_REGEXP = /(\[.*?\])\((.*?)\)/
 const IMG_REGEXP = /!\[(.*?)\]\((.*?)\)/
 const UNORDERLIST_REGEXP = /^- (.*)$/
 const ORDERLIST_REGEXP = /^\d+\.\s(.*)$/
@@ -56,7 +56,7 @@ export function formatMarkDown(str: string) {
             if (i < content.length) {
                 fn()
             }
-        } else if(c.type === 'orderList') {
+        } else if (c.type === 'orderList') {
             result.push({
                 type: c.type,
                 content: [
@@ -100,7 +100,7 @@ export function formatMarkDown(str: string) {
             result.push({
                 type: c.type,
                 content: content.slice(range[0], range[1] + 1).map((item, index) => {
-                    if(index === 0) {
+                    if (index === 0) {
                         return handleLineText(item.content.trim().replace(/>/g, ""))
                     }
                     return handleLineText(item.content)
@@ -129,7 +129,7 @@ export function identifyLine(text: string) {
         const result = UNORDERLIST_REGEXP.exec(text)
         content = result ? result[1] : ""
     }
-    if(ORDERLIST_REGEXP.test(text)) {
+    if (ORDERLIST_REGEXP.test(text)) {
         type = 'orderList' // 有序列表
         const result = ORDERLIST_REGEXP.exec(text)
         content = [text.substring(0, text.indexOf(".")), result ? result[1] : ""]
@@ -143,15 +143,27 @@ export function identifyLine(text: string) {
     if (text === '---' || text === '***') {
         type = 'divider' // 
     }
-    if (LINK_REGEXP.test(text)) {
+    if (text.match(LINK_REGEXP)) {
         type = 'link' // 链接
-        content = LINK_REGEXP.exec(text)
+        const match = text.match(LINK_REGEXP);
+        if (match && match.index !== undefined) {
+            const otherTextBefore = text.substring(0, match.index); // 匹配之前的其他文本
+            const otherTextAfter = text.substring(match.index + match[0].length); // 匹配之后的其他文本
+            const linkText = match[1].replace("[", "").replace("]", ""); // 链接文本
+            const linkUrl = match[2]; // 链接地址
+            content = [
+                otherTextBefore,
+                linkText,
+                linkUrl,
+                otherTextAfter
+            ]
+        }
     }
     if (IMG_REGEXP.test(text)) {
         type = 'img' // 图片
         content = IMG_REGEXP.exec(text)
     }
-    if(text.startsWith("- [x] ") || text.startsWith("- [] ")) {
+    if (text.startsWith("- [x] ") || text.startsWith("- [] ")) {
         type = 'todo'
     }
     if (text.length === 0) {
