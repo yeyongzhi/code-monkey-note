@@ -2,7 +2,7 @@
 import { darkTheme, type GlobalTheme } from 'naive-ui'
 // import { RouterView } from 'vue-router';
 import Header from './header/index.vue'
-import { ref, onMounted, watch, onBeforeMount, shallowRef, ComponentOptions, reactive, computed } from 'vue';
+import { ref, onMounted, watch, onBeforeMount, shallowRef, ComponentOptions } from 'vue';
 // import router, { gotoPage, basePath } from '@/router/index'
 import { routes } from '@/router/component'
 import hljs from 'highlight.js/lib/core'

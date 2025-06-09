@@ -43,11 +43,11 @@
         { "name": "browser-localstorge", "descriptions": "一个浏览器本地存储化工具包", "link": "https://www.npmjs.com/package/browser-localstorge" }
     ],
     "personalTechnology": [
-        { "name": "💻️前端基础", "list": ["html", "js", "ts", "ES6"] },
-        { "name": "⚙️框架生态", "list": ["react", "vue 2、3", "uniapp", "微信小程序（原生开发）"] },
-        { "name": "🗺️GIS开发", "list": ["高德地图、百度地图", "openLayers", "Cesium js", "leaflet", "MapBox GL"] },
+        { "name": "💻️前端基础", "list": ["html", "javascript", "typescript", "ES6"] },
+        { "name": "⚙️框架生态", "list": ["react", "vue 2&3", "UniApp", "微信小程序开发"] },
+        { "name": "🗺️GIS开发", "list": ["高德地图、百度地图", "openLayers", "CesiumJs", "leaflet", "MapBox GL"] },
         { "name": "🧱服务端", "list": ["mysql", "node.js"] },
-        { "name": "🎨组件UI", "list": ["antd", "element Plus", "native UI", "TDesign", "Vant weapp"] },
-        { "name": "🔧工程化能力", "list": ["vite", "webpack"] }
+        { "name": "🎨组件UI", "list": ["Antd", "Element UI", "native UI", "TDesign", "ArcoDesign", "Vant weapp"] },
+        { "name": "🔧工程化能力", "list": ["vite", "webpack", "rollup"] }
     ]
 }

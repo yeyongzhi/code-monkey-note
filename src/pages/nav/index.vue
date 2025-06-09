@@ -177,12 +177,6 @@ onUnmounted(() => {
             padding: 20px;
             border-radius: 5px;
 
-            .title {
-                font-size: 24px;
-                font-weight: bolder;
-                cursor: pointer;
-            }
-
             .content {
                 flex-wrap: wrap;
                 gap: 30px;
@@ -234,7 +228,6 @@ onUnmounted(() => {
     .result {
         width: 100%;
         height: calc(100% - 68px);
-        // border: 1px solid var(--border-color);
         overflow-x: hidden;
         overflow-y: auto;
         &::-webkit-scrollbar {
@@ -246,7 +239,7 @@ onUnmounted(() => {
             background-color: var(--body-color);
             border: 2px solid transparent;
             .left {
-                font-size: 16px;
+                font-size: 1.14rem;
 
                 .icon {
                     width: 40px;

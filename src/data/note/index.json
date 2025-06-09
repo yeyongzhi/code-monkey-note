@@ -29,6 +29,14 @@
         "label": "vue",
         "children": [
             {
+                "key": "usage",
+                "label": "vue用法集合"
+            },
+            {
+                "key": "hooks",
+                "label": "Vue hooks"
+            },
+            {
                 "key": "vueRouter",
                 "label": "vue-router"
             }

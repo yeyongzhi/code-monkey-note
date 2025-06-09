@@ -98,7 +98,7 @@ const getImageUrl = (url: string) => {
 <style scoped lang="scss">
 .article_container {
     padding-bottom: 100px;
-    font-size: 15px;
+    font-size: 1.07rem;
 
     .link {
         span {
