@@ -1,6 +1,10 @@
 @import './flex.scss';
 @import './font.scss';
 
+// 自定义原子化css类名
+@import './atomic/font.scss';
+@import './atomic/size.scss';
+
 * {
     margin: 0;
     padding: 0;

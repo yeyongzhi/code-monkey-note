@@ -2,7 +2,10 @@
 import { onMounted, ref, watch, getCurrentInstance } from 'vue';
 import Avatar from '@/assets/images/user/logo.png'
 import { HeaderLink, type HeaderLinkItem, HeaderUserLink, type HeaderUserLinkItem } from '@/data/header/index'
-import { ArrowLeft16Filled, ArrowRight16Filled, ArrowClockwise16Filled, Settings24Regular } from '@vicons/fluent'
+import { ArrowLeft16Filled, ArrowRight16Filled, ArrowClockwise16Filled, Settings24Regular, Clock24Regular } from '@vicons/fluent'
+import { useTime } from '@/hooks/useTime';
+
+const systemTime = useTime()
 
 const { proxy }: any = getCurrentInstance()
 
@@ -133,13 +136,13 @@ onMounted(() => {
                 </span>
                 <n-tooltip trigger="hover" placement="bottom">
                     <template #trigger>
-                        <n-switch style="margin:0 20px;" v-model:value="isDarkTheme" />
+                        <n-switch class="mr-10 ml-10" v-model:value="isDarkTheme" />
                     </template>
                     {{ !isDarkTheme ? '打开黑夜模式' : '关闭黑夜模式' }}
                 </n-tooltip>
                 <n-tooltip trigger="hover" placement="bottom">
                     <template #trigger>
-                        <n-button quaternary circle type="primary" @click="settingVisible = !settingVisible">
+                        <n-button class="mr-10" quaternary circle type="primary" @click="settingVisible = !settingVisible">
                             <template #icon>
                                 <n-icon :size="25">
                                     <Settings24Regular />
@@ -149,6 +152,19 @@ onMounted(() => {
                     </template>
                     设置
                 </n-tooltip>
+                <n-popover trigger="hover">
+                    <template #trigger>
+                        <n-button quaternary circle type="primary">
+                            <template #icon>
+                                <n-icon :size="25">
+                                    <Clock24Regular />
+                                </n-icon>
+                            </template>
+                        </n-button>
+                    </template>
+                    <p>🕗{{ systemTime.timestmp.value }}</p>
+                    <p>📅{{ systemTime.week.value }}</p>
+                </n-popover>
             </div>
         </div>
         <n-drawer v-model:show="settingVisible" :width="400" placement="right">
