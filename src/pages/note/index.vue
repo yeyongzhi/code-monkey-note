@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed, onBeforeMount, isRef, toRef, shallowRef } from 'vue'
+import { onMounted, ref, computed, onBeforeMount, isRef } from 'vue'
 import NoteData from '@/data/note/index.json'
 import { basePath } from '@/router/index'
 import { Bookmark24Regular } from '@vicons/fluent'

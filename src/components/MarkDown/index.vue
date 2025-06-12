@@ -201,7 +201,7 @@ const articelTextTotal = computed(() => {
     </template>
     <div class="markdown_container flex-between-start" v-else>
         <div class="markdown_content" v-if="markdownContent && markdownContent.length > 0">
-            <div :class="`md_content md_${item.type}`" v-for="(item, index) in markdownContent" :key="'md' + index">
+            <div :class="`md_content md_${item.type} ${(item.type === 'h1' && index === 0) ? 'md_h1_fist' : '' }`" v-for="(item, index) in markdownContent" :key="'md' + index">
                 <template v-if="item.type === 'h1'">
                     <h1 :id="renderTitleId(item)">{{ item.content.trim().replace(/#/g, "") }}</h1>
                 </template>
@@ -238,7 +238,7 @@ const articelTextTotal = computed(() => {
                                 {{ item.content[1] }}
                             </span>
                         </template>
-                        点击前往
+                        点击前往🔗
                     </n-tooltip>
                 </template>
                 <!-- 图片 -->
@@ -341,6 +341,10 @@ const articelTextTotal = computed(() => {
 
         .md_h1 {
             margin: 30px 0;
+        }
+
+        .md_h1_fist {
+            margin-top: 0 !important;
         }
 
         .md_h2 {
