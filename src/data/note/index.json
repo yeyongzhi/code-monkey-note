@@ -29,6 +29,11 @@
         "label": "vue",
         "children": [
             {
+                "key": "vue_ref",
+                "label": "vue Ref",
+                "default": true
+            },
+            {
                 "key": "usage",
                 "label": "vue用法集合"
             },
@@ -66,8 +71,7 @@
             },
             {
                 "key": "fingerprint",
-                "label": "浏览器指纹",
-                "default": true
+                "label": "浏览器指纹"
             }
         ]
     },

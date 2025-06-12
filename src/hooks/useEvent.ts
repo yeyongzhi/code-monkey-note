@@ -1,6 +1,3 @@
-# Vue hooks收集
-## 事件绑定、派发总线
-```javascript
 import { reactive } from 'vue';
 
 export function useEvent() {
@@ -31,4 +28,3 @@ export function useEvent() {
 
     return { on, emit };
 }
-```

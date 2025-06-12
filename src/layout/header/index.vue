@@ -129,42 +129,50 @@ onMounted(() => {
                     {{ link.name }}
                 </span>
             </div>
+            <n-divider vertical />
             <div class="userInfo flex-center-center">
-                <span class="flex-center-center" @click="gotoUserLink(link)" v-for="(link, index) in HeaderUserLink"
-                    :key="'userlink' + index" :title="link.name">
-                    <img :src="link.icon" />
-                </span>
-                <n-tooltip trigger="hover" placement="bottom">
-                    <template #trigger>
-                        <n-switch class="mr-10 ml-10" v-model:value="isDarkTheme" />
-                    </template>
-                    {{ !isDarkTheme ? '打开黑夜模式' : '关闭黑夜模式' }}
-                </n-tooltip>
-                <n-tooltip trigger="hover" placement="bottom">
-                    <template #trigger>
-                        <n-button class="mr-10" quaternary circle type="primary" @click="settingVisible = !settingVisible">
-                            <template #icon>
-                                <n-icon :size="25">
-                                    <Settings24Regular />
-                                </n-icon>
-                            </template>
-                        </n-button>
-                    </template>
-                    设置
-                </n-tooltip>
-                <n-popover trigger="hover">
-                    <template #trigger>
-                        <n-button quaternary circle type="primary">
-                            <template #icon>
-                                <n-icon :size="25">
-                                    <Clock24Regular />
-                                </n-icon>
-                            </template>
-                        </n-button>
-                    </template>
-                    <p>🕗{{ systemTime.timestmp.value }}</p>
-                    <p>📅{{ systemTime.week.value }}</p>
-                </n-popover>
+                <n-space align="center">
+                    <n-tooltip trigger="hover" placement="bottom" v-for="(link, index) in HeaderUserLink"
+                        :key="'userlink' + index" :title="link.name">
+                        <template #trigger>
+                            <div class="flex-center-center">
+                                <img @click="gotoUserLink(link)" :src="isDarkTheme ? link.darkIcon : link.icon" />
+                            </div>
+                        </template>
+                        前往{{ link.name }}
+                    </n-tooltip>
+                    <n-tooltip trigger="hover" placement="bottom">
+                        <template #trigger>
+                            <n-switch v-model:value="isDarkTheme" />
+                        </template>
+                        {{ !isDarkTheme ? '打开黑夜模式' : '关闭黑夜模式' }}
+                    </n-tooltip>
+                    <n-tooltip trigger="hover" placement="bottom">
+                        <template #trigger>
+                            <n-button quaternary circle type="primary" @click="settingVisible = !settingVisible">
+                                <template #icon>
+                                    <n-icon :size="25">
+                                        <Settings24Regular />
+                                    </n-icon>
+                                </template>
+                            </n-button>
+                        </template>
+                        设置
+                    </n-tooltip>
+                    <n-popover trigger="hover">
+                        <template #trigger>
+                            <n-button quaternary circle type="primary">
+                                <template #icon>
+                                    <n-icon :size="25">
+                                        <Clock24Regular />
+                                    </n-icon>
+                                </template>
+                            </n-button>
+                        </template>
+                        <p>🕗{{ systemTime.timestmp.value }}</p>
+                        <p>📅{{ systemTime.week.value }}</p>
+                    </n-popover>
+                </n-space>
             </div>
         </div>
         <n-drawer v-model:show="settingVisible" :width="400" placement="right">
@@ -232,10 +240,6 @@ onMounted(() => {
             width: 25px;
             height: 25px;
             cursor: pointer;
-
-            &:nth-child(n + 1) {
-                margin-left: 10px;
-            }
         }
     }
 }

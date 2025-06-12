@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed, onBeforeMount } from 'vue'
+import { onMounted, ref, computed, onBeforeMount, isRef, toRef, shallowRef } from 'vue'
 import NoteData from '@/data/note/index.json'
 import { basePath } from '@/router/index'
 import { Bookmark24Regular } from '@vicons/fluent'
@@ -10,6 +10,11 @@ const articlePath = ref<string | null>(null)
 const expandedKeys = ref<Array<string | number>>([])
 const selectKeys = ref<Array<string | number>>([])
 const defaultArticleKey = ref(null) // 默认打开的文章
+
+const count = ref(0)
+console.log(isRef(count))
+
+console.log(count)
 
 // 查找文章路径
 const findPath = (tree: Array<any>, targetId: string) => {

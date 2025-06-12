@@ -79,4 +79,20 @@ document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
 
 ## cookie的属性
 
-TODO...
+```javascript
+document.cookie = "[cookie相关内容]";
+
+user_id=12345 // 键名和键值，键名和键值之间使用等号连接——这是最关键的键值对
+Domain=example.com // 指定该 Cookie 只能在 example.com 及其子域名下使用
+Path=/ // 指定该 Cookie 可以被访问的路径是网站的根路径，即整个网站都可以访问
+Expires=Wed, 21 Oct 2025 07:28:00 GMT // 指定该 Cookie 的过期时间为 2025 年 10 月 21 日上午 7:28:00
+Max-Age=3600 （单位是s）// 指定该 Cookie 的最大有效时间为 3600 秒（即 1 小时）
+Secure // 指定该 Cookie 只能在 HTTPS 连接中使用
+HttpOnly // 指定该 Cookie 只能在 HTTP 请求头中被访问，不能在 JavaScript 中被访问
+SameSite=Strict
+Priority=High // 指定该 Cookie 的优先级为高
+Version=1 // 指定该 Cookie 的版本号为 1
+Comment=This cookie stores the user ID // 指定该 Cookie 的注释信息，用于描述该 Cookie 的用途
+CommentURL=https://example.com/cookie-info.html  // 指定该 Cookie 的注释信息的 URL，用于提供更多关于该 Cookie 的信息
+Discard // 指定该 Cookie 应该被丢弃，而不是存储在浏览器中（如果设置了过期时间Expires或者最大有效时间Max-Age，那么一般就不需要设置Discard）
+```

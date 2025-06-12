@@ -1,4 +1,5 @@
 import GitHub from '@/assets/images/github.png'
+import GitHub_Dark from '@/assets/images/github_dark.png'
 
 export interface HeaderLinkItem {
     name: string;
@@ -10,6 +11,7 @@ export interface HeaderUserLinkItem {
     name: string;
     url: string;
     icon: string;
+    darkIcon: string;
 }
 
 export const HeaderLink: Array<HeaderLinkItem> = [
@@ -21,5 +23,5 @@ export const HeaderLink: Array<HeaderLinkItem> = [
 ]
 
 export const HeaderUserLink: Array<HeaderUserLinkItem> = [
-    { name: 'github', url: 'https://github.com/yeyongzhi/code-monkey-note', icon: GitHub },
+    { name: 'github', url: 'https://github.com/yeyongzhi/code-monkey-note', icon: GitHub, darkIcon: GitHub_Dark },
 ]
