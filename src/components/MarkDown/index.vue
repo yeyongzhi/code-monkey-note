@@ -238,7 +238,7 @@ const articelTextTotal = computed(() => {
                                 {{ item.content[1] }}
                             </span>
                         </template>
-                        点击前往🔗
+                        👇点击前往
                     </n-tooltip>
                 </template>
                 <!-- 图片 -->
