@@ -34,6 +34,10 @@
                 "default": true
             },
             {
+                "key": "vue_watch",
+                "label": "vue侦听器"
+            },
+            {
                 "key": "usage",
                 "label": "vue用法集合"
             },
