@@ -159,15 +159,16 @@ function createReactiveObject(
   return proxy
 }
 ```
-> 这段代码也非常好理解，如果`value`是一个对象，那么就返回一个`响应式对象`，否则就返回`value本身`。
+> 这段代码也非常好理解，如果`value`是一个对象，那么就返回一个`响应式对象`，否则就返回`value本身`。同时我们注意到，根据对象target的类型不同，会返回不同的处理函数。
+比如：普通对象会返回`baseHandlers`，集合类型会返回`collectionHandlers`。
+因此我们继续深入，了解一下`baseHandlers`的实现。
 
-### baseHandlers
-让我们先接着钻入代码，了解一下`baseHandlers`的实现
+## baseHandlers
 ```javascript
-// 在reactive.ts中可以看到 baseHandlers 对应的是 baseHandlers.ts 文件中的 shallowReadonlyHandlers
+// 在reactive.ts中可以看到 baseHandlers 对应的是 baseHandlers.ts 文件中的 mutableHandlers
 // 代码1
 import {
-  mutableHandlers,
+  mutableHandlers, // baseHandlers
   readonlyHandlers,
   shallowReactiveHandlers,
   shallowReadonlyHandlers,
@@ -175,34 +176,228 @@ import {
 
 // 代码2
 // baseHandlers.ts
-export const shallowReadonlyHandlers: ReadonlyReactiveHandler =
-  /*@__PURE__*/ new ReadonlyReactiveHandler(true)
+export const mutableHandlers: ProxyHandler<object> =
+  /*@__PURE__*/ new MutableReactiveHandler()
 
-// 代码3
-class ReadonlyReactiveHandler extends BaseReactiveHandler {
+// 代码3【MutableReactiveHandler类的实现】
+class MutableReactiveHandler extends BaseReactiveHandler {
   constructor(isShallow = false) {
-    super(true, isShallow)
+    super(false, isShallow)
   }
 
-  set(target: object, key: string | symbol) {
-    if (__DEV__) {
-      warn(
-        `Set operation on key "${String(key)}" failed: target is readonly.`,
-        target,
-      )
+  set(
+    target: Record<string | symbol, unknown>,
+    key: string | symbol,
+    value: unknown,
+    receiver: object,
+  ): boolean {
+    let oldValue = target[key]
+    if (!this._isShallow) {
+      const isOldValueReadonly = isReadonly(oldValue)
+      if (!isShallow(value) && !isReadonly(value)) {
+        oldValue = toRaw(oldValue)
+        value = toRaw(value)
+      }
+      if (!isArray(target) && isRef(oldValue) && !isRef(value)) {
+        if (isOldValueReadonly) {
+          return false
+        } else {
+          oldValue.value = value
+          return true
+        }
+      }
+    } else {
+      // in shallow mode, objects are set as-is regardless of reactive or not
     }
-    return true
+    // 检查键是否存在
+    // 如果是数组的话，需要检查key是否为整数索引，并且key在数组长度范围内
+    // 如果是对象的话，需要检查key是否为对象的属性
+    const hadKey =
+      isArray(target) && isIntegerKey(key)
+        ? Number(key) < target.length
+        : hasOwn(target, key)
+    const result = Reflect.set(
+      target,
+      key,
+      value,
+      isRef(target) ? target : receiver,
+    )
+    // don't trigger if target is something up in the prototype chain of original
+    if (target === toRaw(receiver)) {
+      // 这一步是核心所在，如果键存在那么触发更新；如果键不存在那么触发新增
+      if (!hadKey) {
+        trigger(target, TriggerOpTypes.ADD, key, value)
+      } else if (hasChanged(value, oldValue)) {
+        trigger(target, TriggerOpTypes.SET, key, value, oldValue)
+      }
+    }
+    // 将Reflect.set的结果返回
+    return result
   }
 
-  deleteProperty(target: object, key: string | symbol) {
-    if (__DEV__) {
-      warn(
-        `Delete operation on key "${String(key)}" failed: target is readonly.`,
-        target,
-      )
+  deleteProperty(
+    target: Record<string | symbol, unknown>,
+    key: string | symbol,
+  ): boolean {
+    const hadKey = hasOwn(target, key)
+    const oldValue = target[key]
+    const result = Reflect.deleteProperty(target, key)
+    if (result && hadKey) {
+      trigger(target, TriggerOpTypes.DELETE, key, undefined, oldValue)
     }
-    return true
+    return result
+  }
+
+  has(target: Record<string | symbol, unknown>, key: string | symbol): boolean {
+    const result = Reflect.has(target, key)
+    if (!isSymbol(key) || !builtInSymbols.has(key)) {
+      track(target, TrackOpTypes.HAS, key)
+    }
+    return result
+  }
+
+  ownKeys(target: Record<string | symbol, unknown>): (string | symbol)[] {
+    track(
+      target,
+      TrackOpTypes.ITERATE,
+      isArray(target) ? 'length' : ITERATE_KEY,
+    )
+    return Reflect.ownKeys(target)
   }
 }
 ```
-> 仔细一看发现，`baseHandlers`其实就是一个`ReadonlyReactiveHandler`实例。`ReadonlyReactiveHandler`的实现也比较简单，仅仅是禁用了`deleteProperty`和`set`方法。那么重点应该就是在`BaseReactiveHandler`类中了。
+### set方法
+前面我们讲的是`toReactive`，然后接着看到了`baseHandlers`，然后看到了`set`方法。
+在Proxy的`set`方法中，我们可以看到`target`是我们传入的对象，`key`是我们传入的键，`value`是我们传入的值，`receiver`是我们传入的代理对象（一共有四个参数）
+观察`set`的后半部分代码，我们发现这也许就是响应式功能的实现~如下所示
+```javascript
+if (target === toRaw(receiver)) {
+  // 这一步是核心所在，如果键存在那么触发更新；如果键不存在那么触发新增
+  if (!hadKey) {
+    // trigger就是触发更新的方法
+    // target表示原始对象，TriggerOpTypes表示当前操作的类型，key表示当前操作的键，value表示当前操作的值
+    trigger(target, TriggerOpTypes.ADD, key, value) 
+  } else if (hasChanged(value, oldValue)) {
+    trigger(target, TriggerOpTypes.SET, key, value, oldValue)
+  }
+}
+```
+
+### trigger方法
+```javascript
+type KeyToDepMap = Map<any, Dep>
+
+export const targetMap: WeakMap<object, KeyToDepMap> = new WeakMap()
+/**
+ * Finds all deps associated with the target (or a specific property) and
+ * triggers the effects stored within.
+ *
+ * @param target - The reactive object.
+ * @param type - Defines the type of the operation that needs to trigger effects.
+ * @param key - Can be used to target a specific reactive property in the target object.
+ */
+export function trigger(
+  target: object, // 【参数】原始对象
+  type: TriggerOpTypes, // 【参数】当前操作的类型
+  key?: unknown, // 【参数】当前操作的键
+  newValue?: unknown, // 【参数】当前操作的值
+  oldValue?: unknown, // 【参数】当前操作的旧值
+  oldTarget?: Map<unknown, unknown> | Set<unknown>,
+): void {
+  // 根据原始对象从WeakMap中获取对应的depsMap
+  const depsMap = targetMap.get(target)
+  // 如果depsMap不存在，那么说明当前对象没有被追踪过，直接返回即可
+  if (!depsMap) {
+    // 这里的globalVersion 是一个全局计数器，每当任何响应式数据发生变化时，它都会递增。它的主要作用是提供一种快速判断机制，帮助 Vue 确定是否有响应式数据发生了变化。
+    // 那么此时就会有疑问了，那岂不是每次是否需要重新计算只需要检查自身有关的变量是否发生变化即可，不需要globalVersion来判断
+    // 答案当然是否定的，因为globalVersion 提供了一个全局的版本号，用于快速判断是否有任何响应式数据发生变化。这在处理多个计算属性或复杂的响应式系统时非常有用。
+    // 如果 Vue 每次都需要逐个检查每个计算属性的所有依赖是否发生变化，性能会显著下降。通过 globalVersion，Vue 可以快速判断是否有任何响应式数据发生变化，从而决定是否需要进一步检查依赖。
+    globalVersion++
+    return
+  }
+  // 这里的run函数的作用是触发依赖的更新
+  const run = (dep: Dep | undefined) => {
+    if (dep) {
+      if (__DEV__) {
+        dep.trigger({
+          target,
+          type,
+          key,
+          newValue,
+          oldValue,
+          oldTarget,
+        })
+      } else {
+        dep.trigger()
+      }
+    }
+  }
+  // 这里的startBatch和endBatch的作用是：
+  // 当我们在一个effect中使用多个响应式数据时，我们可以使用startBatch和endBatch来包裹这些响应式数据的操作，这样可以避免多次触发effect的更新。
+  startBatch()
+
+  // 如果操作类型是 CLEAR，那么说明当前对象正在被清空，那么就需要遍历depsMap，然后触发所有的依赖项的更新
+  if (type === TriggerOpTypes.CLEAR) {
+    // collection being cleared
+    // trigger all effects for target
+    depsMap.forEach(run)
+  } else {
+    const targetIsArray = isArray(target)
+    const isArrayIndex = targetIsArray && isIntegerKey(key)
+
+    if (targetIsArray && key === 'length') {
+      const newLength = Number(newValue)
+      depsMap.forEach((dep, key) => {
+        if (
+          key === 'length' ||
+          key === ARRAY_ITERATE_KEY ||
+          (!isSymbol(key) && key >= newLength)
+        ) {
+          run(dep)
+        }
+      })
+    } else {
+      // schedule runs for SET | ADD | DELETE
+      if (key !== void 0 || depsMap.has(void 0)) {
+        run(depsMap.get(key))
+      }
+
+      // schedule ARRAY_ITERATE for any numeric key change (length is handled above)
+      if (isArrayIndex) {
+        run(depsMap.get(ARRAY_ITERATE_KEY))
+      }
+
+      // also run for iteration key on ADD | DELETE | Map.SET
+      switch (type) {
+        case TriggerOpTypes.ADD:
+          if (!targetIsArray) {
+            run(depsMap.get(ITERATE_KEY))
+            if (isMap(target)) {
+              run(depsMap.get(MAP_KEY_ITERATE_KEY))
+            }
+          } else if (isArrayIndex) {
+            // new index added to array -> length changes
+            run(depsMap.get('length'))
+          }
+          break
+        case TriggerOpTypes.DELETE:
+          if (!targetIsArray) {
+            run(depsMap.get(ITERATE_KEY))
+            if (isMap(target)) {
+              run(depsMap.get(MAP_KEY_ITERATE_KEY))
+            }
+          }
+          break
+        case TriggerOpTypes.SET:
+          if (isMap(target)) {
+            run(depsMap.get(ITERATE_KEY))
+          }
+          break
+      }
+    }
+  }
+  // 这里的endBatch的作用是：
+  // 与startBatch联合使用，避免多次触发更新（等收集完全部的依赖项再统一进行更新）
+  endBatch()
+}
+```
