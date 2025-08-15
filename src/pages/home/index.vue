@@ -6,14 +6,15 @@ import Location from '@/assets/images/location.png'
 import Star from '@/assets/images/star.png'
 import Line1 from '@/assets/images/line_white.png'
 import Line2 from '@/assets/images/line_black.png'
-import { getCurrentInstance, h, onMounted, ref, onUnmounted, defineProps, computed } from 'vue';
+import { getCurrentInstance, h, onMounted, ref, onUnmounted, defineProps, computed, shallowRef } from 'vue';
 import { ArrowRight16Filled, CaretRight16Filled, CaretDown16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
 import { userKnowledge, userTripMapData } from '@/data/home/index'
 // import { gotoPage } from '@/router/index'
 import { openTab } from '@/utils/index'
 import { useNotification, NImage } from 'naive-ui'
-import { initAMapSource, initMap } from '@/utils/gaode'
+// import { initAMapSource, initMap } from '@/utils/gaode'
+import { initMap, createVectorLayer, createFeature, addFeatures } from '@/utils/ol'
 import GitHub from '@/assets/images/github.png'
 
 const { proxy }: any = getCurrentInstance()
@@ -114,7 +115,7 @@ const showAllTrip = () => {
     })
 }
 
-const map = ref<any>(null)
+const map = shallowRef<any>(null)
 const mapContainerRef = ref<any>(null)
 
 const initMarkers = () => {
@@ -148,18 +149,32 @@ const initMarkers = () => {
 }
 
 const initGaodeMap = async () => {
-    await initAMapSource({
-        key: "cb0aa408d9ab7dae72b577579adbadc2",
-        securityJsCode: "097670d2dba193c34ca44b13f721db75"
-    })
-    map.value = await initMap({
+    // await initAMapSource({
+    //     key: "cb0aa408d9ab7dae72b577579adbadc2",
+    //     securityJsCode: "097670d2dba193c34ca44b13f721db75"
+    // })
+    // map.value = await initMap({
+    //     element: mapContainerRef.value
+    // })
+    // initMarkers()
+}
+
+const initOlMap = async () => {
+    map.value = initMap({
         element: mapContainerRef.value
     })
-    initMarkers()
+    const layer = createVectorLayer()
+    const features = userTripMapData.map(item => {
+        return createFeature({
+            coordinates: item.center,
+        })
+    })
+    addFeatures(layer, features)
+    map.value.addLayer(layer)
 }
 
 onMounted(() => {
-    initGaodeMap()
+    initOlMap()
 })
 
 onUnmounted(() => {
