@@ -9,10 +9,22 @@ const count = ref(0)
 watch(count, (newCount, oldCount) => {
   console.log(`count is: ${newCount}`)
   console.log(`oldCount was: ${oldCount}`)
-})
+}, {})
 ```
 watch函数接受三个参数，分别是`数据源source`、`回调函数callback`和`配置选项options`。
+同时，watch返回一个`停止函数stop`，用于停止监听。
+如下图所示：
+
+![watch函数的参数和返回值](./images/vue_watch_1.png)
+
 ### 数据源source
+
+通过上面可以看到，数据源source的类型有以下几种：`WatchSource | WatchSource[] | WatchEffect | object`
+
+```javascript
+// WatchSource表示Ref、ComputedRef或箭头函数的类型
+export type WatchSource<T = any> = Ref<T, any> | ComputedRef<T> | (() => T)
+```
 
 ### 回调函数callback
 
