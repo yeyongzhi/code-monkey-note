@@ -492,6 +492,7 @@ const articelTextTotal = computed(() => {
         }
 
         .md_img {
+            margin: 15px 0;
             .single_img {
                 display: flex;
                 flex-direction: column;

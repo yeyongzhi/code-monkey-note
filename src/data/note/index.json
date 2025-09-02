@@ -76,6 +76,10 @@
             {
                 "key": "fingerprint",
                 "label": "浏览器指纹"
+            },
+            {
+                "key": "browserEvent",
+                "label": "浏览器事件机制"
             }
         ]
     },

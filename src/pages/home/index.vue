@@ -148,7 +148,7 @@ const initMarkers = () => {
     map.value.setFitView(markers)
 }
 
-const initGaodeMap = async () => {
+// const initGaodeMap = async () => {
     // await initAMapSource({
     //     key: "cb0aa408d9ab7dae72b577579adbadc2",
     //     securityJsCode: "097670d2dba193c34ca44b13f721db75"
@@ -157,7 +157,7 @@ const initGaodeMap = async () => {
     //     element: mapContainerRef.value
     // })
     // initMarkers()
-}
+// }
 
 const initOlMap = async () => {
     map.value = initMap({
