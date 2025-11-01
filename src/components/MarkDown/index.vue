@@ -271,7 +271,7 @@ const articelTextTotal = computed(() => {
                 <!-- 代码片段 -->
                 <template v-else-if="item.type === 'code'">
                     <div class="code_header">
-                        <span @click="copyCode(item.content.join('\n'))">📄复制代码</span>
+                        <span @click="copyCode(item.content.join('\n'))">📄<span style="margin-left: 2px;">复制代码</span></span>
                     </div>
                     <n-code :code="item.content.join('\n')" language="javascript" />
                 </template>
@@ -492,6 +492,7 @@ const articelTextTotal = computed(() => {
         }
 
         .md_img {
+            margin: 15px 0;
             .single_img {
                 display: flex;
                 flex-direction: column;

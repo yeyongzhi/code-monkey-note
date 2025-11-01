@@ -6,6 +6,11 @@
             {
                 "key": "dataType",
                 "label": "数据类型✔️"
+            },
+            {
+                "key": "eventLoop",
+                "label": "事件循环机制✏️",
+                "default": true
             }
         ]
     },
@@ -34,8 +39,7 @@
             },
             {
                 "key": "vue_watch",
-                "label": "vue侦听器",
-                "default": true
+                "label": "vue侦听器"
             },
             {
                 "key": "usage",
@@ -76,6 +80,10 @@
             {
                 "key": "fingerprint",
                 "label": "浏览器指纹"
+            },
+            {
+                "key": "browserEvent",
+                "label": "浏览器事件机制"
             }
         ]
     },
