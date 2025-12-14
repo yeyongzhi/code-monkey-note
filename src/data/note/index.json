@@ -9,7 +9,11 @@
             },
             {
                 "key": "eventLoop",
-                "label": "事件循环机制✏️",
+                "label": "事件循环机制✔️"
+            },
+            {
+                "key": "executionContext",
+                "label": "执行上下文",
                 "default": true
             }
         ]

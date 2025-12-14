@@ -16,6 +16,7 @@ import { useNotification, NImage } from 'naive-ui'
 // import { initAMapSource, initMap } from '@/utils/gaode'
 import { initMap, createVectorLayer, createFeature, addFeatures } from '@/utils/ol'
 import GitHub from '@/assets/images/github.png'
+import XBorderBox from '@/components/XBorderBox/index.vue'
 
 const { proxy }: any = getCurrentInstance()
 const notification = useNotification()
@@ -149,14 +150,14 @@ const initMarkers = () => {
 }
 
 // const initGaodeMap = async () => {
-    // await initAMapSource({
-    //     key: "cb0aa408d9ab7dae72b577579adbadc2",
-    //     securityJsCode: "097670d2dba193c34ca44b13f721db75"
-    // })
-    // map.value = await initMap({
-    //     element: mapContainerRef.value
-    // })
-    // initMarkers()
+// await initAMapSource({
+//     key: "cb0aa408d9ab7dae72b577579adbadc2",
+//     securityJsCode: "097670d2dba193c34ca44b13f721db75"
+// })
+// map.value = await initMap({
+//     element: mapContainerRef.value
+// })
+// initMarkers()
 // }
 
 const initOlMap = async () => {
@@ -178,7 +179,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-    map.value.destroy()
     map.value = null
 })
 
@@ -237,7 +237,9 @@ onUnmounted(() => {
         <div style="margin: 20px 0;">
             <div class="flex-start-center" style="margin-bottom: 20px;"
                 v-for="(item, index) in proxy.globalData.personalTechnology" :key="'technology' + index">
-                <span style="margin-right: 10px;font-size: 1.1rem;width: 120px;font-weight: bolder;letter-spacing: 2px;">{{ item.name }} </span>
+                <span
+                    style="margin-right: 10px;font-size: 1.1rem;width: 120px;font-weight: bolder;letter-spacing: 2px;">{{
+                        item.name }} </span>
                 <n-tag :type="tagTypeList[Math.floor(Math.random() * 4)]" round
                     :style="`margin-left: ${index2 === 0 ? '0' : '10px'};padding: 10px 15px;cursor: pointer;`"
                     v-for="(item2, index2) in item.list" :key="'technology_item' + index2">
@@ -250,32 +252,34 @@ onUnmounted(() => {
         <div class="knowledge flex-start-center">
             <n-grid :x-gap="20" :y-gap="20" :cols="3">
                 <n-grid-item v-for="(item, index) in userKnowledge" :key="'knowledge' + index">
-                    <div class="box" @click="gotoKonwledge(item)">
-                        <div class="icon flex-center-center">
-                            {{ item.icon }}
+                    <XBorderBox>
+                        <div class="box" @click="gotoKonwledge(item)">
+                            <div class="icon flex-center-center">
+                                {{ item.icon }}
+                            </div>
+                            <div class="title">
+                                {{ item.title }}
+                            </div>
+                            <div class="descriptions">
+                                <n-ellipsis :line-clamp="3" style="max-width: 240px">
+                                    {{ item.descriptions }}
+                                </n-ellipsis>
+                            </div>
+                            <div class="link flex-start-center">
+                                <span>{{ item.link.text }}</span>
+                                <Icon :size="20">
+                                    <ArrowRight16Filled />
+                                </Icon>
+                            </div>
                         </div>
-                        <div class="title">
-                            {{ item.title }}
-                        </div>
-                        <div class="descriptions">
-                            <n-ellipsis :line-clamp="3" style="max-width: 240px">
-                                {{ item.descriptions }}
-                            </n-ellipsis>
-                        </div>
-                        <div class="link flex-start-center">
-                            <span>{{ item.link.text }}</span>
-                            <Icon :size="20">
-                                <ArrowRight16Filled />
-                            </Icon>
-                        </div>
-                    </div>
+                    </XBorderBox>
                 </n-grid-item>
             </n-grid>
         </div>
         <Divider :margin="50" />
         <!-- 人生地图 -->
         <div class="page_hover_title" style="margin-bottom: 20px;">人生地图</div>
-        <div class="map_container">
+        <div class="map_container x_border_box">
             <div ref="mapContainerRef" class="gaode_map"></div>
         </div>
         <div style="margin: 20px 0;">
@@ -439,14 +443,7 @@ onUnmounted(() => {
         margin-bottom: 50px;
 
         .box {
-            border: 2px solid var(--border-color);
             padding: 10px 20px;
-            border-radius: 8px;
-
-            &:hover {
-                border: 2px solid var(--primary-color);
-                cursor: pointer;
-            }
 
             .icon {
                 width: 50px;
@@ -486,13 +483,7 @@ onUnmounted(() => {
     .map_container {
         width: 100%;
         height: 500px;
-        border: 2px solid var(--border-color);
-        border-radius: 5px;
         position: relative;
-
-        &:hover {
-            border: 2px solid var(--primary-color);
-        }
 
         .gaode_map {
             width: 100%;

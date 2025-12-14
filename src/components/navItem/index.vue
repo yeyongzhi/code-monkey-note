@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import XBorderBox from '@/components/XBorderBox/index.vue'
 import { openTab } from '@/utils/index'
 
 const { nav } = defineProps({
@@ -8,29 +9,31 @@ const { nav } = defineProps({
 </script>
 
 <template>
-    <div class="navItem flex-column-center-center" @click="() => openTab(nav.url)">
-        <div class="title flex-start-center">
-            <template v-if="nav.textIcon">
-                <div class="texticon flex-center-center">
-                    <span>{{ nav.textIcon }}</span>
-                </div>
-            </template>
-            <template v-else>
-                <div class="icon flex-center-center" :style="`width: ${nav.iconWidth || 40}px;`">
-                    <img :src="nav.icon" :style="`width: ${nav.iconWidth + 'px' || 'auto'};`"/>
-                </div>
-                <div class="name">
-                    {{ nav.name }}
-                </div>
-            </template>
-        </div>
-        <div class="description">
-            <n-ellipsis :line-clamp="2">
-                {{ nav.descriptions }}
-            </n-ellipsis>
-        </div>
+    <XBorderBox>
+        <div class="navItem flex-column-center-center" @click="() => openTab(nav.url)">
+            <div class="title flex-start-center">
+                <template v-if="nav.textIcon">
+                    <div class="texticon flex-center-center">
+                        <span>{{ nav.textIcon }}</span>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="icon flex-center-center" :style="`width: ${nav.iconWidth || 40}px;`">
+                        <img :src="nav.icon" :style="`width: ${nav.iconWidth + 'px' || 'auto'};`" />
+                    </div>
+                    <div class="name">
+                        {{ nav.name }}
+                    </div>
+                </template>
+            </div>
+            <div class="description">
+                <n-ellipsis :line-clamp="2">
+                    {{ nav.descriptions }}
+                </n-ellipsis>
+            </div>
 
-    </div>
+        </div>
+    </XBorderBox>
 </template>
 
 <style scoped lang="scss">
@@ -38,9 +41,6 @@ const { nav } = defineProps({
     width: 240px;
     height: 100px;
     padding: 10px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    cursor: pointer;
 
     .title {
         width: 100%;
@@ -72,6 +72,7 @@ const { nav } = defineProps({
             width: 200px;
             height: 40px;
             border-radius: 5px;
+
             img {
                 width: 180px;
                 height: 30px;
@@ -90,10 +91,6 @@ const { nav } = defineProps({
         width: 100%;
         margin-top: 5px;
         color: var(--text-color-2);
-    }
-
-    &:hover {
-        border: 2px solid var(--primary-color);
     }
 }
 </style>
