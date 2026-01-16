@@ -19,7 +19,7 @@ const handleGridItemClick = (item: any) => {
     localStorage.setItem('interviewSelectKey', item.key)
 }
 
-const handleUpdateSelectKeys = (keys: Array<string | number>, option: Array<TreeOption | null>, meta: { node: TreeOption | null, action: 'select' | 'unselect' }) => {
+const handleUpdateSelectKeys = (keys: Array<string | number>, _: Array<TreeOption | null>, meta: { node: TreeOption | null, action: 'select' | 'unselect' }) => {
     if (keys && keys.length > 0 && !meta.node?.children) {
         selectKey.value = keys
     }

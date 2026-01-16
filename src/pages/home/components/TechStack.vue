@@ -23,15 +23,15 @@ const tagTypeList = [
     'error'
 ]
 
-const tagColorList = [
-    '#d71345',
-    '#f47920',
-    '#ffd400',
-    '#1d953f',
-    '#4e72b8',
-    '#00ae9d',
-    '#8552a1'
-]
+// const tagColorList = [
+//     '#d71345',
+//     '#f47920',
+//     '#ffd400',
+//     '#1d953f',
+//     '#4e72b8',
+//     '#00ae9d',
+//     '#8552a1'
+// ]
 
 // const gerRandomTagColor = () => {
 //     const color = tagColorList[Math.floor(Math.random() * tagColorList.length)]
