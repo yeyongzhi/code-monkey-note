@@ -4,6 +4,7 @@ import App from './App.vue'
 import naive from 'naive-ui'
 // import router from '@/router/index.ts'
 
+import FluentIcon from '@/components/FluentIcon/index.vue'
 import Divider from '@/components/Divider/index.vue'
 import MarkDown from '@/components/MarkDown/index.vue'
 import Article from '@/components/Article/index.vue'
@@ -20,6 +21,7 @@ app.use(naive)
 app.component('Divider', Divider)
 app.component('MarkDown', MarkDown)
 app.component('Article', Article)
+app.component('FluentIcon', FluentIcon)
 
 // 全局变量
 app.config.globalProperties.globalData = globalData;

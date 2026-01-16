@@ -86,14 +86,14 @@ const initMarkers = () => {
 }
 
 // const initGaodeMap = async () => {
-    // await initAMapSource({
-    //     key: "cb0aa408d9ab7dae72b577579adbadc2",
-    //     securityJsCode: "097670d2dba193c34ca44b13f721db75"
-    // })
-    // map.value = await initMap({
-    //     element: mapContainerRef.value
-    // })
-    // initMarkers()
+// await initAMapSource({
+//     key: "cb0aa408d9ab7dae72b577579adbadc2",
+//     securityJsCode: "097670d2dba193c34ca44b13f721db75"
+// })
+// map.value = await initMap({
+//     element: mapContainerRef.value
+// })
+// initMarkers()
 // }
 
 const initOlMap = async () => {
@@ -136,32 +136,34 @@ onUnmounted(() => {
         <div class="knowledge flex-start-center">
             <n-grid :x-gap="20" :y-gap="20" :cols="3">
                 <n-grid-item v-for="(item, index) in userKnowledge" :key="'knowledge' + index">
-                    <div class="box" @click="gotoKonwledge(item)">
-                        <div class="icon flex-center-center">
-                            {{ item.icon }}
+                    <XBorderBox>
+                        <div class="box" @click="gotoKonwledge(item)">
+                            <div class="icon flex-center-center">
+                                {{ item.icon }}
+                            </div>
+                            <div class="title">
+                                {{ item.title }}
+                            </div>
+                            <div class="descriptions">
+                                <n-ellipsis :line-clamp="3" style="max-width: 240px">
+                                    {{ item.descriptions }}
+                                </n-ellipsis>
+                            </div>
+                            <div class="link flex-start-center">
+                                <span>{{ item.link.text }}</span>
+                                <Icon :size="20">
+                                    <ArrowRight16Filled />
+                                </Icon>
+                            </div>
                         </div>
-                        <div class="title">
-                            {{ item.title }}
-                        </div>
-                        <div class="descriptions">
-                            <n-ellipsis :line-clamp="3" style="max-width: 240px">
-                                {{ item.descriptions }}
-                            </n-ellipsis>
-                        </div>
-                        <div class="link flex-start-center">
-                            <span>{{ item.link.text }}</span>
-                            <Icon :size="20">
-                                <ArrowRight16Filled />
-                            </Icon>
-                        </div>
-                    </div>
+                    </XBorderBox>
                 </n-grid-item>
             </n-grid>
         </div>
         <Divider :margin="50" />
         <!-- 人生地图 -->
         <div class="page_hover_title" style="margin-bottom: 20px;">人生地图</div>
-        <div class="map_container">
+        <div class="map_container x_border_box">
             <div ref="mapContainerRef" class="gaode_map"></div>
         </div>
         <div style="margin: 20px 0;">
@@ -226,14 +228,7 @@ onUnmounted(() => {
         margin-bottom: 50px;
 
         .box {
-            border: 2px solid var(--border-color);
             padding: 10px 20px;
-            border-radius: 8px;
-
-            &:hover {
-                border: 2px solid var(--primary-color);
-                cursor: pointer;
-            }
 
             .icon {
                 width: 50px;
@@ -273,13 +268,7 @@ onUnmounted(() => {
     .map_container {
         width: 100%;
         height: 500px;
-        border: 2px solid var(--border-color);
-        border-radius: 5px;
         position: relative;
-
-        &:hover {
-            border: 2px solid var(--primary-color);
-        }
 
         .gaode_map {
             width: 100%;

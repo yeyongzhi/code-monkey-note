@@ -1,0 +1,86 @@
+[
+    {
+        "key": "basic",
+        "label": "基础",
+        "description": "掌握好这些才是程序猿的敲门砖",
+        "children": [
+            {
+                "key": "js",
+                "label": "javascript"
+            },
+            {
+                "key": "ts",
+                "label": "typescript"
+            },
+            {
+                "key": "html",
+                "label": "HTML"
+            },
+            {
+                "key": "css",
+                "label": "CSS"
+            },
+            {
+                "key": "node",
+                "label": "Node"
+            },
+            {
+                "key": "browser",
+                "label": "浏览器"
+            }
+        ]
+    },
+    {
+        "key": "advanced",
+        "label": "进阶",
+        "description": "这些才是程序猿的进阶技能",
+        "children": [
+            {
+                "key": "react",
+                "label": "React"
+            },
+            {
+                "key": "vue2",
+                "label": "Vue2"
+            },
+            {
+                "key": "vue3",
+                "label": "Vue3🔥"
+            }
+        ]
+    },
+    {
+        "key": "webgis",
+        "label": "WebGIS",
+        "description": "我是搞GIS的，不是前端",
+        "children": [
+            {
+                "key": "normal",
+                "label": "通用GIS"
+            },
+            {
+                "key": "openlayers",
+                "label": "openlayers"
+            },
+            {
+                "key": "gaoode",
+                "label": "高德地图"
+            }
+        ]
+    },
+    {
+        "key": "neigneer",
+        "label": "工程化",
+        "description": "我是搞GIS的，不是前端",
+        "children": [
+            {
+                "key": "webpack",
+                "label": "webpack"
+            },
+            {
+                "key": "vite",
+                "label": "vite🔥"
+            }
+        ]
+    }
+]

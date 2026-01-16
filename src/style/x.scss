@@ -1,0 +1,11 @@
+.x_border_box {
+    border-style: solid;
+    border-color: var(--border-color);
+    cursor: pointer;
+    border-radius: 8px;
+
+    &:hover {
+        border-style: solid;
+        border-color: var(--primary-color);
+    }
+}
