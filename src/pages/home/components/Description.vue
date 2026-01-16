@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, computed, h } from 'vue';
+import { getCurrentInstance, h } from 'vue';
 import { useNotification, NImage } from 'naive-ui'
 import Wechat from '@/assets/images/user/wechat.jpg'
 import Wx from '@/assets/images/social/wx.png'
@@ -64,7 +64,6 @@ const { proxy }: any = getCurrentInstance()
 const notification = useNotification()
 
 const user_contact_list = proxy.globalData.user_contact_list
-const user_code_list = proxy.globalData.user_code_list
 
 
 const socialIcon: Record<string, string> = {

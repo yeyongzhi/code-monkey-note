@@ -1,5 +1,16 @@
 [
     {
+        "key": "git",
+        "label": "git",
+        "children": [
+            {
+                "key": "gitRules",
+                "label": "Git代码提交规范",
+                "default": true
+            }
+        ]
+    },
+    {
         "key": "js",
         "label": "Javascript基础",
         "children": [
@@ -13,8 +24,7 @@
             },
             {
                 "key": "executionContext",
-                "label": "执行上下文",
-                "default": true
+                "label": "执行上下文"
             }
         ]
     },

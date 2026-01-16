@@ -2,7 +2,7 @@
 import type { TreeOption } from 'naive-ui'
 import { watch, ref, nextTick } from 'vue';
 import { basePath } from '@/router/index'
-import { openTab, getMarkDownContent, scrollToTop, getArticleTextCount, getMarkDownInfo } from '@/utils/index'
+import { openTab, getMarkDownContent, scrollToTop } from '@/utils/index'
 import { formatMarkDown } from '@/utils/markdown'
 import message from '@/plugins/message'
 const baseInterviewPath = basePath + '/article/interview'

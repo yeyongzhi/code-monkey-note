@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import Location from '@/assets/images/location.png'
-import Star from '@/assets/images/star.png'
-import Line1 from '@/assets/images/line_white.png'
-import Line2 from '@/assets/images/line_black.png'
-import { getCurrentInstance, h, onMounted, ref, onUnmounted, computed, shallowRef } from 'vue';
+import { getCurrentInstance, h, onMounted, ref, onUnmounted, shallowRef } from 'vue';
 import { ArrowRight16Filled, CaretRight16Filled, CaretDown16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
 import { userKnowledge, userTripMapData } from '@/data/home/index'
 import { openTab } from '@/utils/index'
-import { useNotification, NImage } from 'naive-ui'
+import { useNotification } from 'naive-ui'
 import { initMap, createVectorLayer, createFeature, addFeatures } from '@/utils/ol'
 import Header from './components/Header.vue'
 import Description from './components/Description.vue'
@@ -54,47 +50,6 @@ const showAllTrip = () => {
 
 const map = shallowRef<any>(null)
 const mapContainerRef = ref<any>(null)
-
-const initMarkers = () => {
-    const AMap = (window as any).AMap
-    const myMarker = new AMap.Marker({
-        position: [120.2, 30.3],
-        icon: new AMap.Icon({
-            image: Star,
-            size: [24, 24],
-            imageSize: [24, 24]
-        })
-    })
-    map.value.add(myMarker)
-    const markers = userTripMapData.map(item => {
-        const marker = new AMap.LabelMarker({
-            position: item.center,
-            icon: {
-                image: Location,
-                size: [24, 24],
-                anchor: 'bottom-center'
-            },
-            text: {
-                content: item.name,
-                direction: 'bottom'
-            }
-        })
-        map.value.add(marker)
-        return marker
-    })
-    map.value.setFitView(markers)
-}
-
-// const initGaodeMap = async () => {
-// await initAMapSource({
-//     key: "cb0aa408d9ab7dae72b577579adbadc2",
-//     securityJsCode: "097670d2dba193c34ca44b13f721db75"
-// })
-// map.value = await initMap({
-//     element: mapContainerRef.value
-// })
-// initMarkers()
-// }
 
 const initOlMap = async () => {
     map.value = initMap({

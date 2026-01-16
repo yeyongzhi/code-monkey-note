@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, computed } from 'vue';
+import { getCurrentInstance } from 'vue';
 
 const tagTypeList = [
     'success',
@@ -33,22 +33,16 @@ const tagColorList = [
     '#8552a1'
 ]
 
-const gerRandomTagColor = () => {
-    const color = tagColorList[Math.floor(Math.random() * tagColorList.length)]
-    return {
-        color: color + '33',
-        textColor: 'var(--base-color)',
-        borderColor: color
-    }
-}
-
-const userTagList = computed(() => {
-    return proxy.globalData.user_tag
-})
-
+// const gerRandomTagColor = () => {
+//     const color = tagColorList[Math.floor(Math.random() * tagColorList.length)]
+//     return {
+//         color: color + '33',
+//         textColor: 'var(--base-color)',
+//         borderColor: color
+//     }
+// }
 
 const { proxy }: any = getCurrentInstance()
-
 
 </script>
 
