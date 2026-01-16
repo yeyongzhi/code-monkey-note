@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getCurrentInstance, h, onMounted, ref, onUnmounted, shallowRef } from 'vue';
+import XBorderBox from '@/components/XBorderBox/index.vue'
 import { ArrowRight16Filled, CaretRight16Filled, CaretDown16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
 import { userKnowledge, userTripMapData } from '@/data/home/index'
