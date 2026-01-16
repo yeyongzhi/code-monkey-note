@@ -1,0 +1,21 @@
+/**
+ * 自定义css变量
+ * 取名规范：类别-用途-状态/尺寸
+ * 
+ */
+
+// --space-xxs: 4px;
+// --space-xs: 8px;
+// --space-sm: 12px;
+// --space-md: 16px;
+// --space-lg: 24px;
+// --space-xl: 32px;
+
+:root {
+    --space-margin-xxs: 4px;
+    --space-margin-xs: 8px;
+    --space-margin-sm: 12px;
+    --space-margin-md: 16px;
+    --space-margin-lg: 24px;
+    --space-margin-xl: 32px;
+}

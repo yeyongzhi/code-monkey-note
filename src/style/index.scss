@@ -4,6 +4,7 @@
 // 自定义原子化css类名
 @import './atomic/font.scss';
 @import './atomic/size.scss';
+@import './cssVariable.scss';
 
 * {
     margin: 0;
@@ -15,7 +16,7 @@ html {
 }
 
 :root {
-    
+
 }
 
 [data-theme="dark"] {
