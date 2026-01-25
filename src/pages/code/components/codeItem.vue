@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Copy16Regular } from '@vicons/fluent'
+import XTooltip from '@/components/XTooltip/index.vue'
 import { useMessage } from 'naive-ui'
 
 const message = useMessage()
@@ -10,13 +10,11 @@ const props = defineProps({
 })
 
 const copyCode = () => {
-    navigator.clipboard.writeText(props.code)
-        .then(() => {
-            message.success("复制成功")
-        })
-        .catch(() => {
-            message.error("复制出错，请重试")
-        });
+    navigator.clipboard.writeText(props.code).then(() => {
+        message.success("复制成功")
+    }).catch(() => {
+        message.error("复制出错，请重试")
+    });
 }
 
 </script>
@@ -28,8 +26,12 @@ const copyCode = () => {
             <span v-html="highlightedCode"></span>
         </pre> -->
         <div class="title flex-between-center">
-            {{ props.title }}
-            <n-icon :size="20" style="cursor: pointer;" @click="copyCode" :component="Copy16Regular" />
+            <div>
+                {{ props.title }}
+            </div>
+            <XTooltip content="复制代码">
+                <FluentIcon name="Copy16Regular" size="20" @click="copyCode" />
+            </XTooltip>
         </div>
         <n-code :code="props.code" language="javascript" />
     </div>
@@ -39,7 +41,7 @@ const copyCode = () => {
 .codeItem_container {
     background-color: var(--tag-color);
     padding: 0 10px 10px 10px;
-    border-radius: 5px;
+    border-radius: 8px;
 
     .title {
         height: 40px;
@@ -51,8 +53,7 @@ const copyCode = () => {
     .code {
         height: auto;
         border: 2px solid var(--border-color);
-        // padding: 10px;
-        border-radius: 5px;
+        border-radius: 8px;
     }
 }
 </style>

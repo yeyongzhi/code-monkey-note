@@ -5,7 +5,7 @@
         "children": [
             {
                 "key": "gitRules",
-                "label": "Git代码提交规范",
+                "label": "Git代码提交规范✔️",
                 "default": true
             }
         ]

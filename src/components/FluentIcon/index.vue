@@ -1,3 +1,11 @@
+<template>
+    <span class="fluent_icon_container flex-center-center" :style="{ width: size + 'px', height: size + 'px' }">
+        <n-icon :size="size" :color="color">
+            <component :is="icon" />
+        </n-icon>
+    </span>
+</template>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 import * as Fluent from '@vicons/fluent'
@@ -11,10 +19,8 @@ const icon = computed(() => {
 })
 </script>
 
-<template>
-    <n-icon :size="size" :color="color">
-        <component :is="icon" />
-    </n-icon>
-</template>
-
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.fluent_icon_container {
+    cursor: pointer;
+}
+</style>
