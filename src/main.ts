@@ -12,6 +12,9 @@ import globalData from '@/data/user.json'
 
 // import message from '@/plugins/message'
 
+// 设置页面标题
+document.title = import.meta.env.VITE_APP_TITLE || '默认标题'
+
 const app = createApp(App)
 
 app.use(naive)

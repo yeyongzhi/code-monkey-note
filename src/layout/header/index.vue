@@ -124,10 +124,26 @@ onMounted(() => {
         <div class="flex-center-center">
             <div class="link flex-start-center">
                 <span :class="`link_item hover_color_text ${componentKey === link.key ? 'link_item_selected' : ''}`"
-                    @click="gotoLink(link)" v-for="(link, index) in HeaderLink" :key="'link' + index">
+                    @click="gotoLink(link)" v-for="(link, index) in HeaderLink.slice(0, 5)" :key="'link' + index">
                     <span v-if="componentKey === link.key">📌</span>
                     {{ link.name }}
                 </span>
+                <n-popover trigger="hover">
+                    <template #trigger>
+                        <!-- <FluentIcon name="AnimalCat16Regular" size="20" /> -->
+                        <FluentIcon name="MoreHorizontal16Regular" size="25" />
+                    </template>
+                    <div>
+                        <p :style="{
+                            marginBottom: index === HeaderLink.slice(5).length - 1 ? '0' : '10px',
+                            padding: '0 5px',
+                            fontSize: '1rem',
+                            cursor: 'pointer',
+                        }" class="hover_color_text" v-for="(link, index) in HeaderLink.slice(5)" @click="gotoLink(link)" :key="'morelink' + index">
+                            {{ link.name }}
+                        </p>
+                    </div>
+                </n-popover>
             </div>
             <n-divider vertical />
             <div class="userInfo flex-center-center">

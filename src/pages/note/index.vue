@@ -78,7 +78,7 @@ const articleTotalNum = computed(() => {
 			if (item.children && item.children.length > 0) {
 				total += getTotal(item.children)
 			}
-			if(!item.children) {
+			if (!item.children) {
 				total++
 			}
 		})
@@ -123,10 +123,10 @@ onMounted(() => {
 	<div class="app_container note_container flex-between-start">
 		<div class="tab_container">
 			<div class="flex-start-center header">
-				<span>学无止境👋</span>
+				<span>学无止境</span>
 				<n-tooltip trigger="hover">
 					<template #trigger>
-						<n-icon :size="25" style="cursor: pointer;margin-left: 5px;">
+						<n-icon :size="20" style="cursor: pointer;margin-left: 5px;">
 							<Bookmark24Regular />
 						</n-icon>
 					</template>
@@ -135,8 +135,13 @@ onMounted(() => {
 
 			</div>
 			<!-- :expanded-keys="expandedKeys"  -->
-			<n-tree :default-expand-all="true" block-line :data="NoteData" expand-on-click :selected-keys="selectKeys"
-				:on-update:selected-keys="handleTreeSelected" :on-update:expanded-keys="handleTreeExpanded" />
+			<div class="content">
+				<n-scrollbar style="height: 100%;">
+					<n-tree :default-expand-all="true" block-line :data="NoteData" expand-on-click
+						:selected-keys="selectKeys" :on-update:selected-keys="handleTreeSelected"
+						:on-update:expanded-keys="handleTreeExpanded" />
+				</n-scrollbar>
+			</div>
 		</div>
 		<div class="note_content_container">
 			<MarkDown v-if="articlePath" :path="articlePath" />
@@ -153,8 +158,18 @@ onMounted(() => {
 		left: 5%;
 		border-right: 1px solid var(--border-color);
 		padding-right: 10px;
+		height: 80vh;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
 
 		.header {}
+
+		.content {
+			flex: 1;
+			overflow: hidden;
+			padding-bottom: 20px;
+		}
 
 	}
 

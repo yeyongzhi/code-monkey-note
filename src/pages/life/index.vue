@@ -55,7 +55,6 @@ const handleTreeSelected = (keys: any, _: any, meta: any) => {
     const path = keys[0]
     if (!meta.node.children || meta.node.children.length === 0) {
         const fullPath = getFullPath(path)
-        console.log(fullPath)
         articlePath.value = `${baseLifePath}/${fullPath}.md`
         selectKeys.value = keys
     }
@@ -68,13 +67,11 @@ const handleTreeExpanded = (keys: any) => {
 onMounted(() => {
     if (DEFAULT_ARTICLE_KEY) {
 		const path = getFullPath(DEFAULT_ARTICLE_KEY)
-        console.log(path)
 		if (path) {
 			const pathList = path.split("/")
 			pathList.pop()
 			expandedKeys.value = pathList
 			articlePath.value = `${baseLifePath}/${path}.md`
-            console.log(articlePath.value)
 			selectKeys.value = [DEFAULT_ARTICLE_KEY]
 		}
 	}
@@ -85,9 +82,7 @@ onMounted(() => {
 <template>
     <div class="app_container life_container">
         <div class="tab_container">
-            <n-tree block-line :data="LifeData" expand-on-click :selected-keys="selectKeys"
-                :expanded-keys="expandedKeys" :on-update:selected-keys="handleTreeSelected"
-                :on-update:expanded-keys="handleTreeExpanded" />
+            <n-tree default-expand-all block-line :data="LifeData" expand-on-click :selected-keys="selectKeys" :on-update:selected-keys="handleTreeSelected" />
         </div>
         <div class="life_content_container">
 			<Article v-if="articlePath && articlePath.length > 0" :path="articlePath" />

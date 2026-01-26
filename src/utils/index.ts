@@ -11,7 +11,6 @@ export async function getMarkDownContent(markdown_path: string) {
     let data = null
     try {
         const response = await fetch(markdown_path);
-        console.log(response)
         const contentType = response.headers.get('Content-Type')
         let lastModified = response.headers.get('Last-Modified') || new Date().toLocaleDateString();
         // lastModified = new Date(lastModified).toLocaleDateString('zh-CN', {
@@ -19,7 +18,7 @@ export async function getMarkDownContent(markdown_path: string) {
         //     month: '2-digit',
         //     day: '2-digit'
         // });
-        console.log(lastModified)
+        // console.log(lastModified)
         if (!contentType?.includes("text/markdown")) {
             return null;
         }

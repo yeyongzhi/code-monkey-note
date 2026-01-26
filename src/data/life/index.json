@@ -1,11 +1,21 @@
 [
     {
         "key": "concert",
-        "label": "耳机不如live",
+        "label": "🎧️耳机不如live",
         "children": [
             {
                 "key": "joker_xue",
                 "label": "至今0人走出天外来物"
+            }
+        ]
+    },
+    {
+        "key": "hobby",
+        "label": "🧵兴趣针脚",
+        "children": [
+            {
+                "key": "DIY_computer",
+                "label": "分享我的DIY主机"
             }
         ]
     }

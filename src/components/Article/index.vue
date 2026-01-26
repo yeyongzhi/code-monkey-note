@@ -14,7 +14,10 @@ watch(() => path, async (newVal) => {
     if (newVal) {
         const result = await getMarkDownContent(newVal) // 获取markdown文档内容
         if (result) {
+            console.log("文章内容")
+            console.log(result)
             const content = formatMarkDown(result) // 识别格式化内容（自定义）
+            console.log("解析后：")
             console.log(content)
             data.value = content
         } else {
@@ -64,14 +67,16 @@ const getImageUrl = (url: string) => {
             </template>
             <!-- 有序列表 -->
             <template v-else-if="item.type === 'orderList'">
-                <div class="orderList_item" v-for="(c, index) in item.content" :key="'order' + index">
-                    <span class="orderList_index">{{ index + 1 }} . </span>
-                    {{ c }}
+                <div class="orderList_item">
+                    <span class="orderList_index">{{ item.content[0] }}. </span>
+                    <span v-html="item.content[1]"></span>
                 </div>
             </template>
             <!-- 无序列表 -->
             <template v-else-if="item.type === 'unorderList'">
-                <div class="unorderList_item" :key="'unorder' + index">{{ item.content }}</div>
+                <div class="unorderList_item" :key="'unorder' + index">
+                    <span v-html="item.content"></span>
+                </div>
             </template>
             <!-- 单张图片 -->
             <template v-else-if="item.type === 'img'">
@@ -147,7 +152,15 @@ const getImageUrl = (url: string) => {
             max-width: 380px;
         }
     }
-
+    .orderList {
+        .orderList_item {
+            .orderList_index {
+                color: var(--primary-color);
+                font-weight: bolder;
+                margin-right: 5px;
+            }
+        }
+    }
     .unorderList {
         .unorderList_item {
             position: relative;
