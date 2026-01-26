@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, ref, shallowRef, h, onMounted, onUnmounted } from 'vue';
+import { getCurrentInstance } from 'vue';
 import { openTab } from '@/utils/index'
 const { proxy }: any = getCurrentInstance()
 

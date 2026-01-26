@@ -2,7 +2,7 @@
 import { onMounted, ref, computed, onBeforeMount, isRef } from 'vue'
 import NoteData from '@/data/note/index.json'
 import { basePath } from '@/router/index'
-import { Bookmark24Regular } from '@vicons/fluent'
+import XTooltip from '@/components/XTooltip/index.vue'
 
 const baseNotePath = basePath + '/article/note'
 
@@ -10,11 +10,6 @@ const articlePath = ref<string | null>(null)
 const expandedKeys = ref<Array<string | number>>([])
 const selectKeys = ref<Array<string | number>>([])
 const defaultArticleKey = ref(null) // 默认打开的文章
-
-const count = ref(0)
-console.log(isRef(count))
-
-console.log(count)
 
 // 查找文章路径
 const findPath = (tree: Array<any>, targetId: string) => {
@@ -87,6 +82,10 @@ const articleTotalNum = computed(() => {
 	return getTotal(NoteData)
 })
 
+const showArticleTotalText = computed(() => {
+	return `已写文章：${articleTotalNum.value}篇`
+})
+
 const findDefaultArticle = (tree: Array<any>) => {
 	tree.forEach((item) => {
 		if (item.children && item.children.length > 0) {
@@ -124,15 +123,9 @@ onMounted(() => {
 		<div class="tab_container">
 			<div class="flex-start-center header">
 				<span>学无止境</span>
-				<n-tooltip trigger="hover">
-					<template #trigger>
-						<n-icon :size="20" style="cursor: pointer;margin-left: 5px;">
-							<Bookmark24Regular />
-						</n-icon>
-					</template>
-					已写文章：{{ articleTotalNum }}篇
-				</n-tooltip>
-
+				<XTooltip :content="showArticleTotalText">
+					<FluentIcon name="Bookmark24Regular" :size="20" style="cursor: pointer;margin-left: 5px;" />
+				</XTooltip>
 			</div>
 			<!-- :expanded-keys="expandedKeys"  -->
 			<div class="content">

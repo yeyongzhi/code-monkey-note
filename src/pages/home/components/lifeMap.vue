@@ -6,11 +6,11 @@
         </div>
         <div>
             <div class="flex-start-center">
-                <FluentIcon name="CaretRight16Filled" v-if="!isExpandTrip" @click="expandUserTripList" />
-                <FluentIcon name="CaretDown16Filled" v-else @click="expandUserTripList" />
-                <div>迄今为止，我已经踏足过 <span
-                        style="font-weight: bolder;color: var(--primary-color);font-size: 1.5rem;cursor: pointer;"
-                        @click="showAllTrip">{{ userTripMapData.length }}</span> 个 城市、区县</div>
+                <span style="cursor: pointer;margin-right: 5px;">
+                    <FluentIcon :name="!isExpandTrip ? 'CaretRight16Filled' : 'CaretDown16Filled'" @click="expandUserTripList" />
+                </span>
+                <p>迄今为止，我已经踏足过 <span
+                        style="font-weight: bolder;color: var(--primary-color);font-size: 1.5rem;cursor: pointer;">{{ userTripMapData.length }}</span> 个 城市、区县</p>
             </div>
             <div v-if="isExpandTrip" class="trip_box">
                 <div class="item" v-for="(item, index) in userTripMapData" :key="'trip' + index">
@@ -34,27 +34,11 @@
 <script setup lang="ts">
 import { userTripMapData } from '@/data/home/index'
 import { initMap, createVectorLayer, createFeature, addFeatures } from '@/utils/ol'
-import { getCurrentInstance, ref, shallowRef, h, onMounted, onUnmounted } from 'vue';
-
-const { proxy }: any = getCurrentInstance()
+import { ref, shallowRef, onMounted, onUnmounted } from 'vue';
 
 const isExpandTrip = ref(false)
 const expandUserTripList = () => {
     isExpandTrip.value = !isExpandTrip.value
-}
-
-const showAllTrip = () => {
-    const list = userTripMapData.map(item => {
-        return h('p', { class: 'text' }, `${item.date}: ${item.name}`)
-    })
-    // notification.success({
-    //     content: () => h('div', {
-    //         class: 'text'
-    //     }, list),
-    //     title: 'Life',
-    //     duration: 3000,
-    //     keepAliveOnHover: true
-    // })
 }
 
 const map = shallowRef<any>(null)

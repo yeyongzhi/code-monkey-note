@@ -1,7 +1,7 @@
 import { createDiscreteApi } from 'naive-ui'
 
 const { message } = createDiscreteApi(
-    ['message', 'dialog', 'notification', 'loadingBar', 'modal']
+    ['message']
   )
 
 export default message

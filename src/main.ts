@@ -10,8 +10,6 @@ import MarkDown from '@/components/MarkDown/index.vue'
 import Article from '@/components/Article/index.vue'
 import globalData from '@/data/user.json'
 
-// import message from '@/plugins/message'
-
 // 设置页面标题
 document.title = import.meta.env.VITE_APP_TITLE || '默认标题'
 
@@ -28,8 +26,5 @@ app.component('FluentIcon', FluentIcon)
 
 // 全局变量
 app.config.globalProperties.globalData = globalData;
-
-// 全局方法
-// app.config.globalProperties.$message = message
 
 app.mount('#app')

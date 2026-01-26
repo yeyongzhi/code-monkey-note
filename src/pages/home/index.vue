@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { getCurrentInstance, h, ref } from 'vue';
+import { getCurrentInstance } from 'vue';
 import XBorderBox from '@/components/XBorderBox/index.vue'
 import { ArrowRight16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
-import { userKnowledge, userTripMapData } from '@/data/home/index'
+import { userKnowledge } from '@/data/home/index'
 import { useNotification } from 'naive-ui'
 import Header from './components/Header.vue'
 import Description from './components/Description.vue'
