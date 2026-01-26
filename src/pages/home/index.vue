@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import { getCurrentInstance } from 'vue';
 import XBorderBox from '@/components/XBorderBox/index.vue'
 import { ArrowRight16Filled } from '@vicons/fluent'
 import { Icon } from '@vicons/utils'
 import { userKnowledge } from '@/data/home/index'
-import { useNotification } from 'naive-ui'
 import Header from './components/Header.vue'
 import Description from './components/Description.vue'
 import TechStack from './components/TechStack.vue'
 import LifeMap from './components/lifeMap.vue'
 import PersonWork from './components/PersonWork.vue'
-
-const { proxy }: any = getCurrentInstance()
-const notification = useNotification()
 
 const emits = defineEmits(['changeComponent'])
 const { theme } = defineProps(['theme'])

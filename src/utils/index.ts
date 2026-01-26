@@ -12,7 +12,7 @@ export async function getMarkDownContent(markdown_path: string) {
     try {
         const response = await fetch(markdown_path);
         const contentType = response.headers.get('Content-Type')
-        let lastModified = response.headers.get('Last-Modified') || new Date().toLocaleDateString();
+        // let lastModified = response.headers.get('Last-Modified') || new Date().toLocaleDateString();
         // lastModified = new Date(lastModified).toLocaleDateString('zh-CN', {
         //     year: 'numeric',
         //     month: '2-digit',

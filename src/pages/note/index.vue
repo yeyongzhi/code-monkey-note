@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed, onBeforeMount, isRef } from 'vue'
+import { onMounted, ref, computed, onBeforeMount } from 'vue'
 import NoteData from '@/data/note/index.json'
 import { basePath } from '@/router/index'
 import XTooltip from '@/components/XTooltip/index.vue'

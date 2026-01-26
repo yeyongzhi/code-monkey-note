@@ -60,10 +60,6 @@ const handleTreeSelected = (keys: any, _: any, meta: any) => {
     }
 }
 
-const handleTreeExpanded = (keys: any) => {
-    expandedKeys.value = keys
-}
-
 onMounted(() => {
     if (DEFAULT_ARTICLE_KEY) {
 		const path = getFullPath(DEFAULT_ARTICLE_KEY)
