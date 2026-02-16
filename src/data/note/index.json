@@ -1,153 +1,157 @@
 [
-    {
-        "key": "git",
-        "label": "git",
+  {
+    "key": "git",
+    "label": "git",
+    "children": [
+      {
+        "key": "gitRules",
+        "label": "Git代码提交规范✔️"
+      }
+    ]
+  },
+  {
+    "key": "js",
+    "label": "Javascript基础",
+    "children": [
+      {
+        "key": "dataType",
+        "label": "数据类型✔️"
+      },
+      {
+        "key": "eventLoop",
+        "label": "事件循环机制✔️"
+      },
+      {
+        "key": "executionContext",
+        "label": "执行上下文"
+      }
+    ]
+  },
+  {
+    "key": "css",
+    "label": "CSS",
+    "children": [
+      {
+        "key": "AtomicCSS",
+        "label": "原子化css"
+      }
+    ]
+  },
+  {
+    "key": "ts",
+    "label": "TypeScript",
+    "children": []
+  },
+  {
+    "key": "vue",
+    "label": "vue",
+    "children": [
+      {
+        "key": "AntfuCode",
+        "label": "Antfu代码风格学习",
+        "default": true
+      },
+      {
+        "key": "vue_ref",
+        "label": "vue Ref"
+      },
+      {
+        "key": "vue_watch",
+        "label": "vue侦听器"
+      },
+      {
+        "key": "usage",
+        "label": "vue用法集合"
+      },
+      {
+        "key": "hooks",
+        "label": "Vue hooks"
+      },
+      {
+        "key": "vueRouter",
+        "label": "vue-router"
+      }
+    ]
+  },
+  {
+    "key": "chrome",
+    "label": "浏览器",
+    "children": [
+      {
+        "key": "chromeRun",
+        "label": "浏览器的运行原理"
+      },
+      {
+        "key": "chromeStorge",
+        "label": "浏览器的本地存储",
         "children": [
-            {
-                "key": "gitRules",
-                "label": "Git代码提交规范✔️",
-                "default": true
-            }
+          {
+            "key": "cookie",
+            "label": "cookie❓"
+          },
+          {
+            "key": "localStorge",
+            "label": "localStorge等存储✔️"
+          }
         ]
-    },
-    {
-        "key": "js",
-        "label": "Javascript基础",
+      },
+      {
+        "key": "fingerprint",
+        "label": "浏览器指纹"
+      },
+      {
+        "key": "browserEvent",
+        "label": "浏览器事件机制"
+      }
+    ]
+  },
+  {
+    "key": "engineering",
+    "label": "工程化",
+    "children": [
+      {
+        "key": "jsDoc",
+        "label": "jsDoc规则"
+      },
+      {
+        "key": "npm",
+        "label": "npm✔️"
+      },
+      {
+        "key": "vite",
+        "label": "vite"
+      }
+    ]
+  },
+  {
+    "key": "WebGIS",
+    "label": "WebGIS",
+    "children": [
+      {
+        "key": "openlayers",
+        "label": "openlayers",
         "children": [
-            {
-                "key": "dataType",
-                "label": "数据类型✔️"
-            },
-            {
-                "key": "eventLoop",
-                "label": "事件循环机制✔️"
-            },
-            {
-                "key": "executionContext",
-                "label": "执行上下文"
-            }
+          {
+            "key": "tileCache",
+            "label": "瓦片缓存✔️"
+          }
         ]
-    },
-    {
-        "key": "css",
-        "label": "CSS",
+      },
+      {
+        "key": "gaode",
+        "label": "高德地图",
         "children": [
-            {
-                "key": "AtomicCSS",
-                "label": "原子化css"
-            }
+          {
+            "key": "2VersionMap",
+            "label": "双版本地图✔️"
+          }
         ]
-    },
-    {
-        "key": "ts",
-        "label": "TypeScript",
-        "children": []
-    },
-    {
-        "key": "vue",
-        "label": "vue",
-        "children": [
-            {
-                "key": "vue_ref",
-                "label": "vue Ref"
-            },
-            {
-                "key": "vue_watch",
-                "label": "vue侦听器"
-            },
-            {
-                "key": "usage",
-                "label": "vue用法集合"
-            },
-            {
-                "key": "hooks",
-                "label": "Vue hooks"
-            },
-            {
-                "key": "vueRouter",
-                "label": "vue-router"
-            }
-        ]
-    },
-    {
-        "key": "chrome",
-        "label": "浏览器",
-        "children": [
-            {
-                "key": "chromeRun",
-                "label": "浏览器的运行原理"
-            },
-            {
-                "key": "chromeStorge",
-                "label": "浏览器的本地存储",
-                "children": [
-                    {
-                        "key": "cookie",
-                        "label": "cookie❓"
-                    },
-                    {
-                        "key": "localStorge",
-                        "label": "localStorge等存储✔️"
-                    }
-                ]
-            },
-            {
-                "key": "fingerprint",
-                "label": "浏览器指纹"
-            },
-            {
-                "key": "browserEvent",
-                "label": "浏览器事件机制"
-            }
-        ]
-    },
-    {
-        "key": "engineering",
-        "label": "工程化",
-        "children": [
-            {
-                "key": "jsDoc",
-                "label": "jsDoc规则"
-            },
-            {
-                "key": "npm",
-                "label": "npm✔️"
-            },
-            {
-                "key": "vite",
-                "label": "vite"
-            }
-        ]
-    },
-    {
-        "key": "WebGIS",
-        "label": "WebGIS",
-        "children": [
-            {
-                "key": "openlayers",
-                "label": "openlayers",
-                "children": [
-                    {
-                        "key": "tileCache",
-                        "label": "瓦片缓存✔️"
-                    }
-                ]
-            },
-            {
-                "key": "gaode",
-                "label": "高德地图",
-                "children": [
-                    {
-                        "key": "2VersionMap",
-                        "label": "双版本地图✔️"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "key": "cesium",
-        "label": "Cesium",
-        "children": []
-    }
+      }
+    ]
+  },
+  {
+    "key": "cesium",
+    "label": "Cesium",
+    "children": []
+  }
 ]
